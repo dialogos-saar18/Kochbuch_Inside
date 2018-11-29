@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wizard SYSTEM "Wizard.dtd">
+
+<wizard>
+	<plugin type="dialogos.plugin.sphinx">
+		<att name="language" type="string" value="de_DE"/>
+	</plugin>
+	<plugin type="dialogos.plugin.tts">
+	</plugin>
+	<plugin type="dialogos.plugin.lego">
+	</plugin>
+	<plugin type="dialogos.plugin.sqlite">
+		<att name="dbURL" type="string" value="jdbc:sqlite:C:\Users\TT\DialogOS\Präsi Anfang\koch.db"/>
+	</plugin>
+	<graph directed="1" Graphic="1" Layout="points">
+		<att name="width" type="integer" value="750"/>
+		<att name="height" type="integer" value="614"/>
+		<groovyFunctions></groovyFunctions>
+		<grammar id="4862c7fd-5a67-4a3e-a813-9b948d08ca4e">
+			<name>auswahl</name>
+			<value>root $input;
+ $input = Ich will [etwas mit] ($kuchen {$=&quot;kuchen&quot;}| $nudeln {$=&quot;nudeln&quot;}) essen;
+$kuchen = schokolade | kuchen | kirschen;
+$nudeln = nudeln | tomaten | tomatensauce | italienisch;</value>
+		</grammar>
+		<grammar id="e2a327e7-1e8b-4cae-a9bd-ba2610f4ce41">
+			<name>vorlesen</name>
+			<value>root $input;
+ $input = beides {$=1} | die Zutaten {$=2} | die Anleitung {$=3};</value>
+		</grammar>
+		<grammar id="6ef80cd2-5d16-4a63-bbcc-c967f547b754">
+			<name>mengenfrage</name>
+			<value>root $input;
+ $input = Wie viel[e] $zutat brauche ich {$=$zutat};
+$zutat = Eier | Mehl | Zucker;</value>
+		</grammar>
+		<variable uid="8a82cf1c-4c28-4a8e-a75e-a1c16d727113">
+			<name>sqout</name>
+			<type>list</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="6b5015f2-e287-4878-861b-e8f25f4e0091">
+			<name>titel</name>
+			<type>string</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="8c837e4b-608d-4427-a5a1-dad77a1f59d9">
+			<name>vorlesen</name>
+			<type>string</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="14ad159d-fe8e-419b-ab82-5bc1bf60381c">
+			<name>v</name>
+			<type>int</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="9274f5a3-e13b-4b35-bd6d-1d8bca79524e">
+			<name>zutaten</name>
+			<type>struct</type>
+			<value>{Mehl = &quot;200 g&quot;, Zucker = &quot;125 g&quot;,Eier = &quot;4 &quot;}</value>
+		</variable>
+		<variable uid="79fd6408-8da0-45a6-a05f-4e14d6b6e3aa">
+			<name>anleitung</name>
+			<type>list</type>
+			<value>[&quot;Eier trennen, Eischnee mit einem Teil des Zuckers schlagen bis er fest ist. Die Butter / Margarine mit dem restlichen Zucker, Eigelb und Rum schaumig rühren. Zimt, Mehl und Backpulver darunter rühren.&quot;, &quot;Den Eischnee, die gemahlenen Nüsse / Mandeln und die geriebene Schokolade unterheben. In gefettete Springform geben. Die abgetropften, entsteinten Sauerkirschen darüber verteilen und bei 170 - 190 Grad ca. 1 Stunde backen.&quot;]</value>
+		</variable>
+		<variable uid="0a877904-3e81-4dcd-b1cf-f0362b5b526d">
+			<name>frage</name>
+			<type>string</type>
+			<value>undefined</value>
+		</variable>
+		<node uid="040e76a1-f0a7-48b0-bb72-18078ae69cde" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="159" y="407" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>&quot;Damit machst du Folgendes:&quot; + str(anleitung)</value>
+			</att>
+			<att name="prompt_type" type="string" value="text"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="18bac83f-089b-4ed6-ab5e-1fc6b86b190c" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="258" y="284" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>&quot;Dein &quot; + titel + &quot;ist fertig. Guten Appetit.&quot;</value>
+			</att>
+			<att name="prompt_type" type="string" value="expression"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="1a38d52b-2585-47fe-995f-902c5835ff06" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="322" y="284" fill="#b20000"/>
+			<att name="title" type="string" value="Spracherkenner"/>
+			<att name="language" type="string" value="Deutsch"/>
+		</node>
+		<node uid="1ebcaf17-8ccd-40ab-986c-a6832dc4ca78" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="350" y="201" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>Die Backzeit beträgt 30 Minuten. Soll ich einen Wecker stellen?</value>
+			</att>
+			<att name="prompt_type" type="string" value="text"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="2358e758-c9af-4c13-96f0-8f03d817da4e" class="com.clt.diamant.graph.nodes.ScriptNode">
+			<graphics x="70" y="307" fill="#99ffff"/>
+			<att name="title" type="string" value="Script"/>
+			<att name="script" type="text">
+				<value>string vorlesen_z = &quot;&quot;;
+for (int i=0; i&lt;length(keys(zutaten)); i++){
+	vorlesen += zutaten(keys(zutaten[i])) + keys(zutaten[i];
+}
+string vorlesen_a = &quot;&quot;;
+for (int i=0; i&lt;length(keys(anleitung)); i++){
+	vorlesen += zutaten(keys(anleitung[i])) + keys(anleitung[i];
+}
+if (v==1){
+	vorlesen=vorlesen_z+&quot; &quot;+vorlesen_a;
+}
+else if (v==2){
+	vorlesen = vorlesen_z;
+}
+else if (v==3){
+	vorlesen = vorlesen_a;
+}
+else {
+	vorlesen = &quot;es ist ein Fehler aufgetreten&quot;;
+}</value>
+			</att>
+		</node>
+		<node uid="23f4d1b0-0c99-440f-b027-b530a6253e65" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="76" y="392" fill="#00b200"/>
+			<att name="title" type="string" value="Vorlesen"/>
+			<att name="prompt" type="text">
+				<value>&quot;Du brauchst für  &quot; + titel + &quot; &quot; + str(zutaten)</value>
+			</att>
+			<att name="prompt_type" type="string" value="expression"/>
+			<att name="wait" type="boolean" value="0"/>
+		</node>
+		<node uid="39328733-0c98-4a70-bad4-6b4b47d6e645" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="32" y="166" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>&quot;Soll ich dir die Zutaten und / oder die Anleitung für &quot; + titel + &quot; vorlesen?&quot;</value>
+			</att>
+			<att name="prompt_type" type="string" value="expression"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="43b3da7d-d94c-47d3-9aa6-9dccaf28cef6" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="288" y="145" fill="#b20000"/>
+			<att name="title" type="string" value="Spracherkenner"/>
+			<att name="language" type="string" value="Deutsch"/>
+		</node>
+		<node uid="6fda7683-4fa5-4d6f-95d1-beee9ca1a93b" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="385" y="367" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>&quot;Du brauchst &quot; + get(zutaten, frage) + frage
++ &quot;Hast du noch mehr Fragen?&quot;</value>
+			</att>
+			<att name="prompt_type" type="string" value="expression"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="7976b8d8-7347-403b-bbc5-3346eaa83748" class="com.clt.diamant.graph.nodes.StartNode">
+			<graphics x="194" y="10" fill="#9999ff"/>
+			<att name="title" type="string" value="Start"/>
+		</node>
+		<node uid="83117d3c-0c60-4f16-8b4f-107c8a4d514f" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="59" y="240" fill="#b20000"/>
+			<att name="title" type="string" value="Spracherkenner"/>
+			<att name="language" type="string" value="Deutsch"/>
+			<att name="grammar" type="string" value="e2a327e7-1e8b-4cae-a9bd-ba2610f4ce41"/>
+		</node>
+		<node uid="afdf9273-7fe0-4134-9e77-839c1158b45e" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="328" y="468" fill="#b20000"/>
+			<att name="title" type="string" value="Spracherkenner"/>
+			<att name="language" type="string" value="Deutsch"/>
+			<att name="grammar" type="string" value="6ef80cd2-5d16-4a63-bbcc-c967f547b754"/>
+		</node>
+		<node uid="b30592c3-da8f-4956-aa76-651476a0f4d4" class="com.clt.diamant.graph.nodes.SleepNode">
+			<graphics x="268" y="217" fill="#99ffff"/>
+			<att name="title" type="string" value="Warten"/>
+			<att name="time" type="string" value="2000"/>
+		</node>
+		<node uid="c59f9c52-d5fb-40b8-b8cc-b2ef79afc7bb" class="edu.cmu.lti.dialogos.db.sqlite.SqliteNode">
+			<graphics x="7" y="308" fill="#c0c0c0"/>
+			<att name="title" type="string" value="Sqlite"/>
+			<att name="resultVar" type="string" value="sqout"/>
+			<att name="queryExp" type="string" value="SELECT zutaten,anleitung FROM rezepte WHERE titel=&quot;kuchen&quot;"/>
+		</node>
+		<node uid="cc169ec5-23fd-40a3-a2a3-cb090cd1f6dc" class="com.clt.diamant.graph.nodes.EndNode">
+			<graphics x="318" y="64" fill="#9999ff"/>
+			<att name="title" type="string" value="Ende"/>
+		</node>
+		<node uid="d3533166-4ed6-4e9e-b3ce-57948affd45e" class="com.clt.diamant.graph.nodes.ScriptNode">
+			<graphics x="126" y="309" fill="#99ffff"/>
+			<att name="title" type="string" value="Script"/>
+			<att name="script" type="text">
+				<value>struct s = get(sqout,0);
+list z = get(s,&quot;zutaten&quot;);
+list a = get(s,&quot;anleitung&quot;);
+string vorlesen_z = &quot;&quot;;
+for (int i=0; i&lt;length(z); i++){
+	vorlesen += z[i];
+}
+string vorlesen_a = &quot;&quot;;
+for (int i=0; i&lt;length(a); i++){
+	vorlesen += a[i];
+}
+if (v==1){
+	vorlesen=vorlesen_z+&quot; &quot;+vorlesen_a;
+}
+else if (v==2){
+	vorlesen = vorlesen_z;
+}
+else if (v==3){
+	vorlesen = vorlesen_a;
+}
+else {
+	vorlesen = &quot;es ist ein Fehler aufgetreten&quot;;
+}</value>
+			</att>
+		</node>
+		<node uid="d396048e-2f18-4436-87fc-751aba5a59ef" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="13" y="102" fill="#b20000"/>
+			<att name="title" type="string" value="Auswahl"/>
+			<att name="language" type="string" value="Deutsch"/>
+			<att name="grammar" type="string" value="4862c7fd-5a67-4a3e-a813-9b948d08ca4e"/>
+		</node>
+		<node uid="d8e7d51f-a4e5-427e-9886-793361bf1086" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="29" y="24" fill="#00b200"/>
+			<att name="title" type="string" value="Begrüßung"/>
+			<att name="prompt" type="text">
+				<value>Willkommen bei Chefkoch. Was möchtest du heute kochen?</value>
+			</att>
+			<att name="prompt_type" type="string" value="text"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="e36e670d-57d8-437a-ab8b-c8573cc37d12" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="489" y="54" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>Dann pass bitte selbst auf, dass dein Essen nicht verbrennt. Guten Appetit.</value>
+			</att>
+			<att name="prompt_type" type="string" value="text"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="eaca3838-89c9-430e-ad5f-053ae2d228ff" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="120" y="467" fill="#b20000"/>
+			<att name="title" type="string" value="weiter"/>
+			<att name="background" type="boolean" value="1"/>
+			<att name="language" type="string" value="Deutsch"/>
+		</node>
+		<edge src="040e76a1-f0a7-48b0-bb72-18078ae69cde" tgt="eaca3838-89c9-430e-ad5f-053ae2d228ff">
+		</edge>
+		<edge src="18bac83f-089b-4ed6-ab5e-1fc6b86b190c" tgt="cc169ec5-23fd-40a3-a2a3-cb090cd1f6dc">
+		</edge>
+		<edge src="1a38d52b-2585-47fe-995f-902c5835ff06" tgt="afdf9273-7fe0-4134-9e77-839c1158b45e">
+			<att name="condition" type="string" value="ja"/>
+		</edge>
+		<edge src="1a38d52b-2585-47fe-995f-902c5835ff06" tgt="1ebcaf17-8ccd-40ab-986c-a6832dc4ca78">
+			<att name="condition" type="string" value="nein"/>
+		</edge>
+		<edge src="1ebcaf17-8ccd-40ab-986c-a6832dc4ca78" tgt="43b3da7d-d94c-47d3-9aa6-9dccaf28cef6">
+		</edge>
+		<edge src="2358e758-c9af-4c13-96f0-8f03d817da4e" tgt="23f4d1b0-0c99-440f-b027-b530a6253e65">
+		</edge>
+		<edge src="23f4d1b0-0c99-440f-b027-b530a6253e65" tgt="afdf9273-7fe0-4134-9e77-839c1158b45e">
+		</edge>
+		<edge src="39328733-0c98-4a70-bad4-6b4b47d6e645" tgt="83117d3c-0c60-4f16-8b4f-107c8a4d514f">
+		</edge>
+		<edge src="43b3da7d-d94c-47d3-9aa6-9dccaf28cef6" tgt="b30592c3-da8f-4956-aa76-651476a0f4d4">
+			<att name="condition" type="string" value="ja"/>
+		</edge>
+		<edge src="43b3da7d-d94c-47d3-9aa6-9dccaf28cef6" tgt="e36e670d-57d8-437a-ab8b-c8573cc37d12">
+			<att name="condition" type="string" value="nein"/>
+		</edge>
+		<edge src="6fda7683-4fa5-4d6f-95d1-beee9ca1a93b" tgt="1a38d52b-2585-47fe-995f-902c5835ff06">
+		</edge>
+		<edge src="7976b8d8-7347-403b-bbc5-3346eaa83748" tgt="d8e7d51f-a4e5-427e-9886-793361bf1086">
+		</edge>
+		<edge src="83117d3c-0c60-4f16-8b4f-107c8a4d514f" tgt="c59f9c52-d5fb-40b8-b8cc-b2ef79afc7bb">
+			<att name="condition" type="string" value="v"/>
+		</edge>
+		<edge src="afdf9273-7fe0-4134-9e77-839c1158b45e" tgt="6fda7683-4fa5-4d6f-95d1-beee9ca1a93b">
+			<att name="condition" type="string" value="frage"/>
+		</edge>
+		<edge src="b30592c3-da8f-4956-aa76-651476a0f4d4" tgt="18bac83f-089b-4ed6-ab5e-1fc6b86b190c">
+		</edge>
+		<edge src="c59f9c52-d5fb-40b8-b8cc-b2ef79afc7bb" tgt="23f4d1b0-0c99-440f-b027-b530a6253e65">
+		</edge>
+		<edge src="d3533166-4ed6-4e9e-b3ce-57948affd45e" tgt="23f4d1b0-0c99-440f-b027-b530a6253e65">
+		</edge>
+		<edge src="d396048e-2f18-4436-87fc-751aba5a59ef" tgt="39328733-0c98-4a70-bad4-6b4b47d6e645">
+			<att name="condition" type="string" value="titel"/>
+		</edge>
+		<edge src="d8e7d51f-a4e5-427e-9886-793361bf1086" tgt="d396048e-2f18-4436-87fc-751aba5a59ef">
+		</edge>
+		<edge src="e36e670d-57d8-437a-ab8b-c8573cc37d12" tgt="cc169ec5-23fd-40a3-a2a3-cb090cd1f6dc">
+		</edge>
+		<edge src="eaca3838-89c9-430e-ad5f-053ae2d228ff" tgt="afdf9273-7fe0-4134-9e77-839c1158b45e">
+			<att name="condition" type="string" value=""/>
+		</edge>
+	</graph>
+</wizard>
