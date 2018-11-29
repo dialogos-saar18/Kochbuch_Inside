@@ -1,0 +1,33 @@
+<h2 class="h2-medium">Zubereitung</h2>
+
+            <p id="preparation-info">
+                <strong>Arbeitszeit:</strong>
+                ca. 25 Min.
+                
+                    / <strong>Koch-/Backzeit:</strong>
+                    ca. 45 Min.
+                
+                
+                    <strong>Ruhezeit:</strong>
+                    ca. 20 Min.
+                
+                / <strong>Schwierigkeitsgrad:</strong>
+
+                normal
+                / <strong>Kalorien p. P.:</strong>
+
+                
+                    keine Angabe
+
+                            </p>
+
+                        <div id="rezept-zubereitung" class="instructions m-b-200">
+
+						Eine 20er Springform mit Backpapier auskleiden. Den Backofen auf 170 °C Ober/-Unterhitze vorheizen.<br />
+<br />
+Wasser, Schmand, Margarine/Butter, Zucker, Vanillezucker, Kakao und die Schokolade (in Stückchen) in einen Kochtopf geben. Bei geringer Hitze erwärmen, bis die Margarine/Butter und die Schokolade geschmolzen sind. Gelegentlich umrühren. Vom Herd nehmen und in eine Rührschüssel umfüllen. Etwa 15 - 20 Minuten abkühlen lassen.<br />
+<br />
+Dann das Ei auf höchster Stufe unterrühren. Mehl mit Backpulver mischen und esslöffelweise unterrühren. Die Masse in die Springform füllen (der Teig ist sehr flüssig!) und im vorgeheizten Backofen bei 170 °C Ober-/Unteerhitze 40-45 Minuten backen. Stäbchenprobe!<br />
+<br />
+Den Kuchen aus dem Backofen nehmen und sofort aus der Form lösen. Auskühlen lassen. <br />
+Mit Puderzucker bestäuben oder mit einer Schokoglasur überziehen.

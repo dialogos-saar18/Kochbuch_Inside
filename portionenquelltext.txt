@@ -1,0 +1,1 @@
+<input class="sg-input" type="text" name="portionen" id="divisor" value="1">

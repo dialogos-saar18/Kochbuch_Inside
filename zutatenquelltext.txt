@@ -1,0 +1,32 @@
+<div class="ingredients__container">
+                        <h2 class="h2-medium">Zutaten</h2>
+                        <table class="incredients">
+
+                            
+                                <tr>
+                                    <td class="amount">
+                                        125&nbsp;g                                    </td>
+                                    <td>
+
+                                        
+                                                
+                                                    Mehl Type 405
+                                                
+                                        
+                                    </td>
+                                </tr>
+
+                            
+                                <tr>
+                                    <td class="amount">
+                                        1&nbsp;TL                                    </td>
+                                    <td>
+
+                                        
+                                                
+                                                    Backpulver 
+                                                
+                                        
+                                    </td>
+                                </tr>
+								
