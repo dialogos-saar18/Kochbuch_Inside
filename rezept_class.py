@@ -33,14 +33,19 @@ class Recipe:
     def get_property(self,key): #returns string
         return self.eigenschaften[key]
 
-    def get_factor():
-        pass
 
-    def umrechnen(self): # argument um faktor auszurechnen
-        factor = get_factor()
+    # no return value, only changes incredients
+    # Einheiten umrechnen?
+    # angabe => entweder Personen oder eine Zutat
+    def umrechnen(self, anzahl, angabe):
+        if angabe == "Personen":
+            factor = anzahl / self.portionen
+        else:
+            factor = anzahl / self.zutaten[angabe][u'menge']
         for d in self.zutaten:
             d[u'menge'] = d[u'menge'] * factor
 
+    # gibt True zurück, wenn die Zutat für das Rezept benötigt wird
     def contains(self, zutat):
         if zutat in self.zutaten:
             return "Ja"
@@ -116,7 +121,7 @@ class Recipe:
     def init_portionen(self, beautifuls):
         p = beautifuls.find("input", {"name": "portionen"})
         p = p[u'value']
-        return p
+        return int(p)
 
     #returns dict: {u'schwierigkeitsgrad': u'simpel', ...}
     def init_properties(self, beautifuls):
@@ -139,6 +144,7 @@ class Recipe:
                         
                 preparation[key] = val
             i = i + 1
+        
         #preparation[u'Gesamtzeit'] = 
         return preparation
                                              
