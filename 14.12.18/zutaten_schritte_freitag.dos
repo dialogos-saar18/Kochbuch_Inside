@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wizard SYSTEM "Wizard.dtd">
+
+<wizard>
+	<device id="16329b47-0236-44d6-8d0a-808a9d0da781">
+		<name>cookclient</name>
+		<connector class="com.clt.dialog.client.ManualCLTConnector">
+			<att name="Server Name" type="string" value="localhost"/>
+			<att name="Port" type="string" value="8888"/>
+		</connector>
+		<icon width="16">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</icon>
+	</device>
+	<plugin type="dialogos.plugin.sphinx">
+		<att name="language" type="string" value="de_DE"/>
+	</plugin>
+	<plugin type="dialogos.plugin.tts">
+	</plugin>
+	<plugin type="dialogos.plugin.lego">
+	</plugin>
+	<plugin type="dialogos.plugin.sqlite">
+		<att name="dbURL" type="string" value="jdbc:sqlite:C:\Users\TT\DialogOS\test.db"/>
+	</plugin>
+	<graph directed="1" Graphic="1" Layout="points">
+		<att name="width" type="integer" value="1098"/>
+		<att name="height" type="integer" value="630"/>
+		<groovyFunctions></groovyFunctions>
+		<grammar id="0bc38a8e-cae8-4b4a-84fa-9be0bfafb1d1">
+			<name>zutatenschritte</name>
+			<value>root $input;
+ $input = $zutaten {$=[&quot;hello&quot;,&quot;world&quot;]}
+		| $eigenschaft 
+		| $anleitung ;
+
+$zutaten = Wie viel $term_z brauche ich {$=[&quot;zutaten&quot;, $term_z]};
+$term_z = (milch | zucker) ;
+
+$eigenschaft = Wie lange (braucht | dauert) {$=[&quot;eigenschaft&quot;,&quot;zubereitungszeit&quot;]} 
+			| (Wie schwer ist | Welchen Schwierigkeitsgrad) {$=[&quot;eigenschaft&quot;,&quot;schwierigkeitsgrad&quot;]};
+
+$anleitung = Was ist der $term_a Schritt 
+			| $term_a Schritt
+			| $nochmal;
+$nochmal = Wiederhole den Schritt | [diesen Schritt] nochmal {$=[&quot;anleitung&quot;,&quot;repeat&quot;]};
+$term_a = nächste {$=[&quot;anleitung&quot;,&quot;next&quot;]} | letzte {$=[&quot;anleitung&quot;,&quot;previous&quot;]};</value>
+		</grammar>
+		<grammar id="ef0d4498-5c51-46da-8237-16a99f071f91">
+			<name>mustertest</name>
+			<value>root $input;
+ $input = $eins {$= [&quot;eigenschaften&quot;,$eins]}| 2 {$= [&quot;anleitung&quot;,&quot;zwei&quot;]}| 3{$= [&quot;zutaten&quot;,&quot;drei&quot;]};
+$eins = 1;</value>
+		</grammar>
+		<variable uid="616a7294-ca38-4923-a7fc-b71a822d01de">
+			<name>result</name>
+			<type>string</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="27412cbd-77d1-43b6-b386-266d737f8b00">
+			<name>aktive_rezepte</name>
+			<type>struct</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="68fab0a3-e2fd-4905-908f-8defb6610de7">
+			<name>term</name>
+			<type>string</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="8ee853bb-dde1-4dc3-8223-6abe5fcf120b">
+			<name>dyngram</name>
+			<type>string</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="f30e7c72-fe81-4933-b84d-4f8b5a8e18d6">
+			<name>ingredients</name>
+			<type>list</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="c207ae93-0c3d-44e2-b898-74d3e69943a1">
+			<name>a</name>
+			<type>string</type>
+			<value>undefined</value>
+		</variable>
+		<variable uid="bcda47c2-ebee-4436-bf09-0a429419b5ed">
+			<name>b</name>
+			<type>string</type>
+			<value>undefined</value>
+		</variable>
+		<node uid="0f5b191e-1a8c-453b-8cb7-d36436a86ad3" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="638" y="128" fill="#ff5a5a"/>
+			<att name="title" type="string" value="Zutatenliste"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;ingredients&quot;]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
+		<node uid="1cade6f4-41c8-47de-a85f-74133272203a" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="954" y="563" fill="#ff5a5a"/>
+			<att name="title" type="string" value="Milch (Zutaten)"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;zutaten&quot;,&quot;milch&quot;]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
+		<node uid="32c2b329-1796-4187-a686-39f1dc869aa1" class="com.clt.diamant.graph.nodes.StartNode">
+			<graphics x="411" y="26" fill="#9999ff"/>
+			<att name="title" type="string" value="Start"/>
+		</node>
+		<node uid="34054068-83be-4d50-b2de-e7ff68aa3f5c" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="258" y="403" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>result</value>
+			</att>
+			<att name="prompt_type" type="string" value="expression"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="3724b2b0-1cf7-4c65-a050-e845d4862781" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="383" y="366" fill="#ff5a5a"/>
+			<att name="title" type="string" value="Milch (Zutaten)"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;zutaten&quot;,term]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
+		<node uid="41095083-cbd6-4369-91ea-9d0b1a0cbc99" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="387" y="402" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>&quot;Du brauchst &quot; + result + &quot; &quot; + term</value>
+			</att>
+			<att name="prompt_type" type="string" value="expression"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="49e92c77-880d-40c0-aebb-f47e8a5f86a6" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="529" y="406" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>term + &quot; ist etwa &quot; + result</value>
+			</att>
+			<att name="prompt_type" type="string" value="expression"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="4ef14db3-7491-4b40-a414-2a534c557737" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="522" y="313" fill="#ff5a5a"/>
+			<att name="title" type="string" value="Schwierigkeit (Eigenschaft)"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;eigenschaft&quot;, term,0]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
+		<node uid="5d3c33ec-9717-4a49-a853-e66d14a7c36b" class="com.clt.diamant.graph.nodes.EndNode">
+			<graphics x="412" y="505" fill="#9999ff"/>
+			<att name="title" type="string" value="Ende"/>
+		</node>
+		<node uid="5e6b1a64-324c-440d-91df-b3c12a039931" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="386" y="111" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>Was möchtest du wissen?</value>
+			</att>
+			<att name="prompt_type" type="string" value="text"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="6ebf431b-29fe-4724-b204-e878117a4ed0" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="275" y="314" fill="#ff5a5a"/>
+			<att name="title" type="string" value="(Schritt)"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="&quot;das wars&quot;"/>
+					<att name="Text" type="string" value="[&quot;anleitung&quot;,term,0]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
+		<node uid="79d7d73d-e62e-4f35-a497-c147a0c3cf07" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="951" y="539" fill="#ff5a5a"/>
+			<att name="title" type="string" value="Schwierigkeit (Eigenschaft)"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;eigenscaft&quot;, &quot;schwierigkeit&quot;,0]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
+		<node uid="8b17dcd5-52fb-45fb-a0a1-3f638066394a" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="631" y="245" fill="#b20000"/>
+			<att name="title" type="string" value="Spracherkenner"/>
+			<att name="language" type="string" value="Deutsch"/>
+			<att name="grammarExpression" type="string" value="dyngram "/>
+		</node>
+		<node uid="a677b47e-4e65-44d8-bcac-1e11298794c4" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="386" y="210" fill="#b20000"/>
+			<att name="title" type="string" value="Spracherkenner"/>
+			<att name="language" type="string" value="Deutsch"/>
+			<att name="grammar" type="string" value="0bc38a8e-cae8-4b4a-84fa-9be0bfafb1d1"/>
+		</node>
+		<node uid="b99ef79f-1042-47ee-9727-625702a9f2e3" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="974" y="409" fill="#ff5a5a"/>
+			<att name="title" type="string" value="(Schritt)"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="&quot;das wars&quot;"/>
+					<att name="Text" type="string" value="[&quot;anleitung&quot;,&quot;next&quot;,0]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
+		<node uid="be069a04-4c42-42db-a59f-0c4ed4610cef" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="513" y="210" fill="#b20000"/>
+			<att name="title" type="string" value="Ausgabetest"/>
+			<att name="language" type="string" value="Deutsch"/>
+			<att name="grammar" type="string" value="0bc38a8e-cae8-4b4a-84fa-9be0bfafb1d1"/>
+		</node>
+		<node uid="d0f420d7-b218-4fcf-a38a-59f8df29fcb9" class="com.clt.diamant.graph.nodes.ScriptNode">
+			<graphics x="622" y="298" fill="#99ffff"/>
+			<att name="title" type="string" value="Dynamische Grammatik"/>
+			<att name="script" type="text">
+				<value>dyngram = &quot;root $input; \n&quot;;
+dyngram = dyngram + &quot;$input = $zutaten {$=[\&quot;zutaten\&quot;, $term_z]} | $eigenschaft | $anleitung; \n&quot;;
+dyngram = dyngram + &quot;$zutaten = Wie viel $term_z brauche ich ; \n&quot;;
+
+#dyngram = &quot;$term_z = milch | zucker; \n&quot;;
+for (int i=1; i&lt;len(ingredients); i++)
+	dyngram = dyngram + &quot;|&quot;+ ingredients[i];
+
+dyngram = dyngram + &quot;$eigenschaft = Wie lange (braucht | dauert) {$=[\&quot;eigenschaft\&quot;,\&quot;zubereitungszeit\&quot;]} | (Wie schwer ist | Welchen Schwierigkeitsgrad) {$=[\&quot;eigenschaft\&quot;,\&quot;schwierigkeitsgrad\&quot;]}; \n&quot;;
+dyngram = dyngram + &quot;$anleitung = Was ist der $term_a Schritt | $term_a Schritt | (Wiederhole den Schritt | [diesen Schritt] nochmal {$=[\&quot;anleitung\&quot;,\&quot;repeat\&quot;]}); \n&quot;;
+dyngram = dyngram + &quot;$term_a = nächste {$=[\&quot;anleitung\&quot;,\&quot;next\&quot;]} | letzte {$=[\&quot;anleitung\&quot;,\&quot;previous\&quot;]}; \n&quot;;
+
+
+#Dinge escapen!!! 
+# -&gt; \&quot;
+
+
+#grammatik = grammatik + &quot;root $Eingabe; \n&quot;;
+#grammatik = grammatik + &quot;$Eingabe = $Zahlen | Ende \n;&quot;;
+#grammatik = grammatik + &quot;$Zahlen = 0 &quot;;
+#for (int i=1; i&lt;999; i++)
+#  grammatik = grammatik + &quot;|&quot;+i;
+#grammatik = grammatik + &quot;;&quot;;</value>
+			</att>
+		</node>
+		<node uid="f8421661-4389-4475-ac3a-dcc5f7597d92" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="862" y="467" fill="#b20000"/>
+			<att name="title" type="string" value="Spracherkenner"/>
+			<att name="language" type="string" value="Deutsch"/>
+		</node>
+		<edge src="0f5b191e-1a8c-453b-8cb7-d36436a86ad3" tgt="d0f420d7-b218-4fcf-a38a-59f8df29fcb9">
+			<att name="condition" type="string" value="ingredients"/>
+		</edge>
+		<edge src="1cade6f4-41c8-47de-a85f-74133272203a">
+			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="32c2b329-1796-4187-a686-39f1dc869aa1" tgt="5e6b1a64-324c-440d-91df-b3c12a039931">
+		</edge>
+		<edge src="34054068-83be-4d50-b2de-e7ff68aa3f5c" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
+		</edge>
+		<edge src="3724b2b0-1cf7-4c65-a050-e845d4862781" tgt="41095083-cbd6-4369-91ea-9d0b1a0cbc99">
+			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="41095083-cbd6-4369-91ea-9d0b1a0cbc99" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
+		</edge>
+		<edge src="49e92c77-880d-40c0-aebb-f47e8a5f86a6" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
+		</edge>
+		<edge src="4ef14db3-7491-4b40-a414-2a534c557737" tgt="49e92c77-880d-40c0-aebb-f47e8a5f86a6">
+			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="5e6b1a64-324c-440d-91df-b3c12a039931" tgt="be069a04-4c42-42db-a59f-0c4ed4610cef">
+		</edge>
+		<edge src="6ebf431b-29fe-4724-b204-e878117a4ed0" tgt="34054068-83be-4d50-b2de-e7ff68aa3f5c">
+			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="79d7d73d-e62e-4f35-a497-c147a0c3cf07">
+			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="8b17dcd5-52fb-45fb-a0a1-3f638066394a">
+			<att name="condition" type="string" value="[&quot;anleitung&quot;,term]"/>
+		</edge>
+		<edge src="8b17dcd5-52fb-45fb-a0a1-3f638066394a">
+			<att name="condition" type="string" value="[&quot;eigenschaften&quot;,term]"/>
+		</edge>
+		<edge src="8b17dcd5-52fb-45fb-a0a1-3f638066394a">
+			<att name="condition" type="string" value="[&quot;zutaten&quot;,term]"/>
+		</edge>
+		<edge src="a677b47e-4e65-44d8-bcac-1e11298794c4" tgt="6ebf431b-29fe-4724-b204-e878117a4ed0">
+			<att name="condition" type="string" value="[&quot;anleitung&quot;,term]"/>
+		</edge>
+		<edge src="a677b47e-4e65-44d8-bcac-1e11298794c4" tgt="3724b2b0-1cf7-4c65-a050-e845d4862781">
+			<att name="condition" type="string" value="[&quot;zutaten&quot;,term]"/>
+		</edge>
+		<edge src="a677b47e-4e65-44d8-bcac-1e11298794c4" tgt="4ef14db3-7491-4b40-a414-2a534c557737">
+			<att name="condition" type="string" value="[&quot;eigenschaft&quot;,term]"/>
+		</edge>
+		<edge src="b99ef79f-1042-47ee-9727-625702a9f2e3">
+			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="be069a04-4c42-42db-a59f-0c4ed4610cef" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
+			<att name="condition" type="string" value="[a,b]"/>
+		</edge>
+		<edge src="be069a04-4c42-42db-a59f-0c4ed4610cef">
+			<att name="condition" type="string" value="a"/>
+		</edge>
+		<edge src="d0f420d7-b218-4fcf-a38a-59f8df29fcb9" tgt="8b17dcd5-52fb-45fb-a0a1-3f638066394a">
+		</edge>
+		<comment x="964" y="346" width="100" height="60" color="#ffff99">nodes for which the client definitively works</comment>
+	</graph>
+</wizard>
