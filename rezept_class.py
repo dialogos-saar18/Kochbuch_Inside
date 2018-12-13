@@ -1,3 +1,4 @@
+# -*- coding:cp1252 -*-
 from bs4 import BeautifulSoup as bs
 
 class Recipe:
@@ -18,12 +19,24 @@ class Recipe:
     def get_schritt(self, argument): #returns string
         #if argument == "all":
         if argument == "next":
+            #try:
             self.schritt += 1
+            return "Dein nächster Schritt lautet: " + self.anleitung[self.schritt]
+            #Index Error -> "Du musst nichts mehr tun."
         elif argument == "repeat":
-            pass
+            return "Ich wiederhole: " + self.anleitung[self.schritt]
+        elif argument == "previous":
+            #IndexError
+            self.schritt -= 1
+            return "Der letzte Schritt war: " + self.anleitung[self.schritt]
+        elif argument == "all":
+            r=""
+            for i in range(len(self.anleitung)):
+                r += str(i+1) + ". " + self.anleitung[i]
         else:
-            print ("Unerwartetes Argument "+argument+" in get_schritt")
+            print ("Unerwartetes Argument "+str(argument)+" in get_schritt")
             ###raise Error
+
 
 
     def get_zutat(self,bezeichnung): #returns string
@@ -32,6 +45,9 @@ class Recipe:
 
     def get_property(self,key): #returns string
         return self.eigenschaften[key]
+
+    def ingredients():
+        return self.zutaten.keys()
 
 
     # no return value, only changes incredients
@@ -47,7 +63,7 @@ class Recipe:
 
     # gibt True zurück, wenn die Zutat für das Rezept benötigt wird
     def contains(self, zutat):
-        if zutat in self.zutaten:
+        if zutat in self.zutaten.keys():
             return "Ja"
         else:
             return "Nein"
@@ -139,15 +155,41 @@ class Recipe:
                     if n == u'/':
                         break
                     else:
-                        n = n.strip()
                         val = val + n
-                        
+                val = val.strip()
+                if key == u'Arbeitszeit:' or key == u'Ruhezeit:' or key == u'Koch-/Backzeit:':
+                    d = {}
+                    val = val[4:]
+                    lis = val.split(" ")
+                    k = int(lis[0])
+                    v = lis[1]
+                    d[u'dauer'] = k
+                    d[u'einheit'] = v
+                    val = d
+                                    
                 preparation[key] = val
             i = i + 1
-        
-        #preparation[u'Gesamtzeit'] = 
+        ges = 0
+        einheiten = []
+        if u'Arbeitszeit:' in preparation:
+            ges = ges + preparation[u'Arbeitszeit:'][u'dauer']
+            einheiten.append(preparation[u'Arbeitszeit:'][u'einheit'])
+        if u'Ruhezeit:' in preparation:
+            ges = ges + preparation[u'Ruhezeit:'][u'dauer']
+            einheiten.append(preparation[u'Ruhezeit:'][u'dauer'])
+        if u'Koch-/Backzeit:' in preparation:
+            ges = ges + preparation[u'Koch-/Backzeit'][u'dauer']
+            einheiten.append(preparation[u'Koch-/Backzeit'][u'dauer'])
+        #todo: Einheiten anpassen und entsprechen umrechnen
+        #todo: für Ruhezeit 2 Zeitangaben und 2 Einheiten ermöglichen (2 Tage 3 Std.)
+        di = {}
+        di[u'dauer'] = ges
+        #noch anpassen
+        di[u'einheit'] = u'Min.'
+        preparation[u'Gesamtzeit'] = di
         return preparation
                                              
+rezept = Recipe("Bsp_quelltext.txt")
 
 '''
 class Nutzer:
