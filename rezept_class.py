@@ -161,8 +161,12 @@ class Recipe:
                     d = {}
                     val = val[4:]
                     lis = val.split(" ")
-                    k = int(lis[0])
-                    v = lis[1]
+                    if len(lis) == 4:
+                        k = int(lis[0]) * 24 + int(lis[2])
+                        v = lis[3]
+                    else:
+                        k = int(lis[0])
+                        v = lis[1]
                     d[u'dauer'] = k
                     d[u'einheit'] = v
                     val = d
@@ -171,25 +175,55 @@ class Recipe:
             i = i + 1
         ges = 0
         einheiten = []
+        try:
+            aze = preparation[u'Arbeitszeit:'][u'einheit']
+            inheiten.append(aze)
+        except:
+            pass
+        try:
+            rze = preparation[u'Ruhezeit:'][u'einheit']
+            einheiten.append(rze)
+        except:
+            pass
+        try:
+            kze = preparation[u'Koch-/Backzeit:'][u'einheit']
+            einheiten.append(kze)
+        except:
+            pass
+        umr = False
+        for e in einheiten:
+            if e != u'Min.':
+                umr = True
         if u'Arbeitszeit:' in preparation:
-            ges = ges + preparation[u'Arbeitszeit:'][u'dauer']
-            einheiten.append(preparation[u'Arbeitszeit:'][u'einheit'])
+            zeit = preparation[u'Arbeitszeit:'][u'dauer']
+            if umr:
+                if aze == u'Std.':
+                    zeit = zeit * 60
+            ges = ges + zeit
         if u'Ruhezeit:' in preparation:
-            ges = ges + preparation[u'Ruhezeit:'][u'dauer']
-            einheiten.append(preparation[u'Ruhezeit:'][u'dauer'])
+            zeit = preparation[u'Ruhezeit:'][u'dauer']
+            if umr:
+                if rze == u'Std.':
+                    zeit = zeit * 60
+            ges = ges + zeit
         if u'Koch-/Backzeit:' in preparation:
-            ges = ges + preparation[u'Koch-/Backzeit'][u'dauer']
-            einheiten.append(preparation[u'Koch-/Backzeit'][u'dauer'])
-        #todo: Einheiten anpassen und entsprechen umrechnen
-        #todo: für Ruhezeit 2 Zeitangaben und 2 Einheiten ermöglichen (2 Tage 3 Std.)
+            zeit = preparation[u'Koch-/Backzeit:'][u'dauer']
+            if umr:
+                if kze == u'Std.':
+                    zeit = zeit * 60
+            ges = ges + zeit  
         di = {}
+        e = u'Min.'
+        if ges > 300:
+            ges = float(ges) / 60
+            e = u'Std.'
         di[u'dauer'] = ges
-        #noch anpassen
-        di[u'einheit'] = u'Min.'
+        di[u'einheit'] = e
         preparation[u'Gesamtzeit'] = di
         return preparation
                                              
-rezept = Recipe("Bsp_quelltext.txt")
+#rezept = Recipe("Bsp_quelltext.txt")
+#rezept2 = Recipe("quelltext_stollen.txt")
 
 '''
 class Nutzer:
