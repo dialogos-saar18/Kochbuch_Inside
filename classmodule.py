@@ -15,22 +15,36 @@ class Recipe:
     def get_schritt(self, argument): #returns string
         #if argument == "all":
         if argument == "next":
+            #try:
             self.schritt += 1
+            return "Dein nächster Schritt lautet: " + self.anleitung[self.schritt]
+            #Index Error -> "Du musst nichts mehr tun."
         elif argument == "repeat":
-            pass
+            return "Ich wiederhole: " + self.anleitung[self.schritt]
+        elif argument == "previous":
+            #IndexError
+            self.schritt -= 1
+            return "Der letzte Schritt war: " + self.anleitung[self.schritt]
+        elif argument == "all":
+            r=""
+            for i in range(len(self.anleitung)):
+                r += str(i+1) + ". " + self.anleitung[i]
         else:
             print ("Unerwartetes Argument "+argument+" in get_schritt")
-            ###raise Error            
+            ###raise Error
 
     def get_zutat(self,bezeichnung): #returns string
         #if bezeichnung == "all"
-        return self.zutaten[bezeichnung]['menge'] + self.zutaten[bezeichnung]['einheit']
+        return str(self.zutaten[bezeichnung]['menge']) + self.zutaten[bezeichnung]['einheit']
 
     def get_property(self,key): #returns string
         return self.eigenschaften[key]
 
     def umrechnen():
         pass
+
+    def ingredients():
+        return self.zutaten.keys()
 
 '''
 class Nutzer:
