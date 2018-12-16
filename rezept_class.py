@@ -18,23 +18,24 @@ class Recipe:
 
     def get_schritt(self, argument): #returns string
         #if argument == "all":
-        if argument == "next":
+        if argument == u'next':
             #try:
             self.schritt += 1
-            return "Dein nächster Schritt lautet: " + self.anleitung[self.schritt]
+            return u'Dein nächster Schritt lautet: ' + self.anleitung[self.schritt]
             #Index Error -> "Du musst nichts mehr tun."
-        elif argument == "repeat":
-            return "Ich wiederhole: " + self.anleitung[self.schritt]
-        elif argument == "previous":
+        elif argument == u'repeat':
+            return u'Ich wiederhole: ' + self.anleitung[self.schritt]
+        elif argument == u'previous':
             #IndexError
             self.schritt -= 1
-            return "Der letzte Schritt war: " + self.anleitung[self.schritt]
-        elif argument == "all":
-            r=""
+            return u'Der letzte Schritt war: ' + self.anleitung[self.schritt]
+        elif argument == u'all':
+            r = u''
             for i in range(len(self.anleitung)):
-                r += str(i+1) + ". " + self.anleitung[i]
+                r += str(i+1) + u'. ' + self.anleitung[i]
+            return r
         else:
-            print ("Unerwartetes Argument "+str(argument)+" in get_schritt")
+            print (u'Unerwartetes Argument '+str(argument)+u' in get_schritt')
             ###raise Error
 
 
@@ -54,7 +55,7 @@ class Recipe:
     # Einheiten umrechnen?
     # angabe => entweder Personen oder eine Zutat
     def umrechnen(self, anzahl, angabe):
-        if angabe == "Personen":
+        if angabe == u'Personen':
             factor = anzahl / self.portionen
         else:
             factor = anzahl / self.zutaten[angabe][u'menge']
@@ -64,19 +65,19 @@ class Recipe:
     # gibt True zurück, wenn die Zutat für das Rezept benötigt wird
     def contains(self, zutat):
         if zutat in self.zutaten.keys():
-            return "Ja"
+            return u'Ja'
         else:
-            return "Nein"
+            return u'Nein'
 
     def init_titel(self, beautifuls):
-        t = beautifuls.find("title")
+        t = beautifuls.find(u'title')
         t = t.contents[0]
         return t[:-14]
 
     # returns liste: [u'Die Zwiebeln fein...', u'Das Tomatenmark...',...]
     def init_anleitung(self, beautifuls):
         schritte = []
-        zubereitung = beautifuls.find(id="rezept-zubereitung")
+        zubereitung = beautifuls.find(id=u'rezept-zubereitung')
         for string in zubereitung.stripped_strings:
             schritte.append(string)
         return schritte
@@ -84,7 +85,7 @@ class Recipe:
     # return dict: {u'Zwiebel(n)': {u'menge': 1, u'einheit': u'm.-gro\xdfe'}, u'Zucker':...}
     def init_zutaten(self, beautifuls):
         zutaten = {}
-        incr = beautifuls.find("table", {"class": "incredients"})
+        incr = beautifuls.find(u'table', {u'class': u'incredients'})
         stripped2 = incr.stripped_strings
         strings = incr.strings
         l = []
@@ -94,7 +95,7 @@ class Recipe:
             if str(type(i)) == "<class 'bs4.element.NavigableString'>":
                 pass
             else:
-                li = i.findAll("td")
+                li = i.findAll(u'td')
                 menge = li[0].contents
                 mengen_angabe= menge[0]
 
@@ -135,14 +136,14 @@ class Recipe:
 
     # returns int
     def init_portionen(self, beautifuls):
-        p = beautifuls.find("input", {"name": "portionen"})
+        p = beautifuls.find(u'input', {u'name': u'portionen'})
         p = p[u'value']
         return int(p)
 
     #returns dict: {u'schwierigkeitsgrad': u'simpel', ...}
     def init_properties(self, beautifuls):
         preparation = {}
-        prep = beautifuls.find(id="preparation-info")
+        prep = beautifuls.find(id=u'preparation-info')
         l = []
         stripped = prep.stripped_strings
         i = 0
@@ -222,7 +223,7 @@ class Recipe:
         preparation[u'Gesamtzeit'] = di
         return preparation
                                              
-#rezept = Recipe("Bsp_quelltext.txt")
+rezept = Recipe("Bsp_quelltext.txt")
 #rezept2 = Recipe("quelltext_stollen.txt")
 
 '''
