@@ -112,7 +112,7 @@ class Recipe:
     def get_property(self,key): #returns string
         return self.eigenschaften[key]
 
-    def ingredients():
+    def ingredients(self):
         return self.zutaten.keys()
 
 
