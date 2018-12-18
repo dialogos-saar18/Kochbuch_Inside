@@ -112,6 +112,9 @@ class Recipe:
     def get_property(self,key): #returns string
         return self.eigenschaften[key]
 
+    def get_title(self):
+        return self.title
+
     def ingredients(self):
         return self.zutaten.keys()
 
@@ -248,7 +251,7 @@ class Recipe:
         einheiten = []
         try:
             aze = preparation[u'Arbeitszeit:'][u'einheit']
-            inheiten.append(aze)
+            einheiten.append(aze)
         except:
             pass
         try:

@@ -34,25 +34,34 @@ class Main(Client):
     def reset(self):
         print "reset"
 
-    #value has type string list; it can have two or three elements which are the args of get_info
-    #or one or two elements which then "ingredients" and optionally the recipe number
-        #we can also tell the Client to get a recipe; elements of value is an url
-    # only ingredients
-    # anleitung/zutat/eigenschaft suchbegriff
-    # anleitung/zutat/eigenschaft suchbegriff rezept
+    #value has type string list (from the Value class)
+    #die rezept-referenz ist ein int-Value
+    # "ingredients"
+    # "ingredients" rezept
+    # "title"
+    # "title" rezept
+    # "anleitung"/"zutat"/"eigenschaft" suchbegriff
+    # "anleitung"/"zutat"/"eigenschaft" suchbegriff rezept
     def output(self, value):
         value = list(value)
+
         if str(value[0]).strip('"')=="ingredients":
             if len(value)==1:
                 self.send(self.recipes[0].ingredients())
             else:
-                self.send(self.recipes[int(str(value[-1]))])
+                self.send(self.recipes[int(str(value[-1]))].ingredients())
         #elif len(value)==1:#meaning it's an url
          #   self.recipes.add(Recipe(str(value[0]).strip('"')))
-        elif len (value)==3:#works
+        elif str(value[0]).strip('"')=="title":
+            if len(value)==1:
+                self.send(self.recipes[0].get_title())
+            else:
+                self.send(self.recipes[int(str(value[-1]))].get_title)
+        elif len (value)==3:
             self.send(call(str(value[0]).strip('"'), str(value[1]).strip('"'), self.recipes[int(str(value[-1]))]))
-        else:#works
+        else:
             self.send(call(str(value[0]).strip('"'), str(value[1]).strip('"'), self.recipes[0]))
+            
         print "output: " + "done"
 
     def getName(self):
