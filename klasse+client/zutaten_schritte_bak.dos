@@ -65,11 +65,12 @@ $term_a = nächste {$=&quot;anleitung&quot;,&quot;next&quot;} | letzte {$=&quot;
  $input = 1 {$= [&quot;eigenschaften&quot;,&quot;eins&quot;]}| 2 {$= [&quot;anleitung&quot;,&quot;zwei&quot;]}| 3{$= [&quot;zutaten&quot;,&quot;drei&quot;]};</value>
 		</grammar>
 		<grammar id="887988cb-ab10-4c6a-9603-09be63e44e57">
-			<name>zutaten oder anleitung</name>
+			<name>zutaten_anleitung_weiter</name>
 			<value>root $input;
- $input = $zutaten {$=[&quot;zutaten&quot;,&quot;all&quot;]} | $anleitung {$=[&quot;zutaten&quot;,&quot;all&quot;]};
+ $input = $zutaten {$=&quot;zutaten&quot;} | $anleitung {$=&quot;anleitung&quot;} | $weiter {$=&quot;weiter&quot;};
 $zutaten = [sag mir | gib mir] (die Liste | alle Zutaten) | die Zutaten | was brauche ich;
-$anleitung = [sag mir | gib mir] (die Anleitung | alle Schritte) | was muss ich tun {$=[&quot;anleitung&quot;,&quot;all&quot;]};</value>
+$anleitung = [sag mir | gib mir] (die Anleitung | alle Schritte) | was muss ich tun ;
+$weiter = weiter | überspringen | fortfahren;</value>
 		</grammar>
 		<variable uid="616a7294-ca38-4923-a7fc-b71a822d01de">
 			<name>result</name>
@@ -225,7 +226,7 @@ $anleitung = [sag mir | gib mir] (die Anleitung | alle Schritte) | was muss ich 
 			<att name="title" type="string" value="[&quot;eigenschaft&quot;,&quot;titel&quot;]"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
-					<att name="Text" type="string" value="[&quot;eigenschaft&quot;,&quot;titel&quot;]"/>
+					<att name="Text" type="string" value="[&quot;eigenschaft&quot;,&quot;Titel&quot;]"/>
 				</att>
 			</att>
 			<att name="reset" type="boolean" value="0"/>
@@ -247,6 +248,19 @@ $anleitung = [sag mir | gib mir] (die Anleitung | alle Schritte) | was muss ich 
 			</att>
 			<att name="prompt_type" type="string" value="expression"/>
 			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="bb27cd88-695e-4f18-a583-3b7644bb7a3c" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="320" y="217" fill="#ff5a5a"/>
+			<att name="title" type="string" value="Zutatenliste"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;zutaten&quot;,&quot;all&quot;]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
 		<node uid="be069a04-4c42-42db-a59f-0c4ed4610cef" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
 			<graphics x="28" y="223" fill="#b20000"/>
@@ -316,6 +330,19 @@ for (int i=1; i&lt;length(ingredients); i++)
 dyngram = dyngram + &quot;;&quot;;</value>
 			</att>
 		</node>
+		<node uid="f7c312e2-51af-4e98-ade8-7bc009027d8e" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="458" y="212" fill="#ff5a5a"/>
+			<att name="title" type="string" value="Ganze Anleitung"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;anleitung&quot;,&quot;all&quot;]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
 		<node uid="facc0c27-16e8-42b1-b317-f7cecf8b60ba" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
 			<graphics x="629" y="245" fill="#00b200"/>
 			<att name="title" type="string" value="Sprachsynthese"/>
@@ -344,8 +371,14 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		<edge src="4ef14db3-7491-4b40-a414-2a534c557737" tgt="49e92c77-880d-40c0-aebb-f47e8a5f86a6">
 			<att name="condition" type="string" value="result"/>
 		</edge>
-		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b">
-			<att name="condition" type="string" value=""/>
+		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="bb27cd88-695e-4f18-a583-3b7644bb7a3c">
+			<att name="condition" type="string" value="&quot;zutaten&quot;"/>
+		</edge>
+		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="f7c312e2-51af-4e98-ade8-7bc009027d8e">
+			<att name="condition" type="string" value="&quot;anleitung&quot;"/>
+		</edge>
+		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="facc0c27-16e8-42b1-b317-f7cecf8b60ba">
+			<att name="condition" type="string" value="&quot;weiter&quot;"/>
 		</edge>
 		<edge src="6ebf431b-29fe-4724-b204-e878117a4ed0" tgt="34054068-83be-4d50-b2de-e7ff68aa3f5c">
 			<att name="condition" type="string" value="result"/>
@@ -367,6 +400,9 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		</edge>
 		<edge src="a7cd5c91-c640-4b1f-a00a-19b817eaad93" tgt="66370e54-87d3-472e-9710-3dcfaebe346b">
 		</edge>
+		<edge src="bb27cd88-695e-4f18-a583-3b7644bb7a3c">
+			<att name="condition" type="string" value="result"/>
+		</edge>
 		<edge src="be069a04-4c42-42db-a59f-0c4ed4610cef" tgt="06c8ca8e-867a-4507-9f60-85aaf09ab289">
 			<att name="condition" type="string" value="[a,b]"/>
 		</edge>
@@ -376,6 +412,9 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		<edge src="d0f420d7-b218-4fcf-a38a-59f8df29fcb9">
 		</edge>
 		<edge src="f2fc8563-5da3-4d1c-8330-434ef8df6e01">
+		</edge>
+		<edge src="f7c312e2-51af-4e98-ade8-7bc009027d8e">
+			<att name="condition" type="string" value="result"/>
 		</edge>
 		<edge src="facc0c27-16e8-42b1-b317-f7cecf8b60ba" tgt="a677b47e-4e65-44d8-bcac-1e11298794c4">
 		</edge>
