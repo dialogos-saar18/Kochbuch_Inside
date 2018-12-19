@@ -2,41 +2,41 @@
 def e_umrechnen(einheit_alt, einheit_neu, menge):
     if einheit_alt == einheit_neu:
         m = menge
-    elif einheit_alt == u'g' and einheit_neu == u'kg':
+    elif einheit_alt == u'Gramm' and einheit_neu == u'Kilogramm':
         m = menge/1000.0
-    elif einheit_alt == u'g' and einheit_neu == u'mg':
+    elif einheit_alt == u'Gramm' and einheit_neu == u'Milligramm':
         m = menge * 1000.0
-    elif einheit_alt == u'kg' and einheit_neu == u'g':
+    elif einheit_alt == u'Kilogramm' and einheit_neu == u'Gramm':
         m = menge * 1000.0
-    elif einheit_alt == u'kg' and einheit_neu == u'mg':
+    elif einheit_alt == u'Kilogramm' and einheit_neu == u'Milligramm':
         m = menge * 1000.0 * 1000.0
-    elif einheit_alt == u'mg' and einheit_neu == u'g':
+    elif einheit_alt == u'Milligramm' and einheit_neu == u'Gramm':
         m = menge / 1000.0
-    elif einheit_alt == u'mg' and einheit_neu == u'kg':
+    elif einheit_alt == u'Milligramm' and einheit_neu == u'Kilogramm':
         m = menge / 1000.0 / 1000.0
-    elif einheit_alt == u'Liter' and einheit_neu == u'ml':
+    elif einheit_alt == u'Liter' and einheit_neu == u'Milliliter':
         m = menge * 1000.0
-    elif einheit_alt == u'Liter' and einheit_neu == u'cl':
+    elif einheit_alt == u'Liter' and einheit_neu == u'Zentiliter':
         m = menge * 100.0
-    elif einheit_alt == u'Liter' and einheit_neu == u'dl':
+    elif einheit_alt == u'Liter' and einheit_neu == u'Deziliter':
         m = menge * 10.0
-    elif einheit_alt == u'ml' and einheit_neu == u'Liter':
+    elif einheit_alt == u'Milliliter' and einheit_neu == u'Liter':
         m = menge / 1000.0
-    elif einheit_alt == u'ml' and einheit_neu == u'cl':
+    elif einheit_alt == u'Milliliter' and einheit_neu == u'Zentiliter':
         m = menge / 10.0
-    elif einheit_alt == u'ml' and einheit_neu == u'dl':
+    elif einheit_alt == u'Milliliter' and einheit_neu == u'Deziliter':
         m = menge / 100.0
-    elif einheit_alt == u'cl' and einheit_neu == u'Liter':
+    elif einheit_alt == u'Zentiliter' and einheit_neu == u'Liter':
         m = menge / 100.0
-    elif einheit_alt == u'cl' and einheit_neu == u'dl':
+    elif einheit_alt == u'Zentiliter' and einheit_neu == u'Deziliter':
         m = menge / 10.0
-    elif einheit_alt == u'cl' and einheit_neu == u'ml':
+    elif einheit_alt == u'Zentiliter' and einheit_neu == u'Milliliter':
         m = menge * 10.0
-    elif einheit_alt == u'dl' and einheit_neu == u'Liter':
+    elif einheit_alt == u'Deziliter' and einheit_neu == u'Liter':
         m = menge / 10.0
-    elif einheit_alt == u'dl' and einheit_neu == u'cl':
+    elif einheit_alt == u'Deziliter' and einheit_neu == u'Zentiliter':
         m = menge * 10.0
-    elif einheit_alt == u'dl' and einheit_neu == u'ml':
+    elif einheit_alt == u'Deziliter' and einheit_neu == u'Milliliter':
         m = menge * 100.0
     else:
         print("Nicht umrechenbar")
@@ -45,8 +45,10 @@ def e_umrechnen(einheit_alt, einheit_neu, menge):
 def e_ausschreiben(einheit):
     if einheit == u'EL, gestr.':
         e = u'EL, gestrichen'
-    #elif einheit == u'EL, gehäuft':
-        #pass
+    elif einheit == u'EL, gehäuft':
+        e = u'Esslöffel, gehäuft'
+    elif einheit == u'EL':
+        e = u'Esslöffel'
     elif einheit == u'TL, gestr.':
         e = u'TL, gestrichen'
     elif einheit == u'gr. Dose/n':
@@ -75,7 +77,24 @@ def e_ausschreiben(einheit):
         e = u'Päckchen'
     elif einheit == u'Pkt.':
         e = u'Päckchen'
+    elif einheit == u'cl':
+        e = u'Zentiliter'
+    elif einheit == u'cm':
+        e = u'Zentimeter'
+    elif einheit == u'dl':
+        e = u'Deziliter'
+    elif einheit == u'g':
+        e = u'Gramm'
+    elif einheit == u'kg':
+        e = u'Kilogramm'
+    elif einheit == u'mg':
+        e = u'Milligramm'
+    elif einheit == u'ml':
+        e = u'Milliliter'
+    elif einheit == u'Port.':
+        e = u'Portion'
     else:
         e = einheit
     return e
+
     
