@@ -38,8 +38,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 		<att name="dbURL" type="string" value="jdbc:sqlite:C:\Users\TT\DialogOS\test.db"/>
 	</plugin>
 	<graph directed="1" Graphic="1" Layout="points">
-		<att name="width" type="integer" value="1121"/>
-		<att name="height" type="integer" value="630"/>
+		<att name="width" type="integer" value="1574"/>
+		<att name="height" type="integer" value="841"/>
 		<groovyFunctions></groovyFunctions>
 		<grammar id="0bc38a8e-cae8-4b4a-84fa-9be0bfafb1d1">
 			<name>zutatenschritte</name>
@@ -128,23 +128,45 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<value>undefined</value>
 			<export/>
 		</variable>
+		<variable uid="8ada212c-756d-439e-acf8-1b22d8127378">
+			<name>einheiten</name>
+			<type>list</type>
+			<value>undefined</value>
+			<export/>
+		</variable>
+		<variable uid="b79570bd-792e-46dd-8618-e1e7525e976e">
+			<name>gram</name>
+			<type>string</type>
+			<value>undefined</value>
+		</variable>
 		<node uid="051e48ad-0873-4ef3-ae51-d7055d253f64" class="com.clt.diamant.graph.nodes.GotoNode">
-			<graphics x="679" y="528" fill="#4c4c80"/>
+			<graphics x="679" y="665" fill="#4c4c80"/>
 			<att name="title" type="string" value="Goto"/>
 			<att name="label_uid" type="string" value="3c2c8d81-3e8c-48d2-8c89-5d078be420f5"/>
 		</node>
 		<node uid="06c8ca8e-867a-4507-9f60-85aaf09ab289" class="com.clt.diamant.graph.nodes.EndNode">
-			<graphics x="1040" y="172" fill="#9999ff"/>
+			<graphics x="1040" y="309" fill="#9999ff"/>
 			<att name="title" type="string" value="Ende"/>
 		</node>
 		<node uid="0ba1cd33-cb86-48ce-ba0c-5a6bcaf39698" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
-			<graphics x="303" y="352" fill="#b20000"/>
+			<graphics x="303" y="489" fill="#b20000"/>
 			<att name="title" type="string" value="janein"/>
 			<att name="language" type="string" value="Deutsch"/>
 			<att name="grammar" type="string" value="9a5dcd6a-8229-4015-b7ba-cd13e10b853f"/>
 		</node>
+		<node uid="0e4f03d7-e789-41a8-be99-844d81a8eb65" class="com.clt.diamant.graph.nodes.OutputNode">
+			<graphics x="42" y="698" fill="#00cc99"/>
+			<att name="title" type="string" value="Ausgabe"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;Personen&quot;, term]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+		</node>
 		<node uid="0f5b191e-1a8c-453b-8cb7-d36436a86ad3" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="596" y="108" fill="#ff5a5a"/>
+			<graphics x="314" y="47" fill="#ff5a5a"/>
 			<att name="title" type="string" value="Zutatenliste"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -157,7 +179,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
 		<node uid="0fa29cb1-34a3-44e0-94e6-e5c7d5b8d062" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="308" y="278" fill="#00b200"/>
+			<graphics x="308" y="415" fill="#00b200"/>
 			<att name="title" type="string" value="Einkaufsliste?"/>
 			<att name="prompt" type="text">
 				<value>result + 
@@ -166,8 +188,17 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="prompt_type" type="string" value="expression"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
+		<node uid="195f158f-6c6d-4267-bacf-5bfb135bf18e" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="893" y="589" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>result</value>
+			</att>
+			<att name="prompt_type" type="string" value="expression"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
 		<node uid="2deb32b5-5ff5-45f7-a5e4-d5d002b16016" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="27" y="423" fill="#00b200"/>
+			<graphics x="95" y="461" fill="#00b200"/>
 			<att name="title" type="string" value="anleitung_zutaten"/>
 			<att name="prompt" type="text">
 				<value>Soll ich die Zutaten oder die Anleitung vorlesen?</value>
@@ -176,11 +207,11 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="32c2b329-1796-4187-a686-39f1dc869aa1" class="com.clt.diamant.graph.nodes.StartNode">
-			<graphics x="222" y="3" fill="#9999ff"/>
+			<graphics x="48" y="17" fill="#9999ff"/>
 			<att name="title" type="string" value="Start"/>
 		</node>
 		<node uid="34054068-83be-4d50-b2de-e7ff68aa3f5c" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="494" y="441" fill="#00b200"/>
+			<graphics x="494" y="578" fill="#00b200"/>
 			<att name="title" type="string" value="Sprachsynthese"/>
 			<att name="prompt" type="text">
 				<value>result</value>
@@ -189,7 +220,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="37233152-ee46-4cd0-a4fa-22d283343513" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="3" y="160" fill="#00b200"/>
+			<graphics x="8" y="316" fill="#00b200"/>
 			<att name="title" type="string" value="Menge ändern?"/>
 			<att name="prompt" type="text">
 				<value>&quot;Das Rezept ist für &quot; + result + &quot; Portionen ausgelegt. Möchtest du die Mengenangaben ändern?&quot;</value>
@@ -198,7 +229,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="3724b2b0-1cf7-4c65-a050-e845d4862781" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="617" y="373" fill="#ff5a5a"/>
+			<graphics x="640" y="514" fill="#ff5a5a"/>
 			<att name="title" type="string" value="zutaten"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -211,29 +242,42 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
 		<node uid="3c2c8d81-3e8c-48d2-8c89-5d078be420f5" class="com.clt.diamant.graph.nodes.LabelNode">
-			<graphics x="796" y="225" fill="#4c4c80"/>
+			<graphics x="796" y="362" fill="#4c4c80"/>
 			<att name="title" type="string" value="2"/>
 		</node>
 		<node uid="41095083-cbd6-4369-91ea-9d0b1a0cbc99" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="623" y="442" fill="#00b200"/>
+			<graphics x="623" y="579" fill="#00b200"/>
 			<att name="title" type="string" value="Sprachsynthese"/>
 			<att name="prompt" type="text">
-				<value>&quot;Du brauchst &quot; + result + &quot; &quot; + term</value>
+				<value>&quot;Du brauchst &quot; + result + &quot; &quot;</value>
 			</att>
 			<att name="prompt_type" type="string" value="expression"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
+		<node uid="4528c0cb-e0f9-49ce-ac6a-91b9bd01c314" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="283" y="125" fill="#ff5a5a"/>
+			<att name="title" type="string" value="Einheitenliste"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;einheiten&quot;]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
 		<node uid="49e92c77-880d-40c0-aebb-f47e8a5f86a6" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="765" y="444" fill="#00b200"/>
+			<graphics x="757" y="586" fill="#00b200"/>
 			<att name="title" type="string" value="Sprachsynthese"/>
 			<att name="prompt" type="text">
-				<value>term + &quot; ist etwa &quot; + result</value>
+				<value>term + &quot; ist &quot; + result</value>
 			</att>
 			<att name="prompt_type" type="string" value="expression"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="4d021f03-04b9-471c-94b3-b4866f513544" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="3" y="96" fill="#ff5a5a"/>
+			<graphics x="22" y="247" fill="#ff5a5a"/>
 			<att name="title" type="string" value="Portionen"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -246,7 +290,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
 		<node uid="4ef14db3-7491-4b40-a414-2a534c557737" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="758" y="369" fill="#ff5a5a"/>
+			<graphics x="723" y="518" fill="#ff5a5a"/>
 			<att name="title" type="string" value="eigenschaft"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -258,23 +302,41 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="discard" type="boolean" value="0"/>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
+		<node uid="558b9ecd-d27d-4367-8414-df0aa90df063" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="7" y="555" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>&quot;Für wie viele Personen oder für welche Menge einer Zutat möchtest du kochen?&quot;</value>
+			</att>
+			<att name="prompt_type" type="string" value="text"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
 		<node uid="5c6c5b8c-3afd-4ea7-ba4d-4a4286959b5a" class="com.clt.diamant.graph.nodes.GotoNode">
-			<graphics x="422" y="486" fill="#4c4c80"/>
+			<graphics x="422" y="623" fill="#4c4c80"/>
 			<att name="title" type="string" value="Goto"/>
 			<att name="label_uid" type="string" value="bb90d713-4708-440b-9277-505a4897b5d9"/>
 		</node>
 		<node uid="5d3c33ec-9717-4a49-a853-e66d14a7c36b" class="com.clt.diamant.graph.nodes.EndNode">
-			<graphics x="831" y="290" fill="#9999ff"/>
+			<graphics x="831" y="427" fill="#9999ff"/>
 			<att name="title" type="string" value="Ende"/>
 		</node>
+		<node uid="5f8181a8-a7cb-4611-bf61-fb96a581182a" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="126" y="711" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>&quot;Die Zutaten wurden umgerechnet&quot;</value>
+			</att>
+			<att name="prompt_type" type="string" value="text"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
 		<node uid="66370e54-87d3-472e-9710-3dcfaebe346b" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
-			<graphics x="403" y="129" fill="#b20000"/>
+			<graphics x="403" y="266" fill="#b20000"/>
 			<att name="title" type="string" value="anleitung_zutaten"/>
 			<att name="language" type="string" value="Deutsch"/>
 			<att name="grammar" type="string" value="887988cb-ab10-4c6a-9603-09be63e44e57"/>
 		</node>
 		<node uid="6ebf431b-29fe-4724-b204-e878117a4ed0" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="514" y="373" fill="#ff5a5a"/>
+			<graphics x="514" y="510" fill="#ff5a5a"/>
 			<att name="title" type="string" value="(Schritt)"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -287,8 +349,34 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="discard" type="boolean" value="0"/>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
+		<node uid="6fe6cab3-b5e9-441f-a6ba-1437343db106" class="com.clt.diamant.graph.nodes.ScriptNode">
+			<graphics x="21" y="473" fill="#99ffff"/>
+			<att name="title" type="string" value="Script"/>
+			<att name="script" type="text">
+				<value>gram = &quot;root $input; \n&quot;;
+gram = gram + &quot;$input = &quot;;
+gram = gram + &quot;(ich möchte für) 0 Personen kochen {$=[\&quot;Personen\&quot;,0]}&quot;;
+for (int i=1; i&lt;999; i++)
+  gram = gram + &quot;| (ich möchte) für &quot; + i + &quot; Personen kochen {$=[\&quot;Personen\&quot;,i]}&quot;;
+gram = gram + &quot;;&quot;
+</value>
+			</att>
+		</node>
+		<node uid="77b4e8bb-41e7-4841-bfff-d1073803cb57" class="com.clt.diamant.graph.nodes.InputNode">
+			<graphics x="892" y="520" fill="#ff5a5a"/>
+			<att name="title" type="string" value="Eingabe"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;exists_zutat&quot;, term]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
+			<att name="discard" type="boolean" value="0"/>
+			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
 		<node uid="81f06fc6-5a24-4454-80fd-ac8c98ce288d" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="346" y="3" fill="#ff5a5a"/>
+			<graphics x="161" y="24" fill="#ff5a5a"/>
 			<att name="title" type="string" value="[&quot;eigenschaft&quot;,&quot;titel&quot;]"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -300,19 +388,26 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="discard" type="boolean" value="0"/>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
+		<node uid="a08657cb-177e-4363-a1c6-ca9d8d2b2c3c" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="8" y="623" fill="#b20000"/>
+			<att name="title" type="string" value="Spracherkenner"/>
+			<att name="language" type="string" value="Deutsch"/>
+			<att name="grammarExpression" type="string" value=""/>
+		</node>
 		<node uid="a410e5a8-da5e-4338-b4b6-da44c5ba2e88" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
-			<graphics x="3" y="221" fill="#b20000"/>
+			<graphics x="3" y="393" fill="#b20000"/>
 			<att name="title" type="string" value="Speech recognizer"/>
 			<att name="language" type="string" value="Deutsch"/>
+			<att name="grammar" type="string" value="9a5dcd6a-8229-4015-b7ba-cd13e10b853f"/>
 		</node>
 		<node uid="a677b47e-4e65-44d8-bcac-1e11298794c4" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
-			<graphics x="625" y="302" fill="#b20000"/>
+			<graphics x="624" y="439" fill="#b20000"/>
 			<att name="title" type="string" value="Spracherkenner"/>
 			<att name="language" type="string" value="Deutsch"/>
 			<att name="grammarExpression" type="string" value="dyngram"/>
 		</node>
 		<node uid="a7cd5c91-c640-4b1f-a00a-19b817eaad93" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="285" y="62" fill="#00b200"/>
+			<graphics x="281" y="209" fill="#00b200"/>
 			<att name="title" type="string" value="Sprachsynthese"/>
 			<att name="prompt" type="text">
 				<value>&quot;Ich habe das Rezept für &quot; + result +&quot; geladen.&quot; </value>
@@ -321,7 +416,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="afd7c684-5d8f-4c0d-92db-1ae68fbde829" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="359" y="418" fill="#00b200"/>
+			<graphics x="271" y="639" fill="#00b200"/>
 			<att name="title" type="string" value="Speech synthesis"/>
 			<att name="prompt" type="text">
 				<value>Soll ich die Zutaten wiederholen oder dir die Anleitung vorlesen.</value>
@@ -330,7 +425,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="b99faceb-da68-4321-881f-b8b68530be7c" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="458" y="283" fill="#00b200"/>
+			<graphics x="458" y="420" fill="#00b200"/>
 			<att name="title" type="string" value="anleitung_zutaten"/>
 			<att name="prompt" type="text">
 				<value>result +
@@ -340,7 +435,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="bb27cd88-695e-4f18-a583-3b7644bb7a3c" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="322" y="211" fill="#ff5a5a"/>
+			<graphics x="322" y="348" fill="#ff5a5a"/>
 			<att name="title" type="string" value="Zutatenliste"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -353,17 +448,17 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
 		<node uid="bb90d713-4708-440b-9277-505a4897b5d9" class="com.clt.diamant.graph.nodes.LabelNode">
-			<graphics x="477" y="44" fill="#4c4c80"/>
+			<graphics x="477" y="181" fill="#4c4c80"/>
 			<att name="title" type="string" value="1"/>
 		</node>
 		<node uid="be069a04-4c42-42db-a59f-0c4ed4610cef" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
-			<graphics x="1023" y="103" fill="#b20000"/>
+			<graphics x="1023" y="240" fill="#b20000"/>
 			<att name="title" type="string" value="Ausgabetest"/>
 			<att name="language" type="string" value="Deutsch"/>
 			<att name="grammarExpression" type="string" value="dyngram"/>
 		</node>
 		<node uid="d0f420d7-b218-4fcf-a38a-59f8df29fcb9" class="com.clt.diamant.graph.nodes.ScriptNode">
-			<graphics x="949" y="41" fill="#99ffff"/>
+			<graphics x="882" y="245" fill="#99ffff"/>
 			<att name="title" type="string" value="Dynamische Grammatik"/>
 			<att name="comment" type="text">
 				<value>Das, was mal (so ungefähr) passieren soll.</value>
@@ -395,7 +490,7 @@ dyngram = dyngram + &quot;$term_a = nächste {$=\&quot;anleitung\&quot;,\&quot;n
 			</att>
 		</node>
 		<node uid="e83ebff3-520a-44b0-a97a-63e70cbf168c" class="com.clt.diamant.graph.nodes.OutputNode">
-			<graphics x="217" y="411" fill="#00cc99"/>
+			<graphics x="217" y="548" fill="#00cc99"/>
 			<att name="title" type="string" value="Einkaufsliste"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -406,7 +501,7 @@ dyngram = dyngram + &quot;$term_a = nächste {$=\&quot;anleitung\&quot;,\&quot;n
 			<att name="wait" type="boolean" value="0"/>
 		</node>
 		<node uid="f2fc8563-5da3-4d1c-8330-434ef8df6e01" class="com.clt.diamant.graph.nodes.ScriptNode">
-			<graphics x="602" y="173" fill="#99ffff"/>
+			<graphics x="603" y="311" fill="#99ffff"/>
 			<att name="title" type="string" value="Workaround (dynamische Grammatik)"/>
 			<att name="comment" type="text">
 				<value>Die Grammatik ist sehr hässlich, da einzeilig
@@ -428,8 +523,8 @@ dyngram = dyngram + &quot; | Was ist der nächste Schritt {$=[\&quot;anleitung\&
 
 //zutaten
 //dyngram = &quot;$term_z = milch | zucker; \n&quot;;
-for (int i=1; i&lt;length(ingredients); i++)
-	dyngram = dyngram + &quot;| wie viel &quot; + get(ingredients,i) + &quot; brauche ich {$=[\&quot;zutaten\&quot;, get(ingredients,i)]} | brauche ich &quot; + get(ingredients,i) + &quot;{$=[\&quot;exists_zutat\&quot;, get(ingredients,i)]} | (kommt | kommen | gehört | gehören) &quot; + get(ingredients,i) + &quot; (rein | hinein | dazu | dabei){$=[\&quot;exists_zutat\&quot;, get(ingredients,i)]}&quot;&quot; ;
+for (int i = 1; i&lt;length(ingredients); i++)
+ dyngram = dyngram + &quot;| wie viel &quot; + get(ingredients,1)  + &quot; brauche ich {$=[\&quot;zutaten\&quot;, 1]} | brauche ich &quot; + get(ingredients,1) + &quot;{$=[\&quot;exists_zutat\&quot;, get(ingredients,1)]} | (kommt | kommen | gehört | gehören) &quot; + get(ingredients,1) + &quot; (rein | hinein | dazu | dabei){$=[\&quot;exists_zutat\&quot;, get(ingredients,1)]}&quot; ;
 
 
 
@@ -438,7 +533,7 @@ dyngram = dyngram + &quot;;&quot;;</value>
 			</att>
 		</node>
 		<node uid="f7c312e2-51af-4e98-ade8-7bc009027d8e" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="458" y="220" fill="#ff5a5a"/>
+			<graphics x="461" y="350" fill="#ff5a5a"/>
 			<att name="title" type="string" value="Ganze Anleitung"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -451,7 +546,7 @@ dyngram = dyngram + &quot;;&quot;;</value>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
 		<node uid="facc0c27-16e8-42b1-b317-f7cecf8b60ba" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="629" y="245" fill="#00b200"/>
+			<graphics x="629" y="375" fill="#00b200"/>
 			<att name="title" type="string" value="Sprachsynthese"/>
 			<att name="prompt" type="text">
 				<value>Im weiteren Verlauf kannst du nach Mengenangaben, Schritten und weiteren Informationen wie Arbeitszeit oder Schwierigkeitsgrad fragen.</value>
@@ -465,10 +560,14 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		<edge src="0ba1cd33-cb86-48ce-ba0c-5a6bcaf39698" tgt="afd7c684-5d8f-4c0d-92db-1ae68fbde829">
 			<att name="condition" type="string" value="&quot;nein&quot;"/>
 		</edge>
-		<edge src="0f5b191e-1a8c-453b-8cb7-d36436a86ad3" tgt="f2fc8563-5da3-4d1c-8330-434ef8df6e01">
+		<edge src="0e4f03d7-e789-41a8-be99-844d81a8eb65" tgt="5f8181a8-a7cb-4611-bf61-fb96a581182a">
+		</edge>
+		<edge src="0f5b191e-1a8c-453b-8cb7-d36436a86ad3" tgt="4528c0cb-e0f9-49ce-ac6a-91b9bd01c314">
 			<att name="condition" type="string" value="ingredients"/>
 		</edge>
 		<edge src="0fa29cb1-34a3-44e0-94e6-e5c7d5b8d062" tgt="0ba1cd33-cb86-48ce-ba0c-5a6bcaf39698">
+		</edge>
+		<edge src="195f158f-6c6d-4267-bacf-5bfb135bf18e" tgt="051e48ad-0873-4ef3-ae51-d7055d253f64">
 		</edge>
 		<edge src="2deb32b5-5ff5-45f7-a5e4-d5d002b16016" tgt="66370e54-87d3-472e-9710-3dcfaebe346b">
 		</edge>
@@ -485,6 +584,9 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		</edge>
 		<edge src="41095083-cbd6-4369-91ea-9d0b1a0cbc99" tgt="051e48ad-0873-4ef3-ae51-d7055d253f64">
 		</edge>
+		<edge src="4528c0cb-e0f9-49ce-ac6a-91b9bd01c314" tgt="a7cd5c91-c640-4b1f-a00a-19b817eaad93">
+			<att name="condition" type="string" value="einheiten"/>
+		</edge>
 		<edge src="49e92c77-880d-40c0-aebb-f47e8a5f86a6" tgt="051e48ad-0873-4ef3-ae51-d7055d253f64">
 		</edge>
 		<edge src="4d021f03-04b9-471c-94b3-b4866f513544" tgt="37233152-ee46-4cd0-a4fa-22d283343513">
@@ -493,20 +595,38 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		<edge src="4ef14db3-7491-4b40-a414-2a534c557737" tgt="49e92c77-880d-40c0-aebb-f47e8a5f86a6">
 			<att name="condition" type="string" value="result"/>
 		</edge>
+		<edge src="558b9ecd-d27d-4367-8414-df0aa90df063" tgt="a08657cb-177e-4363-a1c6-ca9d8d2b2c3c">
+		</edge>
+		<edge src="5f8181a8-a7cb-4611-bf61-fb96a581182a" tgt="2deb32b5-5ff5-45f7-a5e4-d5d002b16016">
+		</edge>
 		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="bb27cd88-695e-4f18-a583-3b7644bb7a3c">
 			<att name="condition" type="string" value="&quot;zutaten&quot;"/>
 		</edge>
 		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="f7c312e2-51af-4e98-ade8-7bc009027d8e">
 			<att name="condition" type="string" value="&quot;anleitung&quot;"/>
 		</edge>
-		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="0f5b191e-1a8c-453b-8cb7-d36436a86ad3">
+		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="f2fc8563-5da3-4d1c-8330-434ef8df6e01">
 			<att name="condition" type="string" value="&quot;weiter&quot;"/>
 		</edge>
 		<edge src="6ebf431b-29fe-4724-b204-e878117a4ed0" tgt="34054068-83be-4d50-b2de-e7ff68aa3f5c">
 			<att name="condition" type="string" value="result"/>
 		</edge>
-		<edge src="81f06fc6-5a24-4454-80fd-ac8c98ce288d" tgt="a7cd5c91-c640-4b1f-a00a-19b817eaad93">
+		<edge src="6fe6cab3-b5e9-441f-a6ba-1437343db106" tgt="558b9ecd-d27d-4367-8414-df0aa90df063">
+		</edge>
+		<edge src="77b4e8bb-41e7-4841-bfff-d1073803cb57" tgt="195f158f-6c6d-4267-bacf-5bfb135bf18e">
 			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="81f06fc6-5a24-4454-80fd-ac8c98ce288d" tgt="0f5b191e-1a8c-453b-8cb7-d36436a86ad3">
+			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="a08657cb-177e-4363-a1c6-ca9d8d2b2c3c" tgt="0e4f03d7-e789-41a8-be99-844d81a8eb65">
+			<att name="condition" type="string" value="[&quot;Personen&quot;,term]"/>
+		</edge>
+		<edge src="a410e5a8-da5e-4338-b4b6-da44c5ba2e88" tgt="6fe6cab3-b5e9-441f-a6ba-1437343db106">
+			<att name="condition" type="string" value="&quot;ja&quot;"/>
+		</edge>
+		<edge src="a410e5a8-da5e-4338-b4b6-da44c5ba2e88" tgt="2deb32b5-5ff5-45f7-a5e4-d5d002b16016">
+			<att name="condition" type="string" value="&quot;nein&quot;"/>
 		</edge>
 		<edge src="a677b47e-4e65-44d8-bcac-1e11298794c4" tgt="6ebf431b-29fe-4724-b204-e878117a4ed0">
 			<att name="condition" type="string" value="[&quot;anleitung&quot;,term]"/>
@@ -517,10 +637,13 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		<edge src="a677b47e-4e65-44d8-bcac-1e11298794c4" tgt="4ef14db3-7491-4b40-a414-2a534c557737">
 			<att name="condition" type="string" value="[&quot;eigenschaft&quot;,term]"/>
 		</edge>
+		<edge src="a677b47e-4e65-44d8-bcac-1e11298794c4" tgt="77b4e8bb-41e7-4841-bfff-d1073803cb57">
+			<att name="condition" type="string" value="[&quot;exists_zutat&quot;, term]"/>
+		</edge>
 		<edge src="a677b47e-4e65-44d8-bcac-1e11298794c4" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
 			<att name="condition" type="string" value="&quot;ende&quot;"/>
 		</edge>
-		<edge src="a7cd5c91-c640-4b1f-a00a-19b817eaad93" tgt="2deb32b5-5ff5-45f7-a5e4-d5d002b16016">
+		<edge src="a7cd5c91-c640-4b1f-a00a-19b817eaad93" tgt="4d021f03-04b9-471c-94b3-b4866f513544">
 		</edge>
 		<edge src="afd7c684-5d8f-4c0d-92db-1ae68fbde829" tgt="5c6c5b8c-3afd-4ea7-ba4d-4a4286959b5a">
 		</edge>
@@ -548,9 +671,9 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		</edge>
 		<edge src="facc0c27-16e8-42b1-b317-f7cecf8b60ba" tgt="a677b47e-4e65-44d8-bcac-1e11298794c4">
 		</edge>
-		<comment x="556" y="14" width="208" height="99" color="#ffff99">vollständige liste aller eigenschaften (von chefkoch.de holen)
+		<comment x="585" y="142" width="208" height="99" color="#ffff99">vollständige liste aller eigenschaften (von chefkoch.de holen)
 Umrechnen
 titel zu eigenschaften</comment>
-		<comment x="166" y="197" width="100" height="60" color="#ffff99">hier kommt die umrechnung rein</comment>
+		<comment x="166" y="334" width="100" height="60" color="#ffff99">hier kommt die umrechnung rein</comment>
 	</graph>
 </wizard>

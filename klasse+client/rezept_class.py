@@ -8,7 +8,7 @@ class Recipe:
     def __init__(self, _quellcode):
         with open(_quellcode) as f:
             soup = bs(f,features="html.parser")
-        self.titel = self.init_titel(soup)
+        self.title = self.init_titel(soup)
         self.anleitung = self.init_anleitung(soup)
         self.schritt = 0
         self.zutaten = self.init_zutaten(soup)
@@ -45,7 +45,7 @@ class Recipe:
 
 
     def einkaufszettel(self):
-        datei = "Einkaufszettel_" + self.titel + ".txt"
+        datei = "Einkaufszettel_" + self.title + ".txt"
         with open(datei, "w") as f:
             for z in self.zutaten:
                 m = self.zutaten[z][u'menge']
@@ -215,6 +215,7 @@ class Recipe:
             z = z.replace(u'(', u'')
             z = z.replace(u')', u'')
             z = z.replace(u'/', u'')
+            z = z.replace(u',', u'')
             te = [m]
             d = {}
             if m == u'':

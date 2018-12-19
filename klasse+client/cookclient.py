@@ -56,6 +56,11 @@ class Main(Client):
                 self.send(self.recipes[int(str(value[-1]))].ingredients())
         #elif len(value)==1:#meaning it's an url
          #   self.recipes.add(Recipe(str(value[0]).strip('"')))
+        elif str(value[0]).strip('"')=="einheiten":
+            if len(value)==1:
+                self.send(self.recipes[0].einheiten())
+            else:
+                self.send(self.recipes[int(str(value[-1]))].einheiten())
         elif str(value[0]).strip('"')=="titel":
             if len(value)==1:
                 self.send(self.recipes[0].get_title())
@@ -71,14 +76,18 @@ class Main(Client):
                 self.send(self.recipes[0].contains(str(value[1]).strip('"')))
             #else:
              #   self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
+        elif str(value[0]).strip('"')=="zutaten":
+            self.send(self.recipes[0].get_zutat(str(value[1]).strip('"')))
         elif str(value[0]).strip('"')=="portionen":
             #if len(value)==1:
             if str(value[1]).strip('"')== "wert":
                 self.send(str(self.recipes[0].get_portions()))
             #else:
                 #self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
-        elif len (value)==3:
+        elif len(value)==3:
             self.send(call(str(value[0]).strip('"'), str(value[1]).strip('"'), self.recipes[int(str(value[-1]))]))
+        elif str(value[0]).strip('"')=="Personen":
+            self.send(self.recipes[0].umrechnen(str(value[1].strip('"')),u'Personen')
         else:
             self.send(call(str(value[0]).strip('"'), str(value[1]).strip('"'), self.recipes[0]))
             
