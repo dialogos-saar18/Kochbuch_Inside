@@ -64,11 +64,6 @@ $term_a = nächste {$=&quot;anleitung&quot;,&quot;next&quot;} | letzte {$=&quot;
 			<value>root $input;
  $input = 1 {$= [&quot;eigenschaften&quot;,&quot;eins&quot;]}| 2 {$= [&quot;anleitung&quot;,&quot;zwei&quot;]}| 3{$= [&quot;zutaten&quot;,&quot;drei&quot;]};</value>
 		</grammar>
-		<grammar id="887988cb-ab10-4c6a-9603-09be63e44e57">
-			<name>Ohne Titel</name>
-			<value>root $input;
- $input = ;</value>
-		</grammar>
 		<variable uid="616a7294-ca38-4923-a7fc-b71a822d01de">
 			<name>result</name>
 			<type>string</type>
@@ -142,7 +137,7 @@ $term_a = nächste {$=&quot;anleitung&quot;,&quot;next&quot;} | letzte {$=&quot;
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="3724b2b0-1cf7-4c65-a050-e845d4862781" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="383" y="399" fill="#ff5a5a"/>
+			<graphics x="383" y="327" fill="#ff5a5a"/>
 			<att name="title" type="string" value="Milch (Zutaten)"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -240,10 +235,10 @@ $term_a = nächste {$=&quot;anleitung&quot;,&quot;next&quot;} | letzte {$=&quot;
 			<graphics x="28" y="223" fill="#b20000"/>
 			<att name="title" type="string" value="Ausgabetest"/>
 			<att name="language" type="string" value="Deutsch"/>
-			<att name="grammarExpression" type="string" value="dyngram"/>
+			<att name="grammar" type="string" value="0bc38a8e-cae8-4b4a-84fa-9be0bfafb1d1"/>
 		</node>
 		<node uid="d0f420d7-b218-4fcf-a38a-59f8df29fcb9" class="com.clt.diamant.graph.nodes.ScriptNode">
-			<graphics x="839" y="95" fill="#99ffff"/>
+			<graphics x="840" y="23" fill="#99ffff"/>
 			<att name="title" type="string" value="Dynamische Grammatik"/>
 			<att name="comment" type="text">
 				<value>Das, was mal (so ungefähr) passieren soll.</value>
@@ -256,7 +251,7 @@ dyngram = dyngram + &quot;$zutaten = Wie viel $term_z brauche ich ; \n&quot;;
 #dyngram = &quot;$term_z = milch | zucker; \n&quot;;
 for (int i=1; i&lt;len(ingredients); i++)
 	dyngram = dyngram + &quot;|&quot;+ ingredients[i];
-//
+
 dyngram = dyngram + &quot;$eigenschaft = Wie lange (braucht | dauert) {$=[\&quot;eigenschaft\&quot;,\&quot;zubereitungszeit\&quot;]} | (Wie schwer ist | Welchen Schwierigkeitsgrad) {$=[\&quot;eigenschaft\&quot;,\&quot;schwierigkeitsgrad\&quot;]}; \n&quot;;
 dyngram = dyngram + &quot;$anleitung = Was ist der $term_a Schritt | $term_a Schritt | (Wiederhole den Schritt | [diesen Schritt] nochmal {$=\&quot;anleitung\&quot;,\&quot;repeat\&quot;}); \n&quot;;
 dyngram = dyngram + &quot;$term_a = nächste {$=\&quot;anleitung\&quot;,\&quot;next\&quot;} | letzte {$=\&quot;anleitung\&quot;,\&quot;previous\&quot;}; \n&quot;;
@@ -275,7 +270,7 @@ dyngram = dyngram + &quot;$term_a = nächste {$=\&quot;anleitung\&quot;,\&quot;n
 			</att>
 		</node>
 		<node uid="f2fc8563-5da3-4d1c-8330-434ef8df6e01" class="com.clt.diamant.graph.nodes.ScriptNode">
-			<graphics x="38" y="154" fill="#99ffff"/>
+			<graphics x="30" y="150" fill="#99ffff"/>
 			<att name="title" type="string" value="Workaround (dynamische Grammatik)"/>
 			<att name="comment" type="text">
 				<value>Die Grammatik ist sehr hässlich, da einzeilig
@@ -294,7 +289,7 @@ dyngram = dyngram + &quot; | Was ist der nächste Schritt {$=[\&quot;anleitung\&
 //zutaten
 //dyngram = &quot;$term_z = milch | zucker; \n&quot;;
 for (int i=1; i&lt;length(ingredients); i++)
-	dyngram = dyngram + &quot;| Wie viel &quot; + get(ingredients,i) + &quot; brauche ich {$=[\&quot;zutaten\&quot;, get(ingredients,i)]}&quot;  ;
+	dyngram = dyngram + &quot;| Wie viel &quot; + get(ingredients,i) + &quot; brauche ich {$=[\&quot;zutaten\&quot;, ingredients[i]]}&quot;  ;
 
 
 dyngram = dyngram + &quot;;&quot;;</value>
@@ -359,7 +354,6 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		<edge src="facc0c27-16e8-42b1-b317-f7cecf8b60ba" tgt="a677b47e-4e65-44d8-bcac-1e11298794c4">
 		</edge>
 		<comment x="556" y="14" width="208" height="99" color="#ffff99">vollständige liste aller eigenschaften (von chefkoch.de holen)
-kommt zutat x vor?
-sfd</comment>
+kommt zutat x vor?</comment>
 	</graph>
 </wizard>

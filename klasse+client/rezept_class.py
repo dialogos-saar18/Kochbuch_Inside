@@ -118,6 +118,15 @@ class Recipe:
     def ingredients(self):
         return self.zutaten.keys()
 
+    def einheiten(self):
+        einheiten = set()
+        for z in self.zutaten:
+            e = self.zutaten[z][u'einheit']
+            if e != u'':
+                einheiten.add(e)
+        einheiten = list(einheiten)
+        return einheiten
+
 
     # no return value, only changes incredients
     # Einheiten umrechnen?
