@@ -12,7 +12,7 @@ class Recipe:
         self.anleitung = self.init_anleitung(soup)
         self.schritt = 0
         self.zutaten = self.init_zutaten(soup)
-        self.portionen = self.init_portionen(soup)
+        self.portionen = self.init_portionen(soup)#int
         #eigenschaften: dict; available keys:
         #zubereitungszeit ebenfalls evtl. in Größe und Einheit unterteilen
             #-> an den jeweiligen Nutzer anpassen
@@ -119,6 +119,9 @@ class Recipe:
 
     def get_title(self):
         return self.title
+
+    def get_portions(self):
+        return self.portionen
 
     def ingredients(self):
         return self.zutaten.keys()

@@ -40,8 +40,12 @@ class Main(Client):
     # "ingredients" rezept
     # "title"
     # "title" rezept
+    # "einkaufszettel"
+    # "einkaufszettel" rezept
     # "anleitung"/"zutat"/"eigenschaft" suchbegriff
     # "anleitung"/"zutat"/"eigenschaft" suchbegriff rezept
+    # "portionen" "wert"
+    # "exists_zutat" suchbegriff
     def output(self, value):
         value = list(value)
 
@@ -56,7 +60,23 @@ class Main(Client):
             if len(value)==1:
                 self.send(self.recipes[0].get_title())
             else:
-                self.send(self.recipes[int(str(value[-1]))].get_title)
+                self.send(self.recipes[int(str(value[-1]))].get_title())
+        elif str(value[0]).strip('"')=="einkaufszettel":
+            if len(value)==1:
+                self.send(self.recipes[0].einkaufszettel())
+            else:
+                self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
+        elif str(value[0]).strip('"')=="exists_zutat":
+            #if len(value)==1:
+                self.send(self.recipes[0].contains(str(value[1]).strip('"')))
+            #else:
+             #   self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
+        elif str(value[0]).strip('"')=="portionen":
+            #if len(value)==1:
+            if str(value[1]).strip('"')== "wert":
+                self.send(str(self.recipes[0].get_portions()))
+            #else:
+                #self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
         elif len (value)==3:
             self.send(call(str(value[0]).strip('"'), str(value[1]).strip('"'), self.recipes[int(str(value[-1]))]))
         else:
