@@ -37,7 +37,7 @@ class Recipe:
         elif argument == u'all':
             r = u''
             for i in range(len(self.anleitung)):
-                r += str(i+1) + u'. ' + self.anleitung[i]
+                r += str(i+1) + u'. ' + self.anleitung[i] + u'  '
             return r
         else:
             print (u'Unerwartetes Argument '+str(argument)+u' in get_schritt')
@@ -63,7 +63,7 @@ class Recipe:
 
     def get_zutat(self,bezeichnung): #returns string
         if bezeichnung == "all":
-            s = u''
+            s = u'Du brauchst '
             for z in self.zutaten:
                 m = self.zutaten[z][u'menge']
                 if m == 0:
