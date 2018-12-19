@@ -209,6 +209,9 @@ class Recipe:
         while i < len(angaben_m):
             m = angaben_m[i]
             z = angaben_z[i]
+            z = z.replace(u'(', u'')
+            z = z.replace(u')', u'')
+            z = z.replace(u'/', u'')
             te = [m]
             d = {}
             if m == u'':
