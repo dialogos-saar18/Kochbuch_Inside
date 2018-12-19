@@ -51,9 +51,9 @@ class Recipe:
                     m = str(m)
                 e = self.zutaten[z][u'einheit']
                 s = m + u' ' + e
-                f.write(s.encode('utf8'))
+                f.write(s.encode('cp1252'))
                 f.write("\t")
-                f.write(z.encode('utf8'))
+                f.write(z.encode('cp1252'))
                 f.write("\n")
 
 
