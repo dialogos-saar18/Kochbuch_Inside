@@ -1,5 +1,6 @@
 # -*- coding:cp1252 -*-
 from bs4 import BeautifulSoup as bs
+from einheiten_transf import *
 import re
 
 class Recipe:
@@ -129,26 +130,34 @@ class Recipe:
 
 
     # no return value, only changes incredients
-    # Einheiten umrechnen?
-    # angabe => entweder Personen oder eine Zutat
+    # angabe: "Personen" oder eine Zutat
+    # anzahl: liste: [menge, einheit] zum umrechnen oder die Anzahl der Portionen
+    # to do: argumente anpassen an client, evtl menge in int umrechnen
     def umrechnen(self, anzahl, angabe):
         if angabe == u'Personen':
             factor = anzahl / self.portionen
         else:
-            factor = anzahl / self.zutaten[angabe][u'menge']
-        for d in self.zutaten:
+            einheit_alt = self.zutaten[angabe][u'einheit']
+            einheit_neu = anzahl[1]
+            menge_alteeinheit = self.zutaten[angabe][u'menge']
+            #print(einheit_alt, einheit_neu, menge_alteeinheit)
+            menge_neueeinheit = e_umrechnen(einheit_alt, einheit_neu, menge_alteeinheit)
+            #print(menge_neueeinheit)
+            factor = anzahl[0] / menge_neueeinheit
+        for z in self.zutaten:
+            d = self.zutaten[z]
             d[u'menge'] = d[u'menge'] * factor
 
-    # gibt True zurück, wenn die Zutat für das Rezept benötigt wird
+    # gibt zurück ob die Zutat gebraucht wird oder nicht
     # Problem: mehrere Sorten der gleichen Zutat
     def contains(self, zutat):
         if zutat in self.zutaten.keys():
-            return u'Ja'
+            return u'Ja, du brauchst ' + zutat
         else:
             for i in self.zutaten.keys():
                 if re.search(zutat, i):
                     return u'Du brauchst ' + i
-            return u'Nein'
+            return u'Nein, ' + zutat + u' brauchst du nicht'
 
     def init_titel(self, beautifuls):
         t = beautifuls.find(u'title')
@@ -306,7 +315,6 @@ class Recipe:
         preparation[u'Gesamtzeit'] = di
         return preparation
 
-    #def einheiten_ausschreiben(self, einheit):
         
                                              
 rezept = Recipe("Bsp_quelltext.txt")
