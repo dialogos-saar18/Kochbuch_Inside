@@ -52,7 +52,7 @@ class Main(Client):
                 self.send(self.recipes[int(str(value[-1]))].ingredients())
         #elif len(value)==1:#meaning it's an url
          #   self.recipes.add(Recipe(str(value[0]).strip('"')))
-        elif str(value[0]).strip('"')=="title":
+        elif str(value[0]).strip('"')=="titel":
             if len(value)==1:
                 self.send(self.recipes[0].get_title())
             else:

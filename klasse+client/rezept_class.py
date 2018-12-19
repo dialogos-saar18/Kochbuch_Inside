@@ -20,6 +20,7 @@ class Recipe:
 
     def get_schritt(self, argument): #returns string
         #if argument == "all":
+            #TODO
         if argument == u'first':
             return u'Lass und loslegen: ' + self.anleitung[self.schritt]
         elif argument == u'next':
@@ -113,6 +114,7 @@ class Recipe:
                 return u'Zutat wird nicht benötigt'
 
     def get_property(self,key): #returns string
+        #key error / "all"=> gesamtzeit / übersicht über die einzelnen Zeiten
         return self.eigenschaften[key]
 
     def get_title(self):
