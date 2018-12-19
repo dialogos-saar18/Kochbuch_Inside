@@ -139,7 +139,9 @@ class Recipe:
     # to do: argumente anpassen an client, evtl menge in int umrechnen
     def umrechnen(self, anzahl, angabe):
         if angabe == u'Personen':
-            factor = anzahl / self.portionen
+            anzahl = float(anzahl)
+            factor = anzahl / self.get_property(u'Portionen')
+            self.eigenschaften[u'Portionen'] = anzahl
         else:
             einheit_alt = self.zutaten[angabe][u'einheit']
             einheit_neu = anzahl[1]
@@ -219,6 +221,7 @@ class Recipe:
                     einheit = m.split()[1]
                 else:
                     einheit = u''
+                einheit = e_ausschreiben(einheit)
                 try:
                     d[u'menge'] = int(zahl)
                     d[u'einheit'] = einheit
@@ -317,6 +320,10 @@ class Recipe:
         di[u'dauer'] = ges
         di[u'einheit'] = e
         preparation[u'Gesamtzeit'] = di
+        ti = self.init_titel(beautifuls)
+        pi = self.init_portionen(beautifuls)
+        preparation[u'Titel'] = ti
+        preparation[u'Portionen'] = pi
         return preparation
 
         
