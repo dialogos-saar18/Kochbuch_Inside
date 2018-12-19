@@ -44,8 +44,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 		<grammar id="b40058fa-51f8-436e-ba74-8649b2169520">
 			<name>clienttest</name>
 			<value>root $input;
- $input = Wie viel Milch brauche ich {$=[&quot;zutaten&quot;,&quot;Milch&quot;]}
-| nächster Schritt {$=[&quot;anleitung&quot;,&quot;next&quot;]}| wie schwierig ist das Rezept {$=[&quot;eigenschaft&quot;,&quot;schwierigkeit&quot;]}
+ $input = Wie viel Zucker brauche ich {$=[&quot;zutaten&quot;,&quot;zucker&quot;]}
+| nächster Schritt {$=[&quot;anleitung&quot;,&quot;next&quot;]}| wie schwierig ist das Rezept {$=[&quot;eigenschaft&quot;,&quot;Schwierigkeitsgrad&quot;]}
 | ende;</value>
 		</grammar>
 		<variable uid="616a7294-ca38-4923-a7fc-b71a822d01de">
@@ -84,11 +84,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 			<value>undefined</value>
 		</variable>
 		<node uid="1cade6f4-41c8-47de-a85f-74133272203a" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="469" y="316" fill="#ff5a5a"/>
+			<graphics x="465" y="324" fill="#ff5a5a"/>
 			<att name="title" type="string" value="Milch (Zutaten)"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
-					<att name="Text" type="string" value="[&quot;zutaten&quot;,&quot;milch&quot;]"/>
+					<att name="Text" type="string" value="[&quot;zutaten&quot;,term]"/>
 				</att>
 			</att>
 			<att name="reset" type="boolean" value="0"/>
@@ -140,7 +140,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 			<att name="title" type="string" value="Schwierigkeit (Eigenschaft)"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
-					<att name="Text" type="string" value="[&quot;eigenschaft&quot;, &quot;schwierigkeit&quot;,0]"/>
+					<att name="Text" type="string" value="[&quot;eigenschaft&quot;, term,0]"/>
 				</att>
 			</att>
 			<att name="reset" type="boolean" value="0"/>
@@ -149,7 +149,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
 		<node uid="a677b47e-4e65-44d8-bcac-1e11298794c4" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
-			<graphics x="479" y="199" fill="#b20000"/>
+			<graphics x="473" y="196" fill="#b20000"/>
 			<att name="title" type="string" value="Spracherkenner"/>
 			<att name="language" type="string" value="Deutsch"/>
 			<att name="grammar" type="string" value="b40058fa-51f8-436e-ba74-8649b2169520"/>
@@ -160,7 +160,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
 					<att name="Text" type="string" value="&quot;das wars&quot;"/>
-					<att name="Text" type="string" value="[&quot;anleitung&quot;,&quot;next&quot;,0]"/>
+					<att name="Text" type="string" value="[&quot;anleitung&quot;,term,0]"/>
 				</att>
 			</att>
 			<att name="reset" type="boolean" value="0"/>

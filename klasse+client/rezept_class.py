@@ -223,6 +223,7 @@ class Recipe:
         for s in stripped:
             if i % 2 == 0:
                 key = s
+                key = s.replace(u':', u'')
             else:
                 val = u''
                 for n in s:
