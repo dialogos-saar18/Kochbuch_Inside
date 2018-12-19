@@ -20,7 +20,9 @@ class Recipe:
 
     def get_schritt(self, argument): #returns string
         #if argument == "all":
-        if argument == u'next':
+        if argument == u'first':
+            return u'Lass und loslegen: ' + self.anleitung[self.schritt]
+        elif argument == u'next':
             #try:
             self.schritt += 1
             return u'Dein nächster Schritt lautet: ' + self.anleitung[self.schritt]

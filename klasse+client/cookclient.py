@@ -9,7 +9,7 @@ from rezept_class import *
 def call(category, term, recipe):
     #ruft die Methoden auf, die die Informationen auslesen
     if category == "anleitung":#works but should be expanded
-        return(recipe.get_schritt(term)) # term one of {"next","repeat","all","previous"}
+        return(recipe.get_schritt(term)) # term one of {"first","next","repeat","all","previous"}
     elif category == "zutaten":#works
         return(recipe.get_zutat(term)) 
     elif category == "eigenschaft":#works
