@@ -216,6 +216,7 @@ class Recipe:
             z = z.replace(u')', u'')
             z = z.replace(u'/', u'')
             z = z.replace(u',', u'')
+            z = z.replace(u'.', u'')
             te = [m]
             d = {}
             if m == u'':
