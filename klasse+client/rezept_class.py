@@ -63,6 +63,7 @@ class Recipe:
 
     def get_zutat(self,bezeichnung): #returns string
         if bezeichnung == "all":
+            liste = []
             s = u'Du brauchst '
             for z in self.zutaten:
                 m = self.zutaten[z][u'menge']
@@ -71,8 +72,11 @@ class Recipe:
                 else:
                     m = str(m)
                 e = self.zutaten[z][u'einheit']
-                s = s + u' ' + m + u' ' + e + u' ' + z + u' '
-            return s
+                #s = s + u' ' + m + u' ' + e + u' ' + z + u' '
+                s = u' ' + m + u' ' + e + u' ' + z + u' '
+                liste.append(s)
+            return liste
+            #return s
             
         try:
             me = self.zutaten[bezeichnung][u'menge']
