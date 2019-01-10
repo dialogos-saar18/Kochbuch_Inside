@@ -86,8 +86,11 @@ class Main(Client):
                 #self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
         elif str(value[0]).strip('"')=="Personen":
             self.send(self.recipes[0].umrechnen(str(value[1]).strip('"'),u'Personen'))
-        #elif str(value[0]).strip('"')=="Zutaten":
-            #self.send(self.recipes
+        elif str(value[0]).strip('"')=="Zutaten":
+            z = str(value[1]).strip('"')
+            m = str(value[2]).strip('"')
+            e = str(value[3]).strip('"')
+            self.send(self.recipes[0].umrechnen([m,e],z))
 
         elif len(value)==3:
             self.send(call(str(value[0]).strip('"'), str(value[1]).strip('"'), self.recipes[int(str(value[-1]))]))

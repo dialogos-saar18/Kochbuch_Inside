@@ -149,14 +149,18 @@ class Recipe:
             anzahl = float(anzahl)
             factor = anzahl / self.get_property(u'Portionen')
             self.eigenschaften[u'Portionen'] = anzahl
+        elif int(anzahl[1]) == 0:
+            menge_alt = self.zutaten[angabe][u'menge']
+            factor = int(anzahl[0]) / menge_alt
         else:
+            anzahl = int(anzahl[0])
             einheit_alt = self.zutaten[angabe][u'einheit']
             einheit_neu = anzahl[1]
             menge_alteeinheit = self.zutaten[angabe][u'menge']
             #print(einheit_alt, einheit_neu, menge_alteeinheit)
             menge_neueeinheit = e_umrechnen(einheit_alt, einheit_neu, menge_alteeinheit)
             #print(menge_neueeinheit)
-            factor = anzahl[0] / menge_neueeinheit
+            factor = anzahl / menge_neueeinheit
         for z in self.zutaten:
             d = self.zutaten[z]
             d[u'menge'] = d[u'menge'] * factor
@@ -340,7 +344,7 @@ class Recipe:
 
         
                                              
-rezept = Recipe("Bsp_quelltext.txt")
+#rezept = Recipe("Bsp_quelltext.txt")
 #rezept2 = Recipe("quelltext_stollen.txt")
 
 '''
