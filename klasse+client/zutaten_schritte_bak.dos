@@ -32,6 +32,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 	</plugin>
 	<plugin type="dialogos.plugin.tts">
 	</plugin>
+	<plugin type="dialogos.plugin.lego">
+	</plugin>
 	<plugin type="dialogos.plugin.sqlite">
 		<att name="dbURL" type="string" value="jdbc:sqlite:C:\Users\TT\DialogOS\test.db"/>
 	</plugin>
@@ -67,8 +69,8 @@ $term_a = nächste {$=&quot;anleitung&quot;,&quot;next&quot;} | letzte {$=&quot;
 			<value>root $input;
  $input = $zutaten {$=&quot;zutaten&quot;} | $anleitung {$=&quot;anleitung&quot;} | $weiter {$=&quot;weiter&quot;} | $einkaufszettel {$=&quot;einkaufszettel&quot;};
 $zutaten = [sag mir | gib mir] (die Liste | alle Zutaten | die Zutatenliste) | [die] Zutaten | [die] Zutatenliste | was brauche ich;
-$anleitung = [sag mir | gib mir] (die Anleitung | [alle] Schritte | [die] komplette Anleitung) | was muss ich tun ;
-$weiter = weiter | weitere Informationen | überspringen | fortfahren | nein | weder noch | nichts davon | keins von beiden;
+$anleitung = [sag mir | gib mir] ([alle] Schritte | [die] (komplette | ganze) Anleitung) | was muss ich tun ;
+$weiter = weiter | [weitere | die] Informationen | überspringen | fortfahren | nein | weder noch | nichts davon | keins von beiden;
 $einkaufszettel = [schreib mir einen] Einkaufszettel;</value>
 		</grammar>
 		<grammar id="9a5dcd6a-8229-4015-b7ba-cd13e10b853f">
@@ -186,7 +188,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="grammar" type="string" value="9a5dcd6a-8229-4015-b7ba-cd13e10b853f"/>
 		</node>
 		<node uid="0f5b191e-1a8c-453b-8cb7-d36436a86ad3" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="173" y="193" fill="#ff5a5a"/>
+			<graphics x="171" y="177" fill="#ff5a5a"/>
 			<att name="title" type="string" value="Zutatenliste"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -202,9 +204,10 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<graphics x="526" y="528" fill="#00b200"/>
 			<att name="title" type="string" value="Einkaufsliste?"/>
 			<att name="prompt" type="text">
-				<value>&quot;Möchtest du, dass ich dir eine Einkaufsliste für diese Zutaten schreibe?&quot;</value>
+				<value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;maryxml xmlns=&quot;http://mary.dfki.de/2002/MaryXML&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; version=&quot;0.4&quot; xml:lang=&quot;de&quot;&gt;&lt;prosody pitch=&quot;+0%&quot; range=&quot;-10%&quot; rate=&quot;100%&quot; volume=&quot;loud&quot;&gt;&lt;t ph=&quot;'m9C-t@st&quot;&gt;möchtest&lt;/t&gt; du, dass ich dir eine Einkaufsliste für diese Zutaten &lt;prosody contour=&quot; (70%,-10%) (100%,+100%)&quot;&gt;
+&lt;t ph=&quot;S r aI b @&quot;&gt; schreibe&lt;/t&gt; &lt;/prosody&gt; &lt;/prosody&gt;&lt;/maryxml&gt;</value>
 			</att>
-			<att name="prompt_type" type="string" value="expression"/>
+			<att name="prompt_type" type="string" value="maryxml"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="18e1152a-90c2-46c9-9c42-f745f16a24e3" class="com.clt.diamant.graph.nodes.InputNode">
@@ -224,9 +227,9 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<graphics x="340" y="540" fill="#00b200"/>
 			<att name="title" type="string" value="anleitung_zutaten"/>
 			<att name="prompt" type="text">
-				<value>Soll ich dir die Zutaten oder die komplette Anleitung vorlesen, dir einen Einkaufszettel schreiben oder möchtest du nach weiteren Informationen fragen?</value>
+				<value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;maryxml xmlns=&quot;http://mary.dfki.de/2002/MaryXML&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; version=&quot;0.4&quot; xml:lang=&quot;de&quot;&gt;&lt;prosody pitch=&quot;+0%&quot; range=&quot;-10%&quot; rate=&quot;100%&quot; volume=&quot;loud&quot;&gt;Soll ich dir die Zutaten oder die komplette Anleitung vorlesen, dir einen Einkaufszettel schreiben oder &lt;t ph=&quot;'m9C-t@st&quot;&gt;möchtest&lt;/t&gt; du nach weiteren Informationen fragen?&lt;/prosody&gt;&lt;/maryxml&gt;</value>
 			</att>
-			<att name="prompt_type" type="string" value="text"/>
+			<att name="prompt_type" type="string" value="maryxml"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="317681f6-f4a0-4836-98cb-fad9e1da29a0" class="com.clt.diamant.graph.nodes.GraphNode">
@@ -241,7 +244,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 						<graphics x="576" y="158" fill="#00b200"/>
 						<att name="title" type="string" value="Sprachsynthese"/>
 						<att name="prompt" type="text">
-							<value>Im weiteren Verlauf kannst du nach Mengenangaben, Schritten und weiteren Informationen wie Arbeitszeit oder Schwierigkeitsgrad fragen.</value>
+							<value>Im weiteren Verlauf kannst du nach Mengenangaben, Schritten, und weiteren Informationen wie Arbeitszeit oder Schwierigkeitsgrad fragen.</value>
 						</att>
 						<att name="prompt_type" type="string" value="text"/>
 						<att name="wait" type="boolean" value="1"/>
@@ -306,7 +309,7 @@ dyngram = dyngram + &quot;;&quot;;</value>
 					</node>
 					<node uid="7b68894e-d32b-45f7-be72-f96c1e6422f3" class="com.clt.diamant.graph.nodes.GotoNode">
 						<graphics x="673" y="610" fill="#4c4c80"/>
-						<att name="title" type="string" value="Goto"/>
+						<att name="title" type="string" value="Goto 2"/>
 						<att name="label_uid" type="string" value="d7cce0c9-7777-475b-b249-14f7aaaea17c"/>
 					</node>
 					<node uid="82f902bb-f8b6-442c-b3ff-1d035d52958a" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
@@ -444,16 +447,16 @@ dyngram = dyngram + &quot;;&quot;;</value>
 			<att name="title" type="string" value="Start"/>
 		</node>
 		<node uid="37233152-ee46-4cd0-a4fa-22d283343513" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="170" y="483" fill="#00b200"/>
+			<graphics x="168" y="445" fill="#00b200"/>
 			<att name="title" type="string" value="Menge ändern?"/>
 			<att name="prompt" type="text">
-				<value>&quot;Das Rezept ist für &quot; + result + &quot; Portionen ausgelegt. Möchtest du die Mengenangaben ändern?&quot;</value>
+				<value>&quot;Das Rezept ist für &quot; + result + &quot; Portionen ausgelegt.&quot;</value>
 			</att>
 			<att name="prompt_type" type="string" value="expression"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="4528c0cb-e0f9-49ce-ac6a-91b9bd01c314" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="165" y="269" fill="#ff5a5a"/>
+			<graphics x="163" y="245" fill="#ff5a5a"/>
 			<att name="title" type="string" value="Einheitenliste"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -466,7 +469,7 @@ dyngram = dyngram + &quot;;&quot;;</value>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
 		<node uid="4d021f03-04b9-471c-94b3-b4866f513544" class="com.clt.diamant.graph.nodes.InputNode">
-			<graphics x="185" y="410" fill="#ff5a5a"/>
+			<graphics x="183" y="386" fill="#ff5a5a"/>
 			<att name="title" type="string" value="Portionen"/>
 			<att name="output" type="list">
 				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
@@ -480,7 +483,7 @@ dyngram = dyngram + &quot;;&quot;;</value>
 		</node>
 		<node uid="5c6c5b8c-3afd-4ea7-ba4d-4a4286959b5a" class="com.clt.diamant.graph.nodes.GotoNode">
 			<graphics x="879" y="798" fill="#4c4c80"/>
-			<att name="title" type="string" value="Goto"/>
+			<att name="title" type="string" value="Goto 1"/>
 			<att name="label_uid" type="string" value="bb90d713-4708-440b-9277-505a4897b5d9"/>
 		</node>
 		<node uid="5d3c33ec-9717-4a49-a853-e66d14a7c36b" class="com.clt.diamant.graph.nodes.EndNode">
@@ -515,6 +518,15 @@ dyngram = dyngram + &quot;;&quot;;</value>
 			<att name="discard" type="boolean" value="0"/>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
 		</node>
+		<node uid="a16ebd1d-5845-48b6-bd78-071999eb704c" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="165" y="502" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;maryxml xmlns=&quot;http://mary.dfki.de/2002/MaryXML&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; version=&quot;0.4&quot; xml:lang=&quot;de&quot;&gt;&lt;prosody pitch=&quot;+0%&quot; range=&quot;-10%&quot; rate=&quot;100%&quot; volume=&quot;loud&quot;&gt;&lt;t ph=&quot;'m9C-t@st&quot;&gt;möchtest&lt;/t&gt; du die Mengenangaben ändern?&lt;/prosody&gt;&lt;/maryxml&gt;</value>
+			</att>
+			<att name="prompt_type" type="string" value="maryxml"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
 		<node uid="a410e5a8-da5e-4338-b4b6-da44c5ba2e88" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
 			<graphics x="160" y="562" fill="#b20000"/>
 			<att name="title" type="string" value="Speech recognizer"/>
@@ -522,7 +534,7 @@ dyngram = dyngram + &quot;;&quot;;</value>
 			<att name="grammar" type="string" value="9a5dcd6a-8229-4015-b7ba-cd13e10b853f"/>
 		</node>
 		<node uid="a7cd5c91-c640-4b1f-a00a-19b817eaad93" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-			<graphics x="166" y="341" fill="#00b200"/>
+			<graphics x="164" y="317" fill="#00b200"/>
 			<att name="title" type="string" value="Sprachsynthese"/>
 			<att name="prompt" type="text">
 				<value>&quot;Ich habe das Rezept für &quot; + result +&quot; geladen.&quot; </value>
@@ -534,9 +546,12 @@ dyngram = dyngram + &quot;;&quot;;</value>
 			<graphics x="602" y="784" fill="#00b200"/>
 			<att name="title" type="string" value="Speech synthesis"/>
 			<att name="prompt" type="text">
-				<value>Soll ich die Zutaten wiederholen oder dir die Anleitung vorlesen.</value>
+				<value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;maryxml xmlns=&quot;http://mary.dfki.de/2002/MaryXML&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; version=&quot;0.4&quot; xml:lang=&quot;de&quot;&gt;&lt;prosody pitch=&quot;+0%&quot; range=&quot;-10%&quot; rate=&quot;100%&quot; volume=&quot;loud&quot;&gt;Soll ich die Zutaten &lt;t ph=&quot;v i: d 6 h o: l  n &quot;&gt; wiederholen &lt;/t&gt;, oder dir die Anleitung 
+&lt;prosody contour=&quot;(100%,+20%) (50%,-20%)  (90%,+50%)&quot;&gt;
+vorlesen
+&lt;/prosody&gt; ? &lt;/prosody&gt;&lt;/maryxml&gt;</value>
 			</att>
-			<att name="prompt_type" type="string" value="text"/>
+			<att name="prompt_type" type="string" value="maryxml"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="b99faceb-da68-4321-881f-b8b68530be7c" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
@@ -620,18 +635,18 @@ dyngram = dyngram + &quot;$term_a = nächste {$=\&quot;anleitung\&quot;,\&quot;n
 						<att name="script" type="text">
 							<value>gram = &quot;root $input; \n&quot;;
 gram = gram + &quot;$input = &quot;;
-gram = gram + &quot;(ich möchte) für 1 Person (kochen) {$=[\&quot;Personen\&quot;,1]}&quot;;
+gram = gram + &quot;[ich möchte] [für] 1 Person [kochen] {$=[\&quot;Personen\&quot;,\&quot;&quot;+1+&quot;\&quot;]}&quot;;
 for (int i=2; i&lt;51; i++)
-  gram = gram + &quot;| (ich möchte) für &quot; + i + &quot; Personen( kochen) {$=[\&quot;Personen\&quot;,\&quot;&quot;+ i +&quot;\&quot;]}&quot;;
+  gram = gram + &quot;| [ich möchte] [für] &quot; + i + &quot; Personen [kochen] {$=[\&quot;Personen\&quot;,\&quot;&quot;+ i +&quot;\&quot;]}&quot;;
 for (int i = 0; i &lt; 1001; i+=25){
 	for (int n = 0; n&lt;length(ingredients); n++){
 		for (int m=0; m&lt;length(einheiten); m++)
-			gram = gram + &quot;| (ich möchte) (für) &quot; + i + &quot; &quot; + get(einheiten,m) + &quot; &quot; + get(ingredients,n) + &quot;( kochen) &quot; + &quot;{$=[\&quot;Zutaten\&quot;,\&quot;&quot; + get(ingredients,n) +&quot;\&quot;,\&quot;&quot; + i + &quot;\&quot;,\&quot;&quot; + get(einheiten,m) + &quot;\&quot;]}&quot;;
+			gram = gram + &quot;| [ich möchte] [für] &quot; + i + &quot; &quot; + get(einheiten,m) + &quot; &quot; + get(ingredients,n) + &quot; [kochen] &quot; + &quot;{$=[\&quot;Zutaten\&quot;,\&quot;&quot; + get(ingredients,n) +&quot;\&quot;,\&quot;&quot; + i + &quot;\&quot;,\&quot;&quot; + get(einheiten,m) + &quot;\&quot;]}&quot;;
 }
 }
 for (int i = 0; i&lt;51;i++){
 	for (int n = 0; n&lt;length(ingredients); n++){
-		gram = gram + &quot;| (ich möchte) (für) &quot; + i + &quot; &quot;+ get(ingredients,n) + &quot;( kochen) &quot; + &quot;{$=[\&quot;Zutaten\&quot;,\&quot;&quot; + get(ingredients,n) + &quot;\&quot;,\&quot;&quot; + i + &quot;\&quot;]}&quot;;
+		gram = gram + &quot;| [ich möchte] [für] &quot; + i + &quot; &quot;+ get(ingredients,n) + &quot; [kochen] &quot; + &quot;{$=[\&quot;Zutaten\&quot;,\&quot;&quot; + get(ingredients,n) + &quot;\&quot;,\&quot;&quot; + i + &quot;\&quot;]}&quot;;
 }
 }
 gram = gram + &quot;;&quot;;</value>
@@ -641,9 +656,9 @@ gram = gram + &quot;;&quot;;</value>
 						<graphics x="341" y="223" fill="#00b200"/>
 						<att name="title" type="string" value="Sprachsynthese"/>
 						<att name="prompt" type="text">
-							<value>&quot;Für wie viele Personen oder für welche Menge einer Zutat möchtest du kochen?&quot;</value>
+							<value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;maryxml xmlns=&quot;http://mary.dfki.de/2002/MaryXML&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; version=&quot;0.4&quot; xml:lang=&quot;de&quot;&gt;&lt;prosody pitch=&quot;+0%&quot; range=&quot;-10%&quot; rate=&quot;100%&quot; volume=&quot;loud&quot;&gt;Für wie viele Personen oder für welche Menge einer Zutat &lt;t ph=&quot;'m9C-t@st&quot;&gt;möchtest&lt;/t&gt; du kochen?&lt;/prosody&gt;&lt;/maryxml&gt;</value>
 						</att>
-						<att name="prompt_type" type="string" value="text"/>
+						<att name="prompt_type" type="string" value="maryxml"/>
 						<att name="wait" type="boolean" value="1"/>
 					</node>
 					<node uid="7e1d1938-28e0-42ec-bdb5-f06f983a857a" class="com.clt.diamant.graph.nodes.ReturnNode">
@@ -725,6 +740,9 @@ gram = gram + &quot;;&quot;;</value>
 					</edge>
 					<edge src="d8be8c21-98b1-439e-8257-4b83c99c427b" tgt="92af95d0-f04f-45be-ae92-c82dff4716e7">
 					</edge>
+					<comment x="142" y="176" width="166" height="78" color="#ffff99">Fehler, falls Einheiten nicht zur Zutat passen
+
+Grounding</comment>
 				</graph>
 			</att>
 			<att name="endpoints" type="list">
@@ -827,7 +845,7 @@ gram = gram + &quot;;&quot;;</value>
 						<graphics x="475" y="353" fill="#00b200"/>
 						<att name="title" type="string" value="Sprachsynthese"/>
 						<att name="prompt" type="text">
-							<value>Du brauchst</value>
+							<value>Du brauchst </value>
 						</att>
 						<att name="prompt_type" type="string" value="text"/>
 						<att name="wait" type="boolean" value="1"/>
@@ -917,7 +935,7 @@ gram = gram + &quot;;&quot;;</value>
 						<att name="condition" type="string" value="einzeln | der Reihe nach | Schritt für Schritt | nacheinander | ja | erste"/>
 					</edge>
 					<edge src="5d4c6cf9-c97b-4a03-b773-9b17d3bd535a" tgt="27a8a739-d2f5-4592-a568-752c0c1bba38">
-						<att name="condition" type="string" value="gleichzeitig | auf einmal | alle | [ganze] Liste | nein | zweite"/>
+						<att name="condition" type="string" value="gleichzeitig | auf einmal | alle[s] | [ganze] Liste | nein | zweite"/>
 					</edge>
 					<edge src="5e4093a6-7731-421b-a3fa-95d0ef5cb058" tgt="f642fd85-fa61-4713-a0ca-c7dfc28700a6">
 					</edge>
@@ -976,7 +994,7 @@ gram = gram + &quot;;&quot;;</value>
 		</edge>
 		<edge src="32c2b329-1796-4187-a686-39f1dc869aa1" tgt="81f06fc6-5a24-4454-80fd-ac8c98ce288d">
 		</edge>
-		<edge src="37233152-ee46-4cd0-a4fa-22d283343513" tgt="a410e5a8-da5e-4338-b4b6-da44c5ba2e88">
+		<edge src="37233152-ee46-4cd0-a4fa-22d283343513" tgt="a16ebd1d-5845-48b6-bd78-071999eb704c">
 		</edge>
 		<edge src="4528c0cb-e0f9-49ce-ac6a-91b9bd01c314" tgt="a7cd5c91-c640-4b1f-a00a-19b817eaad93">
 			<att name="condition" type="string" value="einheiten"/>
@@ -1000,6 +1018,8 @@ gram = gram + &quot;;&quot;;</value>
 		</edge>
 		<edge src="81f06fc6-5a24-4454-80fd-ac8c98ce288d" tgt="0f5b191e-1a8c-453b-8cb7-d36436a86ad3">
 			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="a16ebd1d-5845-48b6-bd78-071999eb704c" tgt="a410e5a8-da5e-4338-b4b6-da44c5ba2e88">
 		</edge>
 		<edge src="a410e5a8-da5e-4338-b4b6-da44c5ba2e88" tgt="e31926ce-dacc-4ba0-9c7d-0f5222f27a89">
 			<att name="condition" type="string" value="&quot;ja&quot;"/>
@@ -1034,9 +1054,8 @@ gram = gram + &quot;;&quot;;</value>
 		<edge src="f7c312e2-51af-4e98-ade8-7bc009027d8e" tgt="b99faceb-da68-4321-881f-b8b68530be7c">
 			<att name="condition" type="string" value="result"/>
 		</edge>
-		<comment x="1063" y="70" width="208" height="99" color="#ffff99">vollständige liste aller eigenschaften (von chefkoch.de holen)
+		<comment x="1035" y="58" width="208" height="99" color="#ffff99">vollständige liste aller eigenschaften (von chefkoch.de holen)
 Umrechnen
 titel zu eigenschaften</comment>
-		<comment x="36" y="371" width="100" height="60" color="#ffff99">hier kommt die umrechnung rein</comment>
 	</graph>
 </wizard>
