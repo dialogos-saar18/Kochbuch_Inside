@@ -49,7 +49,14 @@ class Main(Client):
     def output(self, value):
         value = list(value)
 
-        if str(value[0]).strip('"')=="ingredients":
+        #Quelltext für Rezept abfragen
+        if str(value[0]).strip('"') == "URL":
+            url = (value[1]).strip('"')
+            recipe = Recipe(url)
+            self.recipes=[recipe]
+            
+            
+        elif str(value[0]).strip('"')=="ingredients":
             if len(value)==1:
                 self.send(self.recipes[0].ingredients())
             else:
@@ -84,8 +91,11 @@ class Main(Client):
                 self.send(str(self.recipes[0].get_portions()))
             #else:
                 #self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
+
+        #fürs umrechnen nach Personen
         elif str(value[0]).strip('"')=="Personen":
             self.send(self.recipes[0].umrechnen(str(value[1]).strip('"'),u'Personen'))
+        #fürs umrechnen nach Zutaten
         elif str(value[0]).strip('"')=="Zutaten":
             z = str(value[1]).strip('"')
             m = str(value[2]).strip('"')
