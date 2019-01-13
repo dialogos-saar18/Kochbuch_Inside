@@ -1,16 +1,19 @@
 # -*- coding:cp1252 -*-
 from bs4 import BeautifulSoup as bs
+from einheiten_transf import *
+import re
 
 class Recipe:
     
     def __init__(self, _quellcode):
         with open(_quellcode) as f:
             soup = bs(f,features="html.parser")
-        self.titel = self.init_titel(soup)
+        self.title = self.init_titel(soup)
         self.anleitung = self.init_anleitung(soup)
         self.schritt = 0
         self.zutaten = self.init_zutaten(soup)
-        self.portionen = self.init_portionen(soup)
+        self.zutatenliste = None
+        self.portionen = self.init_portionen(soup)#int
         #eigenschaften: dict; available keys:
         #zubereitungszeit ebenfalls evtl. in Größe und Einheit unterteilen
             #-> an den jeweiligen Nutzer anpassen
@@ -18,7 +21,10 @@ class Recipe:
 
     def get_schritt(self, argument): #returns string
         #if argument == "all":
-        if argument == u'next':
+            #TODO
+        if argument == u'first':
+            return u'Lass und loslegen: ' + self.anleitung[self.schritt]
+        elif argument == u'next':
             #try:
             self.schritt += 1
             return u'Dein nächster Schritt lautet: ' + self.anleitung[self.schritt]
@@ -32,42 +38,153 @@ class Recipe:
         elif argument == u'all':
             r = u''
             for i in range(len(self.anleitung)):
-                r += str(i+1) + u'. ' + self.anleitung[i]
+                r += str(i+1) + u'. ' + self.anleitung[i] + u'  '
             return r
         else:
             print (u'Unerwartetes Argument '+str(argument)+u' in get_schritt')
             ###raise Error
 
 
+    #option: entweder "all" oder die der Index der Zutat, die aufgeschrieben werden soll
+    def einkaufszettel(self,option):
+        datei = "Einkaufszettel_" + self.title + ".txt"
+        if option == "all":
+            with open(datei, "w") as f:
+                for z in self.zutaten:
+                    m = self.zutaten[z][u'menge']
+                    if m == 0:
+                        m = u''
+                    else:
+                        m = str(m)
+                    e = self.zutaten[z][u'einheit']
+                    s = m + u' ' + e
+                    f.write(s.encode('cp1252'))
+                    f.write("\t")
+                    f.write(z.encode('cp1252'))
+                    f.write("\n")
+        else:
+            with open(datei, "a") as f:
+                o = int(option)
+                zutat = self.zutatenliste[o]
+                f.write(zutat.encode('cp1252'))
+                f.write("\n")
+
 
     def get_zutat(self,bezeichnung): #returns string
-        #if bezeichnung == "all"
-        return str(self.zutaten[bezeichnung]['menge']) + self.zutaten[bezeichnung]['einheit']
+        if bezeichnung == "all":
+            liste = []
+            s = u'Du brauchst '
+            for z in self.zutaten:
+                m = self.zutaten[z][u'menge']
+                if m == 0:
+                    m = u''
+                else:
+                    m = str(m)
+                e = self.zutaten[z][u'einheit']
+                #s = s + u' ' + m + u' ' + e + u' ' + z + u' '
+                s = u' ' + m + u' ' + e + u' ' + z + u' '
+                liste.append(s)
+            self.zutatenliste = liste
+            return liste
+            #return s
+            
+        try:
+            me = self.zutaten[bezeichnung][u'menge']
+            if me == 0:
+                me = u''
+            else:
+                me = str(me)
+            ei = self.zutaten[bezeichnung][u'einheit']
+            return me + u' ' + ei + u' ' + bezeichnung
+        except:
+            l = []
+            for i in self.zutaten:
+                if re.search(bezeichnung, i):
+                    me = self.zutaten[i][u'menge']
+                    ei = self.zutaten[i][u'einheit']
+                    l.append(me)
+                    l.append(ei)
+                    l.append(i)
+            try:
+                if l[0] == 0:
+                    l0 = u''
+                else:
+                    l0 = str(l[0])
+                s = l0 + u' ' + l[1] + u' ' + l[2]
+                i = 3
+                while i < len(l):
+                    print(i)
+                    if i%3 == 0:
+                        s = s + u' und'
+                    if l[i] == 0:
+                        li = u''
+                    else:
+                        li = str(l[i])
+                    s = s + u' ' + li
+                    i = i + 1
+                return s
+                    
+            except:
+                return u'Zutat wird nicht benötigt'
 
     def get_property(self,key): #returns string
+        #key error / "all"=> gesamtzeit / übersicht über die einzelnen Zeiten
         return self.eigenschaften[key]
 
-    def ingredients():
+    def get_title(self):
+        return self.title
+
+    def get_portions(self):
+        return self.portionen
+
+    def ingredients(self):
         return self.zutaten.keys()
+
+    def einheiten(self):
+        einheiten = set()
+        for z in self.zutaten:
+            e = self.zutaten[z][u'einheit']
+            if e != u'':
+                einheiten.add(e)
+        einheiten = list(einheiten)
+        return einheiten
 
 
     # no return value, only changes incredients
-    # Einheiten umrechnen?
-    # angabe => entweder Personen oder eine Zutat
+    # angabe: "Personen" oder eine Zutat
+    # anzahl: liste: [menge, einheit] zum umrechnen oder die Anzahl der Portionen
+    # to do: argumente anpassen an client, evtl menge in int umrechnen
     def umrechnen(self, anzahl, angabe):
         if angabe == u'Personen':
-            factor = anzahl / self.portionen
+            anzahl = float(anzahl)
+            factor = anzahl / self.get_property(u'Portionen')
+            self.eigenschaften[u'Portionen'] = anzahl
+        elif int(anzahl[1]) == 0:
+            menge_alt = self.zutaten[angabe][u'menge']
+            factor = int(anzahl[0]) / menge_alt
         else:
-            factor = anzahl / self.zutaten[angabe][u'menge']
-        for d in self.zutaten:
+            anzahl = int(anzahl[0])
+            einheit_alt = self.zutaten[angabe][u'einheit']
+            einheit_neu = anzahl[1]
+            menge_alteeinheit = self.zutaten[angabe][u'menge']
+            #print(einheit_alt, einheit_neu, menge_alteeinheit)
+            menge_neueeinheit = e_umrechnen(einheit_alt, einheit_neu, menge_alteeinheit)
+            #print(menge_neueeinheit)
+            factor = anzahl / menge_neueeinheit
+        for z in self.zutaten:
+            d = self.zutaten[z]
             d[u'menge'] = d[u'menge'] * factor
 
-    # gibt True zurück, wenn die Zutat für das Rezept benötigt wird
+    # gibt zurück ob die Zutat gebraucht wird oder nicht
+    # Problem: mehrere Sorten der gleichen Zutat
     def contains(self, zutat):
         if zutat in self.zutaten.keys():
-            return u'Ja'
+            return u'Ja, du brauchst ' + zutat
         else:
-            return u'Nein'
+            for i in self.zutaten.keys():
+                if re.search(zutat, i):
+                    return u'Du brauchst ' + i
+            return u'Nein, ' + zutat + u' brauchst du nicht'
 
     def init_titel(self, beautifuls):
         t = beautifuls.find(u'title')
@@ -98,7 +215,8 @@ class Recipe:
                 li = i.findAll(u'td')
                 menge = li[0].contents
                 mengen_angabe= menge[0]
-
+                mengen_angabe = mengen_angabe.strip()
+                mengen_angabe = mengen_angabe.replace(u'\xa0', u' ')
                 mengen_angabe = mengen_angabe.strip()
                 angaben_m.append(mengen_angabe)
                     
@@ -107,23 +225,29 @@ class Recipe:
                     zutat_angabe = zutat[0]
                 else:
                     zutat_angabe = zutat[1].contents[0]
-                angaben_z.append(zutat_angabe.strip())
+                angaben_z.append(zutat_angabe.strip().lower())
         i = 0
         while i < len(angaben_m):
             m = angaben_m[i]
             z = angaben_z[i]
+            z = z.replace(u'(', u'')
+            z = z.replace(u')', u'')
+            z = z.replace(u'/', u'')
+            z = z.replace(u',', u'')
+            z = z.replace(u'.', u'')
+            te = [m]
             d = {}
             if m == u'':
                 d[u'menge'] = 0
                 d[u'einheit'] = u''
             else:
-                m = m.replace(u'\xa0', u' ')
                 spl = m.split()
                 zahl = spl[0]
                 if len(spl) == 2:
                     einheit = m.split()[1]
                 else:
                     einheit = u''
+                einheit = e_ausschreiben(einheit)
                 try:
                     d[u'menge'] = int(zahl)
                     d[u'einheit'] = einheit
@@ -150,6 +274,7 @@ class Recipe:
         for s in stripped:
             if i % 2 == 0:
                 key = s
+                key = s.replace(u':', u'')
             else:
                 val = u''
                 for n in s:
@@ -178,7 +303,7 @@ class Recipe:
         einheiten = []
         try:
             aze = preparation[u'Arbeitszeit:'][u'einheit']
-            inheiten.append(aze)
+            einheiten.append(aze)
         except:
             pass
         try:
@@ -221,9 +346,15 @@ class Recipe:
         di[u'dauer'] = ges
         di[u'einheit'] = e
         preparation[u'Gesamtzeit'] = di
+        ti = self.init_titel(beautifuls)
+        pi = self.init_portionen(beautifuls)
+        preparation[u'Titel'] = ti
+        preparation[u'Portionen'] = pi
         return preparation
+
+        
                                              
-rezept = Recipe("Bsp_quelltext.txt")
+#rezept = Recipe("Bsp_quelltext.txt")
 #rezept2 = Recipe("quelltext_stollen.txt")
 
 '''
