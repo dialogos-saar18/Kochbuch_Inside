@@ -73,11 +73,18 @@ class Main(Client):
                 self.send(self.recipes[0].get_title())
             else:
                 self.send(self.recipes[int(str(value[-1]))].get_title())
+
+        #kompletten Einkaufszettel schreiben
         elif str(value[0]).strip('"')=="einkaufszettel":
             if len(value)==1:
-                self.send(self.recipes[0].einkaufszettel())
+                self.send(self.recipes[0].einkaufszettel("all"))
             else:
                 self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
+
+        #einzelne Zutat auf Einkaufszettel
+        elif str(value[0]).strip('"')=="Zettel":
+            self.recipes[0].einkaufszettel(str(value[1]).strip('"'))
+        
         elif str(value[0]).strip('"')=="exists_zutat":
             #if len(value)==1:
                 self.send(self.recipes[0].contains(str(value[1]).strip('"')))

@@ -15,6 +15,7 @@ class Recipe:
         self.anleitung = self.init_anleitung(soup)
         self.schritt = 0
         self.zutaten = self.init_zutaten(soup)
+        self.zutatenliste = None
         self.portionen = self.init_portionen(soup)#int
         #eigenschaften: dict; available keys:
         #zubereitungszeit ebenfalls evtl. in Größe und Einheit unterteilen
@@ -47,20 +48,28 @@ class Recipe:
             ###raise Error
 
 
-    def einkaufszettel(self):
+    #option: entweder "all" oder die der Index der Zutat, die aufgeschrieben werden soll
+    def einkaufszettel(self,option):
         datei = "Einkaufszettel_" + self.title + ".txt"
-        with open(datei, "w") as f:
-            for z in self.zutaten:
-                m = self.zutaten[z][u'menge']
-                if m == 0:
-                    m = u''
-                else:
-                    m = str(m)
-                e = self.zutaten[z][u'einheit']
-                s = m + u' ' + e
-                f.write(s.encode('cp1252'))
-                f.write("\t")
-                f.write(z.encode('cp1252'))
+        if option == "all":
+            with open(datei, "w") as f:
+                for z in self.zutaten:
+                    m = self.zutaten[z][u'menge']
+                    if m == 0:
+                        m = u''
+                    else:
+                        m = str(m)
+                    e = self.zutaten[z][u'einheit']
+                    s = m + u' ' + e
+                    f.write(s.encode('cp1252'))
+                    f.write("\t")
+                    f.write(z.encode('cp1252'))
+                    f.write("\n")
+        else:
+            with open(datei, "a") as f:
+                o = int(option)
+                zutat = self.zutatenliste[o]
+                f.write(zutat.encode('cp1252'))
                 f.write("\n")
 
 

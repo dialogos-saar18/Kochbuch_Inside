@@ -1,5 +1,5 @@
 # -*- coding: cp1252 -*-
-#jython -Dpython.path=ClientInterface-2.0.4.jar cookclient.py
+#jython -Dpython.path=ClientInterface-2.0.4.jar cookclient_url.py
 from com.clt.dialog.client import Client
 from com.clt.script.exp import Value
 #from testmodule import *
@@ -33,8 +33,9 @@ def call(category, term, recipe):
 class Main(Client):
     def __init__(self):
         pass
-        #testrec = Recipe("Bsp_quelltext.txt")
-        #self.recipes=[testrec]###
+        recipe = Recipe('https://www.chefkoch.de/rezepte/785281181805506/Spinat-Cannelloni-al-Forno.html')
+        self.recipes=[recipe]
+    
 
     def stateChanged(self, cs):
         print "new state: " + str(cs)
@@ -63,7 +64,9 @@ class Main(Client):
 
         #Quelltext für Rezept abfragen
         if str(value[0]).strip('"') == "URL":
-            self.gui()
+            #self.gui()
+            #recipe = Recipe('https://www.chefkoch.de/rezepte/785281181805506/Spinat-Cannelloni-al-Forno.html')
+            #self.recipes=[recipe]
             print("created recipe")            
                     
         elif str(value[0]).strip('"')=="ingredients":
@@ -81,11 +84,19 @@ class Main(Client):
                 self.send(self.recipes[0].get_title())
             else:
                 self.send(self.recipes[int(str(value[-1]))].get_title())
+
+        #kompletten Einkaufszettel schreiben
         elif str(value[0]).strip('"')=="einkaufszettel":
             if len(value)==1:
-                self.send(self.recipes[0].einkaufszettel())
+                self.send(self.recipes[0].einkaufszettel("all"))
             else:
                 self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
+
+        #einzelne Zutat auf Einkaufszettel
+        elif str(value[0]).strip('"')=="Zettel":
+            self.recipes[0].einkaufszettel(str(value[1]).strip('"'))
+
+
         elif str(value[0]).strip('"')=="exists_zutat":
             #if len(value)==1:
                 self.send(self.recipes[0].contains(str(value[1]).strip('"')))
@@ -123,6 +134,7 @@ class Main(Client):
     def error(self, throwable):
         print "error"
 
+
     def gui(self):#returns URL in unicode
         frame = JFrame('URL eingeben',
                 defaultCloseOperation = JFrame.EXIT_ON_CLOSE,
@@ -137,7 +149,8 @@ class Main(Client):
             recipe = Recipe(url)
             self.recipes=[recipe]
             self.send("continue")
-            
+
+         
         fieldlabel = JLabel()
         fieldlabel.setText("<html><font size=+1>Geben Sie die Internetadresse des Rezepts ein</font></html>")
         fieldlabel.setBounds(20,20,500,40)
