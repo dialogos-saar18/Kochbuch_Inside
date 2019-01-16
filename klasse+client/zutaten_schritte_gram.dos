@@ -262,31 +262,30 @@ $nein = ( nein [danke] | ne | falsch );</value>
 						</att>
 						<att name="script" type="text">
 							<value>dyngram = &quot;root $input; \n&quot;;
-dyngram = dyngram + &quot;$input = (ende | fertig) {$=\&quot;ende\&quot;} &quot;;
+dyngram = dyngram + &quot;$input = (ende | fertig) {$=\&quot;ende\&quot;} | $ruhezeit {$=[\&quot;eigenschaft\&quot;,\&quot;Ruhezeit\&quot;]} | $arbeitszeit {$=[\&quot;eigenschaft\&quot;,\&quot;Arbeitszeit\&quot;]} | $kochzeit {$=[\&quot;eigenschaft\&quot;,\&quot;Koch-/Backzeit\&quot;]} | $schwierig {$=[\&quot;eigenschaft\&quot;,\&quot;Schwierigkeitsgrad\&quot;]} | $kalorien {$=[\&quot;eigenschaft\&quot;,\&quot;Kalorien\&quot;]} | $anleitung {$=$anleitung} | $zutaten_menge {$=$zutaten_menge} | $zutaten_exist {$=$zutaten_exist};&quot;;
+dyngram = dyngram + &quot;$ruhezeit = wie viel Ruhezeit (muss | kann | soll) ich rechnen | was ist die Ruhezeit | wie lange muss es ruhen;&quot;;
+dyngram = dyngram + &quot;$arbeitszeit = wie viel Arbeitszeit (muss | kann | soll) ich rechnen | was ist die Arbeitszeit;&quot;;
+dyngram = dyngram + &quot;$kochzeit = wie viel (Kochzeit | Backzeit) (muss | kann | soll) ich rechnen | was ist die (Kochzeit | Backzeit) | wie lange (kocht | backt) es | wie lange muss es (kochen | backen);&quot;;
+dyngram = dyngram + &quot;$schwierig = wie schwer ist (es | das Rezept) | welchen Schwierigkeitsgrad hat (es | das Rezept);&quot;;
+dyngram = dyngram + &quot;$kalorien = wie viele Kalorien hat das (Gericht | Essen);&quot;;
 
-//eigenschaft
-dyngram = dyngram + &quot;| wie viel Ruhezeit (muss | kann | soll) ich rechnen {$=[\&quot;eigenschaft\&quot;,\&quot;Ruhezeit\&quot;]} | was ist die Ruhezeit {$=[\&quot;eigenschaft\&quot;,\&quot;Ruhezeit\&quot;]} | wie lange muss es ruhen {$=[\&quot;eigenschaft\&quot;,\&quot;Ruhezeit\&quot;]} | wie viel Arbeitszeit (muss | kann | soll) ich rechnen {$=[\&quot;eigenschaft\&quot;,\&quot;Arbeitszeit\&quot;]} | was ist die Arbeitszeit {$=[\&quot;eigenschaft\&quot;,\&quot;Arbeitszeit\&quot;]} | wie viel (Kochzeit | Backzeit) (muss | kann | soll) ich rechnen {$=[\&quot;eigenschaft\&quot;,\&quot;Koch-/Backzeit\&quot;]} | was ist die (Kochzeit | Backzeit) {$=[\&quot;eigenschaft\&quot;,\&quot;Koch-/Backzeit\&quot;]} | wie lange (kocht | backt) {$=[\&quot;eigenschaft\&quot;,\&quot;Koch-/Backzeit\&quot;]} | wie lange muss es (kochen | backen) {$=[\&quot;eigenschaft\&quot;,\&quot;Koch-/Backzeit\&quot;]} | (Wie schwer ist | Welchen Schwierigkeitsgrad) {$=[\&quot;eigenschaft\&quot;,\&quot;Schwierigkeitsgrad\&quot;]} | wie viele Kalorien {$=[\&quot;eigenschaft\&quot;,\&quot;Kalorien\&quot;]}&quot;;
-//{$=[\&quot;eigenschaft\&quot;,\&quot;zubereitungszeit\&quot;]} -&gt; {$=[\&quot;eigenschaft\&quot;,\&quot;Gesamtzeit\&quot;]}, 
-//Ausgabe (in get_properties einen Stringen berechnen): Die Gesamtzeit beträgt. Das unterteilt sich in a, b, c
-//Rückgabe für key error?
+dyngram = dyngram + &quot;$anleitung = $next {$=[\&quot;anleitung\&quot;,\&quot;next\&quot;]} | $prev {$=[\&quot;anleitung\&quot;,\&quot;previous\&quot;]} | $first {$=[\&quot;anleitung\&quot;,\&quot;first\&quot;]} | $rep {$=[\&quot;anleitung\&quot;,\&quot;repeat\&quot;]};&quot;;
+dyngram = dyngram + &quot;$next = was ist der nächste Schritt | nächster Schritt;&quot;;
+dyngram = dyngram + &quot;$prev = was ist der letzt Schritt | letzter Schritt;&quot;;
+dyngram = dyngram + &quot;$first = erster Schritt;&quot;;
+dyngram = dyngram + &quot;$rep = was ist der erste Schritt | [Wiederhole (den | diesen) Schritt] nochmal | wiederholen;&quot;;
 
-//anleitung
-dyngram = dyngram + &quot; | Was ist der nächste Schritt {$=[\&quot;anleitung\&quot;,\&quot;next\&quot;]} | Was ist der erste Schritt {$=[\&quot;anleitung\&quot;,\&quot;repeat\&quot;]}|Was ist der letzte Schritt {$=[\&quot;anleitung\&quot;,\&quot;previous\&quot;]} | nächster Schritt {$=[\&quot;anleitung\&quot;,\&quot;next\&quot;]} | erster Schritt {$=[\&quot;anleitung\&quot;,\&quot;first\&quot;]} | letzter Schritt {$=[\&quot;anleitung\&quot;,\&quot;previous\&quot;]} | (Wiederhole den Schritt | [diesen Schritt] nochmal) {$=[ \&quot;anleitung\&quot;,\&quot;repeat\&quot;]} &quot;;
+dyngram = dyngram + &quot;$zutaten_exist = brauche ich $term_z {$=[\&quot;exists_zutat\&quot;, $term_z]} | (kommt | kommen | gehört | gehören) $term_z (rein | hinein | dazu | dabei) {$=[\&quot;exists_zutat\&quot;, $term_z]};&quot;;
 
-
-//zutaten
-//dyngram = &quot;$term_z = milch | zucker; \n&quot;;
-for (int i = 0; i&lt;length(ingredients); i++)
- dyngram = dyngram + &quot;| wie viel &quot; + get(ingredients,i)  + &quot; brauche ich {$=[\&quot;zutaten\&quot;,\&quot;&quot; + str(get(ingredients,i)) + &quot;\&quot;]} | brauche ich &quot; + get(ingredients,i) + &quot;{$=[\&quot;exists_zutat\&quot;,\&quot;&quot; + get(ingredients,i) + &quot;\&quot;]} | (kommt | kommen | gehört | gehören) &quot; + get(ingredients,i) + &quot; (rein | hinein | dazu | dabei){$=[\&quot;exists_zutat\&quot;,\&quot;&quot; + get(ingredients,i) +&quot;\&quot;]}&quot; ;
-//für &quot;brauche ich x&quot; eigentlich allgemeines Kochzutaten-Wörterbuch verwenden, wie auch für die Grammatik für die Suchanfrage
-
-
-
+dyngram = dyngram + &quot;$zutaten_menge = wie viel $term_z brauche ich {$=[\&quot;zutaten\&quot;, $term_z]};&quot;;
+dyngram = dyngram + &quot;$term_z = &quot; + get(ingredients,0);
+for (int i = 1; i&lt;length(ingredients); i++)
+  dyngram = dyngram + &quot; | &quot; + get(ingredients,i);
 dyngram = dyngram + &quot;;&quot;;</value>
 						</att>
 					</node>
 					<node uid="61d04731-f344-44c4-beac-e8e2ef26cba4" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-						<graphics x="692" y="457" fill="#00b200"/>
+						<graphics x="693" y="456" fill="#00b200"/>
 						<att name="title" type="string" value="Sprachsynthese"/>
 						<att name="prompt" type="text">
 							<value>term + &quot; ist &quot; + result</value>
