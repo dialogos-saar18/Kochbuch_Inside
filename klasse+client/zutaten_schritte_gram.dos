@@ -242,7 +242,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="graph" type="object">
 				<graph directed="1" Graphic="1" Layout="points">
 					<att name="width" type="integer" value="1636"/>
-					<att name="height" type="integer" value="839"/>
+					<att name="height" type="integer" value="841"/>
 					<groovyFunctions></groovyFunctions>
 					<node uid="38075a29-b46f-49db-aa85-fdbc788c4f52" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
 						<graphics x="576" y="158" fill="#00b200"/>
@@ -647,21 +647,25 @@ dyngram = dyngram + &quot;$term_a = nächste {$=\&quot;anleitung\&quot;,\&quot;n
 						<att name="title" type="string" value="Script"/>
 						<att name="script" type="text">
 							<value>gram = &quot;root $input; \n&quot;;
-gram = gram + &quot;$input = &quot;;
-gram = gram + &quot;[ich möchte] [für] 1 Person [kochen] {$=[\&quot;Personen\&quot;,\&quot;&quot;+1+&quot;\&quot;]}&quot;;
-for (int i=2; i&lt;51; i++)
-  gram = gram + &quot;| [ich möchte] [für|mit] &quot; + i + &quot; Personen [kochen] {$=[\&quot;Personen\&quot;,\&quot;&quot;+ i +&quot;\&quot;]}&quot;;
-for (int i = 0; i &lt; 1001; i+=25){
-	for (int n = 0; n&lt;length(ingredients); n++){
-		for (int m=0; m&lt;length(einheiten); m++)
-			gram = gram + &quot;| [ich möchte] [für] &quot; + i + &quot; &quot; + get(einheiten,m) + &quot; &quot; + get(ingredients,n) + &quot; [kochen] &quot; + &quot;{$=[\&quot;Zutaten\&quot;,\&quot;&quot; + get(ingredients,n) +&quot;\&quot;,\&quot;&quot; + i + &quot;\&quot;,\&quot;&quot; + get(einheiten,m) + &quot;\&quot;]}&quot;;
-}
-}
-for (int i = 0; i&lt;51;i++){
-	for (int n = 0; n&lt;length(ingredients); n++){
-		gram = gram + &quot;| [ich möchte] [für] &quot; + i + &quot; &quot;+ get(ingredients,n) + &quot; [kochen] &quot; + &quot;{$=[\&quot;Zutaten\&quot;,\&quot;&quot; + get(ingredients,n) + &quot;\&quot;,\&quot;&quot; + i + &quot;\&quot;]}&quot;;
-}
-}
+gram = gram + &quot;$input = $personen {$=$personen} | $zutaten {$=$zutaten};&quot;;
+gram = gram + &quot;$personen = [ich möchte] [für] 1 Person kochen {$=[\&quot;Personen\&quot;,\&quot;&quot;+1+&quot;\&quot;]} | [ich möchte] [für|mit] $anz Personen [kochen] {$=[\&quot;Personen\&quot;, $anz]};&quot;;
+gram = gram + &quot;$anz = 2&quot;;
+for (int i = 3; i&lt;50 ; i++)
+	gram = gram + &quot; | &quot; + i ;
+gram = gram + &quot;;&quot;;
+gram = gram + &quot;$zutaten = [ich möchte] [für] $zahl $einheit $term_z [kochen] {$=[\&quot;Zutaten\&quot;, $term_z, $zahl, $einheit]}| [ich möchte] [für] $zahl $term_z [kochen] {$=[\&quot;Zutaten\&quot;, $term_z, $zahl]};&quot;;
+gram = gram + &quot;$term_z = &quot; + get(ingredients,0);
+for (int i = 1; i&lt;length(ingredients); i++)
+	gram = gram + &quot; | &quot; + get(ingredients,i);
+gram = gram + &quot;;&quot;;
+gram = gram + &quot;$einheit = &quot; + get(einheiten, 0);
+for (int i = 1; i&lt;length(einheiten); i++)
+	gram = gram + &quot; | &quot; + get(einheiten,i);
+gram = gram + &quot;;&quot;;
+
+gram = gram + &quot;$zahl = 1&quot;;
+for (int i = 2; i&lt;1001; i++)
+	gram = gram + &quot; | &quot; + i;
 gram = gram + &quot;;&quot;;</value>
 						</att>
 					</node>
@@ -1140,6 +1144,9 @@ aber wie kürzen?</comment>
 		</edge>
 		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="317681f6-f4a0-4836-98cb-fad9e1da29a0">
 			<att name="condition" type="string" value="&quot;weiter&quot;"/>
+		</edge>
+		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
+			<att name="condition" type="string" value="&quot;ende&quot; | &quot;abbrechen&quot;"/>
 		</edge>
 		<edge src="81f06fc6-5a24-4454-80fd-ac8c98ce288d" tgt="0f5b191e-1a8c-453b-8cb7-d36436a86ad3">
 			<att name="condition" type="string" value="result"/>
