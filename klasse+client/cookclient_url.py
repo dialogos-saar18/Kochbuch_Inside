@@ -32,7 +32,7 @@ def call(category, term, recipe):
 
 class Main(Client):
     def __init__(self):
-        pass
+        #pass
         recipe = Recipe('https://www.chefkoch.de/rezepte/785281181805506/Spinat-Cannelloni-al-Forno.html')
         self.recipes=[recipe]
     
@@ -64,7 +64,7 @@ class Main(Client):
 
         #Quelltext für Rezept abfragen
         if str(value[0]).strip('"') == "URL":
-            #self.gui()
+            self.gui()
             #recipe = Recipe('https://www.chefkoch.de/rezepte/785281181805506/Spinat-Cannelloni-al-Forno.html')
             #self.recipes=[recipe]
             print("created recipe")            
@@ -146,8 +146,8 @@ class Main(Client):
             print("hi")
             frame.setVisible(False)
             url = field.getText()
-            recipe = Recipe(url)
-            self.recipes=[recipe]
+            #recipe = Recipe(url)
+            #self.recipes=[recipe]
             self.send("continue")
 
          
