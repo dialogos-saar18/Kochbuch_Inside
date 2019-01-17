@@ -179,7 +179,7 @@ class Recipe:
             factor = zahl / menge_neueeinheit
         for z in self.zutaten:
             d = self.zutaten[z]
-            d[u'menge'] = d[u'menge'] * factor
+            d[u'menge'] = round(d[u'menge'] * factor, 2)
 
     # gibt zurück ob die Zutat gebraucht wird oder nicht
     # Problem: mehrere Sorten der gleichen Zutat
