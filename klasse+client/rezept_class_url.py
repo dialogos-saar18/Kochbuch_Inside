@@ -161,18 +161,22 @@ class Recipe:
             anzahl = float(anzahl)
             factor = anzahl / self.get_property(u'Portionen')
             self.eigenschaften[u'Portionen'] = anzahl
-        elif int(anzahl[1]) == 0:
+        elif anzahl[1] == "0":
             menge_alt = self.zutaten[angabe][u'menge']
-            factor = int(anzahl[0]) / menge_alt
+            zahl = anzahl[0]
+            zahl = zahl.replace("komma", ".")
+            factor = float(zahl) / menge_alt
         else:
-            anzahl = int(anzahl[0])
+            zahl = anzahl[0]
+            zahl = zahl.replace("komma", ".")
+            zahl = float(zahl)
             einheit_alt = self.zutaten[angabe][u'einheit']
             einheit_neu = anzahl[1]
             menge_alteeinheit = self.zutaten[angabe][u'menge']
             #print(einheit_alt, einheit_neu, menge_alteeinheit)
             menge_neueeinheit = e_umrechnen(einheit_alt, einheit_neu, menge_alteeinheit)
             #print(menge_neueeinheit)
-            factor = anzahl / menge_neueeinheit
+            factor = zahl / menge_neueeinheit
         for z in self.zutaten:
             d = self.zutaten[z]
             d[u'menge'] = d[u'menge'] * factor

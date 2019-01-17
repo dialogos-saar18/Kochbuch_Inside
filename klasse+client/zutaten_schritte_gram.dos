@@ -237,7 +237,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="317681f6-f4a0-4836-98cb-fad9e1da29a0" class="com.clt.diamant.graph.nodes.GraphNode">
-			<graphics x="937" y="422" fill="#ffc800"/>
+			<graphics x="899" y="445" fill="#ffc800"/>
 			<att name="title" type="string" value="Info"/>
 			<att name="graph" type="object">
 				<graph directed="1" Graphic="1" Layout="points">
@@ -447,7 +447,7 @@ dyngram = dyngram + &quot;;&quot;;</value>
 			</att>
 		</node>
 		<node uid="32c2b329-1796-4187-a686-39f1dc869aa1" class="com.clt.diamant.graph.nodes.StartNode">
-			<graphics x="190" y="39" fill="#9999ff"/>
+			<graphics x="191" y="34" fill="#9999ff"/>
 			<att name="title" type="string" value="Start"/>
 		</node>
 		<node uid="37233152-ee46-4cd0-a4fa-22d283343513" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
@@ -491,7 +491,7 @@ dyngram = dyngram + &quot;;&quot;;</value>
 			<att name="label_uid" type="string" value="bb90d713-4708-440b-9277-505a4897b5d9"/>
 		</node>
 		<node uid="5d3c33ec-9717-4a49-a853-e66d14a7c36b" class="com.clt.diamant.graph.nodes.EndNode">
-			<graphics x="1004" y="524" fill="#9999ff"/>
+			<graphics x="1003" y="444" fill="#9999ff"/>
 			<att name="title" type="string" value="Ende"/>
 		</node>
 		<node uid="61b5ea98-44c4-4127-a839-258f682b158c" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
@@ -653,6 +653,7 @@ gram = gram + &quot;$anz = 2&quot;;
 for (int i = 3; i&lt;50 ; i++)
 	gram = gram + &quot; | &quot; + i ;
 gram = gram + &quot;;&quot;;
+
 gram = gram + &quot;$zutaten = [ich möchte] [für] $zahl $einheit $term_z [kochen] {$=[\&quot;Zutaten\&quot;, $term_z, $zahl, $einheit]}| [ich möchte] [für] $zahl $term_z [kochen] {$=[\&quot;Zutaten\&quot;, $term_z, $zahl]};&quot;;
 gram = gram + &quot;$term_z = &quot; + get(ingredients,0);
 for (int i = 1; i&lt;length(ingredients); i++)
@@ -663,8 +664,18 @@ for (int i = 1; i&lt;length(einheiten); i++)
 	gram = gram + &quot; | &quot; + get(einheiten,i);
 gram = gram + &quot;;&quot;;
 
-gram = gram + &quot;$zahl = 1&quot;;
+gram = gram + &quot;$zahl = $integer {$=$integer} | $komm {$=$komm};&quot;;
+gram = gram + &quot;$integer = 1&quot;;
 for (int i = 2; i&lt;1001; i++)
+	gram = gram + &quot; | &quot; + i;
+gram = gram + &quot;; \n&quot;;
+gram = gram + &quot;$komm = $integer komma $term_i $term_i2 {$ = $integer + \&quot;komma\&quot; + $term_i + $term_i2;} | $integer komma $term_i {$ = $integer + \&quot;komma\&quot; + $term_i;};&quot;;
+gram = gram + &quot;$term_i = 0 &quot;;
+for (int i = 1; i &lt; 10; i++)
+	gram = gram + &quot; | &quot; + i;
+gram = gram + &quot;;&quot;;
+gram = gram + &quot;$term_i2 = 0&quot;;
+for (int i = 1; i &lt; 10;i++)
 	gram = gram + &quot; | &quot; + i;
 gram = gram + &quot;;&quot;;</value>
 						</att>
