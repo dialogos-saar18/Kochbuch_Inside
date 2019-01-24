@@ -23,21 +23,27 @@ class Recipe:
         self.eigenschaften = self.init_properties(soup)
 
     def get_schritt(self, argument): #returns string
-        #if argument == "all":
-            #TODO
+        
         if argument == u'first':
-            return u'Lass und loslegen: ' + self.anleitung[self.schritt]
+            return u'Lass uns loslegen: ' + self.anleitung[self.schritt]
         elif argument == u'next':
-            #try:
-            self.schritt += 1
-            return u'Dein nächster Schritt lautet: ' + self.anleitung[self.schritt]
-            #Index Error -> "Du musst nichts mehr tun."
+            try:
+                self.schritt += 1
+                return u'Dein nächster Schritt lautet: ' + self.anleitung[self.schritt]
+            except:
+                return u'Du bist fertig'
         elif argument == u'repeat':
             return u'Ich wiederhole: ' + self.anleitung[self.schritt]
         elif argument == u'previous':
-            #IndexError
-            self.schritt -= 1
-            return u'Der letzte Schritt war: ' + self.anleitung[self.schritt]
+            try:
+                self.schritt -= 1
+                return u'Der vorherige Schritt war: ' + self.anleitung[self.schritt]
+            except:
+                self.schritt = 0
+                return u'Dein erster Schritt lautet: ' + self.anleitung[0]
+        elif argument == u'last':
+            self.schritt = len(self.anleitungen - 1)
+            return u'Der letzte Schritt lautet: ' + self.anleitung[self.schritt]
         elif argument == u'all':
             r = u''
             for i in range(len(self.anleitung)):
@@ -180,6 +186,7 @@ class Recipe:
         for z in self.zutaten:
             d = self.zutaten[z]
             d[u'menge'] = round(d[u'menge'] * factor, 2)
+            self.eigenschaften[u'Portionen'] = self.get_property(u'Portionen') * factor
 
     # gibt zurück ob die Zutat gebraucht wird oder nicht
     # Problem: mehrere Sorten der gleichen Zutat
@@ -201,7 +208,9 @@ class Recipe:
     def init_anleitung(self, beautifuls):
         schritte = []
         zubereitung = beautifuls.find(id=u'rezept-zubereitung')
+        i = 1
         for string in zubereitung.stripped_strings:
+            string = str(i) + u'. ' + string
             schritte.append(string)
         return schritte
 

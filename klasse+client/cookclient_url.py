@@ -99,7 +99,8 @@ class Main(Client):
 
         elif str(value[0]).strip('"')=="exists_zutat":
             #if len(value)==1:
-                self.send(self.recipes[0].contains(str(value[1]).strip('"')))
+            
+            self.send(self.recipes[0].contains(str(value[1]).strip('"')))
             #else:
              #   self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
         elif str(value[0]).strip('"')=="zutaten":
@@ -169,6 +170,6 @@ class Main(Client):
 
 
 m = Main()
-m.open(8888)
+m.open(8880)
 
 
