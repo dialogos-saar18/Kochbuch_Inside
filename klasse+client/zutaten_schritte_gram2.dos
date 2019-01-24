@@ -29,8 +29,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 	</device>
 	<plugin type="dialogos.plugin.sphinx">
 		<att name="language" type="string" value="de_DE"/>
+		<g2p language="de_DE">
+			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
+			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
+		</g2p>
 	</plugin>
 	<plugin type="dialogos.plugin.tts">
+	</plugin>
+	<plugin type="dialogos.plugin.lego">
 	</plugin>
 	<plugin type="dialogos.plugin.sqlite">
 		<att name="dbURL" type="string" value="jdbc:sqlite:C:\Users\TT\DialogOS\test.db"/>
@@ -187,6 +193,12 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<value>undefined</value>
 			<export/>
 		</variable>
+		<variable uid="9055fe2b-751d-4ed9-a345-b6f9c0dd4fd6">
+			<name>zutaten_voc</name>
+			<type>list</type>
+			<value>undefined</value>
+			<export/>
+		</variable>
 		<node uid="0324b06f-14e1-4af0-a1b7-949cfd3a5c4f" class="com.clt.diamant.graph.nodes.LabelNode">
 			<graphics x="1149" y="534" fill="#4c4c80"/>
 			<att name="title" type="string" value="Zutaten"/>
@@ -295,6 +307,18 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			</att>
 			<att name="prompt_type" type="string" value="expression"/>
 			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="382bb26e-097c-4f5d-b006-d266a1d84d7b" class="com.clt.diamant.graph.nodes.GroovyNode">
+			<graphics x="562" y="228" fill="#99ffff"/>
+			<att name="title" type="string" value="Zutatenwörterbuch einlesen"/>
+			<att name="script" type="text">
+				<value>java.util.ArrayList fileContents = new File('./Zutatenliste_unicode.txt').readLines('unicode')
+A=[]
+fileContents.each { String line -&gt;
+  if (line != &quot;&quot;){A.add('&quot;' + line.trim() + '&quot;')} else {}
+}
+zutaten_voc = A</value>
+			</att>
 		</node>
 		<node uid="48791351-f2f2-4aed-ad81-cec3b17ad87c" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
 			<graphics x="1186" y="805" fill="#00b200"/>
@@ -809,7 +833,11 @@ dyngram = dyngram + &quot;$first = erster Schritt | von vorne | was ist der erst
 
 dyngram = dyngram + &quot;$rep = was ist der erste Schritt | [Wiederhole (den | diesen) Schritt] nochmal;&quot;;
 
-dyngram = dyngram + &quot;$zutaten_exist = (brauche ich | braucht man | brauchen wir) $term_z {$=[\&quot;exists_zutat\&quot;, $term_z]} | (kommt | kommen | gehört | gehören) $term_z (rein | hinein | dazu | dabei) {$=[\&quot;exists_zutat\&quot;, $term_z]} | ist $term_z im Gericht {$=[\&quot;exists_zutat\&quot;, $term_z]} | (gehört | gehören) $term_z zu den Zutaten {$=[\&quot;exists_zutat\&quot;, $term_z]};&quot;;
+dyngram = dyngram + &quot;$zutaten_exist = (brauche ich | braucht man | brauchen wir) $term_v {$=[\&quot;exists_zutat\&quot;, $term_v]} | (kommt | kommen | gehört | gehören) $term_v (rein | hinein | dazu | dabei) {$=[\&quot;exists_zutat\&quot;, $term_v]} | ist $term_z im Gericht {$=[\&quot;exists_zutat\&quot;, $term_v]} | (gehört | gehören) $term_v zu den Zutaten {$=[\&quot;exists_zutat\&quot;, $term_v]};&quot;;
+dyngram = dyngram + &quot;$term_v = &quot; + get(zutaten_voc,0);
+for (int i = 1; i&lt;length(zutaten_voc); i++)
+  dyngram = dyngram + &quot; | &quot; + get(zutaten_voc,i);
+dyngram = dyngram + &quot;;&quot;;
 
 dyngram = dyngram + &quot;$zutaten_menge = wie viel $term_z [brauche ich] {$=[\&quot;zutaten\&quot;, $term_z]};&quot;;
 dyngram = dyngram + &quot;$term_z = &quot; + get(ingredients,0);
@@ -1402,11 +1430,14 @@ aber wie kürzen?</comment>
 		<edge src="18e1152a-90c2-46c9-9c42-f745f16a24e3" tgt="61b5ea98-44c4-4127-a839-258f682b158c">
 			<att name="condition" type="string" value="result"/>
 		</edge>
-		<edge src="2deb32b5-5ff5-45f7-a5e4-d5d002b16016" tgt="d6849f9b-ad6c-47b8-9212-f6f0655d0379">
+		<edge src="2deb32b5-5ff5-45f7-a5e4-d5d002b16016" tgt="382bb26e-097c-4f5d-b006-d266a1d84d7b">
 		</edge>
 		<edge src="32c2b329-1796-4187-a686-39f1dc869aa1" tgt="7ed7db50-0bae-44e3-9d33-54109705159c">
 		</edge>
 		<edge src="37233152-ee46-4cd0-a4fa-22d283343513" tgt="a16ebd1d-5845-48b6-bd78-071999eb704c">
+		</edge>
+		<edge src="382bb26e-097c-4f5d-b006-d266a1d84d7b" tgt="d6849f9b-ad6c-47b8-9212-f6f0655d0379">
+			<att name="condition" type="string" value="Standard"/>
 		</edge>
 		<edge src="48791351-f2f2-4aed-ad81-cec3b17ad87c" tgt="308e062e-f331-400a-ba5d-bf38e5d16e0e">
 		</edge>
@@ -1531,6 +1562,7 @@ aber wie kürzen?</comment>
 		</edge>
 		<edge src="f7db33dc-0881-400f-808b-a7ee59a294f7" tgt="ea05c05d-ee78-443d-93cb-f84cfb14d20a">
 		</edge>
-		<comment x="372" y="48" width="208" height="99" color="#ffff99">titel zu eigenschaften</comment>
+		<comment x="500" y="188" width="208" height="99" color="#cc0000">Achtung: 
+Hier muss der richtige Pfad eingegeben werden!</comment>
 	</graph>
 </wizard>
