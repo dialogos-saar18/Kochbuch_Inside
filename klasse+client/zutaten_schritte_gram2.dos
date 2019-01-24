@@ -6,7 +6,7 @@
 		<name>cookclient</name>
 		<connector class="com.clt.dialog.client.ManualCLTConnector">
 			<att name="Server Name" type="string" value="localhost"/>
-			<att name="Port" type="string" value="8880"/>
+			<att name="Port" type="string" value="8888"/>
 		</connector>
 		<icon width="16">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -312,7 +312,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<graphics x="562" y="228" fill="#99ffff"/>
 			<att name="title" type="string" value="Zutatenwörterbuch einlesen"/>
 			<att name="script" type="text">
-				<value>java.util.ArrayList fileContents = new File('./Zutatenliste_unicode.txt').readLines('unicode')
+				<value>java.util.ArrayList fileContents = new File('C:/Users/TT/Documents/GitHub/Kochbuch/klasse+client/Zutatenliste_unicode.txt').readLines('unicode')
 A=[]
 fileContents.each { String line -&gt;
   if (line != &quot;&quot;){A.add('&quot;' + line.trim() + '&quot;')} else {}
@@ -583,7 +583,7 @@ zutaten_voc = A</value>
 						<att name="discard" type="boolean" value="0"/>
 						<att name="ignoreInputHandlers" type="boolean" value="0"/>
 					</node>
-					<edge src="2d841cce-8071-4d96-8103-8769f7aa3b03" tgt="d8a41a27-5c26-41cc-919d-2720d9cc0920">
+					<edge src="2d841cce-8071-4d96-8103-8769f7aa3b03" tgt="f2d077af-0d3d-4281-ab84-566eeb987a9b">
 					</edge>
 					<edge src="52b8d9ec-3e1f-4e93-a5f2-b236edc42d70" tgt="45cece56-fb78-48c3-8b9a-485a6c02ff6b">
 					</edge>
@@ -811,7 +811,7 @@ dyngram = dyngram + &quot;$term_a = nächste {$=\&quot;anleitung\&quot;,\&quot;n
 		</node>
 		<node uid="d6849f9b-ad6c-47b8-9212-f6f0655d0379" class="com.clt.diamant.graph.nodes.ScriptNode">
 			<graphics x="833" y="210" fill="#99ffff"/>
-			<att name="title" type="string" value="Workaround (dynamische Grammatik)"/>
+			<att name="title" type="string" value="dyngram erzeugen"/>
 			<att name="comment" type="text">
 				<value>Die Grammatik ist sehr hässlich, da einzeilig
 </value>
@@ -1562,7 +1562,7 @@ aber wie kürzen?</comment>
 		</edge>
 		<edge src="f7db33dc-0881-400f-808b-a7ee59a294f7" tgt="ea05c05d-ee78-443d-93cb-f84cfb14d20a">
 		</edge>
-		<comment x="500" y="188" width="208" height="99" color="#cc0000">Achtung: 
+		<comment x="484" y="138" width="208" height="99" color="#cc0000">Achtung: 
 Hier muss der richtige Pfad eingegeben werden!</comment>
 	</graph>
 </wizard>
