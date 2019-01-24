@@ -18,7 +18,7 @@ from java.lang import Class
 def call(category, term, recipe):
     #ruft die Methoden auf, die die Informationen auslesen
     if category == "anleitung":#works but should be expanded
-        return(recipe.get_schritt(term)) # term one of {"first","next","repeat","all","previous"}
+        return(recipe.get_schritt(term)) # term one of {"first","next","repeat","all","previous", "last"}
     elif category == "zutaten":#works
         return(recipe.get_zutat(term)) 
     elif category == "eigenschaft":#works
@@ -76,7 +76,7 @@ class Main(Client):
                 self.send(self.recipes[int(str(value[-1]))].ingredients())
         elif str(value[0]).strip('"')=="einheiten":
             if len(value)==1:
-                self.send(self.recipes[0].einheiten())
+                self.send(self.recipes[0].einheiten)
             else:
                 self.send(self.recipes[int(str(value[-1]))].einheiten())
         elif str(value[0]).strip('"')=="titel":
