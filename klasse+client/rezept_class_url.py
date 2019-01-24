@@ -15,12 +15,13 @@ class Recipe:
         self.anleitung = self.init_anleitung(soup)
         self.schritt = 0
         self.zutaten = self.init_zutaten(soup)
-        self.zutatenliste = None
+        self.zutatenliste = self.ingredients()
         self.portionen = self.init_portionen(soup)#int
         #eigenschaften: dict; available keys:
         #zubereitungszeit ebenfalls evtl. in Größe und Einheit unterteilen
             #-> an den jeweiligen Nutzer anpassen
         self.eigenschaften = self.init_properties(soup)
+        self.einheiten = self.get_einheiten()
 
     def get_schritt(self, argument): #returns string
         
@@ -95,6 +96,8 @@ class Recipe:
                 liste.append(s)
             return liste
             #return s
+        if bezeichnung == "liste":
+            return self.zutatenliste
             
         try:
             me = self.zutaten[bezeichnung][u'menge']
@@ -148,7 +151,7 @@ class Recipe:
     def ingredients(self):
         return self.zutaten.keys()
 
-    def einheiten(self):
+    def get_einheiten(self):
         einheiten = set()
         for z in self.zutaten:
             e = self.zutaten[z][u'einheit']
@@ -156,6 +159,7 @@ class Recipe:
                 einheiten.add(e)
         einheiten = list(einheiten)
         return einheiten
+
 
 
     # no return value, only changes incredients
@@ -167,17 +171,19 @@ class Recipe:
             anzahl = float(anzahl)
             factor = anzahl / self.get_property(u'Portionen')
             self.eigenschaften[u'Portionen'] = anzahl
-        elif anzahl[1] == "0":
+        elif anzahl[1] == "-1":
+            angabe = self.zutatenliste[int(angabe)]
             menge_alt = self.zutaten[angabe][u'menge']
             zahl = anzahl[0]
             zahl = zahl.replace("komma", ".")
             factor = float(zahl) / menge_alt
         else:
+            angabe = self.zutatenliste[int(angabe)]
             zahl = anzahl[0]
             zahl = zahl.replace("komma", ".")
             zahl = float(zahl)
             einheit_alt = self.zutaten[angabe][u'einheit']
-            einheit_neu = anzahl[1]
+            einheit_neu = self.einheiten[int(anzahl[1])]
             menge_alteeinheit = self.zutaten[angabe][u'menge']
             #print(einheit_alt, einheit_neu, menge_alteeinheit)
             menge_neueeinheit = e_umrechnen(einheit_alt, einheit_neu, menge_alteeinheit)
