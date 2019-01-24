@@ -813,7 +813,7 @@ dyngram = dyngram + &quot;$term_a = nächste {$=\&quot;anleitung\&quot;,\&quot;n
 			<graphics x="833" y="210" fill="#99ffff"/>
 			<att name="title" type="string" value="dyngram erzeugen"/>
 			<att name="comment" type="text">
-				<value>Die Grammatik ist sehr hässlich, da einzeilig
+				<value>
 </value>
 			</att>
 			<att name="script" type="text">
@@ -1562,7 +1562,7 @@ aber wie kürzen?</comment>
 		</edge>
 		<edge src="f7db33dc-0881-400f-808b-a7ee59a294f7" tgt="ea05c05d-ee78-443d-93cb-f84cfb14d20a">
 		</edge>
-		<comment x="484" y="138" width="208" height="99" color="#cc0000">Achtung: 
+		<comment x="487" y="177" width="208" height="99" color="#cc0000">Achtung: 
 Hier muss der richtige Pfad eingegeben werden!</comment>
 	</graph>
 </wizard>
