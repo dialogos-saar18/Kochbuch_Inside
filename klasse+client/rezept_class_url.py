@@ -197,6 +197,7 @@ class Recipe:
     # gibt zurück ob die Zutat gebraucht wird oder nicht
     # Problem: mehrere Sorten der gleichen Zutat
     def contains(self, zutat):
+        zutat = zutat.lower()
         if zutat in self.zutaten.keys():
             return u'Ja, du brauchst ' + zutat
         else:
@@ -378,7 +379,8 @@ class Recipe:
 
                                              
 #rezept = Recipe("https://www.chefkoch.de/rezepte/447611137007614/Paprika-Carbonara.html")
-    
+#recipe = Recipe('https://www.chefkoch.de/rezepte/785281181805506/Spinat-Cannelloni-al-Forno.html')
+        
 
 '''
 class Nutzer:

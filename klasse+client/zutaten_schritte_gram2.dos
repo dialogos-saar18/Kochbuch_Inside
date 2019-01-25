@@ -935,7 +935,7 @@ dyngram = dyngram + &quot;$einkaufszettel = [schreib mir einen] Einkaufszettel |
 						<att name="script" type="text">
 							<value>gram = &quot;root $input; \n&quot;;
 gram = gram + &quot;$input = $personen {$=$personen} | $zutaten {$=$zutaten};&quot;;
-gram = gram + &quot;$personen = [ich möchte] [für] 1 (Person | Portion) kochen {$=[\&quot;Personen\&quot;,\&quot;&quot;+1+&quot;\&quot;]} | [ich möchte] [für|mit] $anz (Personen| Portionen) [kochen] {$=[\&quot;Personen\&quot;, $anz]} | für $anz {$=[\&quot;Personen\&quot;, $anz]};&quot;;
+gram = gram + &quot;$personen = [ich möchte] [für] 1 [Person | Portion] kochen {$=[\&quot;Personen\&quot;,\&quot;&quot;+1+&quot;\&quot;]} | [ich möchte] [für|mit] $anz [Personen| Portionen] [kochen] {$=[\&quot;Personen\&quot;, $anz]} | für $anz {$=[\&quot;Personen\&quot;, $anz]};&quot;;
 gram = gram + &quot;$anz = 2&quot;;
 for (int i = 3; i&lt;50 ; i++)
 	gram = gram + &quot; | &quot; + i ;
