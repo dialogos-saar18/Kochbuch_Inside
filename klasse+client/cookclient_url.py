@@ -63,69 +63,69 @@ class Main(Client):
         value = list(value)
 
         #Quelltext für Rezept abfragen
-        if str(value[0]).strip('"') == "URL":
+        if value[0].getString().strip('"') == "URL":
             self.gui()
             #recipe = Recipe('https://www.chefkoch.de/rezepte/785281181805506/Spinat-Cannelloni-al-Forno.html')
             #self.recipes=[recipe]
             print("created recipe")            
                     
-        elif str(value[0]).strip('"')=="ingredients":
+        elif value[0].getString().strip('"')=="ingredients":
             if len(value)==1:
                 self.send(self.recipes[0].ingredients())
             else:
-                self.send(self.recipes[int(str(value[-1]))].ingredients())
-        elif str(value[0]).strip('"')=="einheiten":
+                self.send(self.recipes[int(value[-1].getString())].ingredients())
+        elif value[0].getString().strip('"')=="einheiten":
             if len(value)==1:
-                self.send(self.recipes[0].einheiten)
+                self.send(self.recipes[0].einheiten())
             else:
-                self.send(self.recipes[int(str(value[-1]))].einheiten())
-        elif str(value[0]).strip('"')=="titel":
+                self.send(self.recipes[int(value[-1].getString())].einheiten())
+        elif value[0].getString().strip('"')=="titel":
             if len(value)==1:
                 self.send(self.recipes[0].get_title())
             else:
-                self.send(self.recipes[int(str(value[-1]))].get_title())
+                self.send(self.recipes[int(value[-1].getString())].get_title())
 
         #kompletten Einkaufszettel schreiben
-        elif str(value[0]).strip('"')=="einkaufszettel":
+        elif value[0].getString().strip('"')=="einkaufszettel":
             if len(value)==1:
                 self.send(self.recipes[0].einkaufszettel("all"))
             else:
-                self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
+                self.send(self.recipes[int(value[-1].getString())].einkaufszettel())
 
         #einzelne Zutat auf Einkaufszettel
-        elif str(value[0]).strip('"')=="Zettel":
-            self.recipes[0].einkaufszettel(str(value[1]).strip('"'))
+        elif value[0].getString().strip('"')=="Zettel":
+            self.recipes[0].einkaufszettel(value[1].getString().strip('"'))
 
 
-        elif str(value[0]).strip('"')=="exists_zutat":
+        elif value[0]).getString().strip('"')=="exists_zutat":
             #if len(value)==1:
             
-            self.send(self.recipes[0].contains(str(value[1]).strip('"')))
+            self.send(self.recipes[0].contains(value[1].getString().strip('"')))
             #else:
              #   self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
-        elif str(value[0]).strip('"')=="zutaten":
-            self.send(self.recipes[0].get_zutat(str(value[1]).strip('"')))
-        elif str(value[0]).strip('"')=="portionen":
+        elif value[0].getString().strip('"')=="zutaten":
+            self.send(self.recipes[0].get_zutat(value[1].getString().strip('"')))
+        elif value[0].getString().strip('"')=="portionen":
             #if len(value)==1:
-            if str(value[1]).strip('"')== "wert":
+            if value[1].getString().strip('"')== "wert":
                 self.send(str(self.recipes[0].get_portions()))
             #else:
                 #self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
 
         #fürs umrechnen nach Personen
-        elif str(value[0]).strip('"')=="Personen":
-            self.send(self.recipes[0].umrechnen(str(value[1]).strip('"'),u'Personen'))
+        elif value[0].getString().strip('"') == "Personen":
+            self.send(self.recipes[0].umrechnen(value[1].getString().strip('"'),u'Personen'))
         #fürs umrechnen nach Zutaten
-        elif str(value[0]).strip('"')=="Zutaten":
-            z = str(value[1]).strip('"')
-            m = str(value[2]).strip('"')
-            e = str(value[3]).strip('"')
+        elif value[0].getString().strip('"')=="Zutaten":
+            z = value[1].getString().strip('"')
+            m = value[2].getString().strip('"')
+            e = value[3].getString().strip('"')
             self.send(self.recipes[0].umrechnen([m,e],z))
 
         elif len(value)==3:
-            self.send(call(str(value[0]).strip('"'), str(value[1]).strip('"'), self.recipes[int(str(value[-1]))]))
+            self.send(call(value[0].getString().strip('"'), value[1].getString().strip('"'), self.recipes[int(str(value[-1]))]))
         else:
-            self.send(call(str(value[0]).strip('"'), str(value[1]).strip('"'), self.recipes[0]))
+            self.send(call(value[0].getString().strip('"'), value[1].getString().strip('"'), self.recipes[0]))
             
         print "output: " + "done"
 
