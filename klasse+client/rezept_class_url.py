@@ -73,8 +73,8 @@ class Recipe:
                     f.write("\n")
         else:
             with open(datei, "a") as f:
-                o = int(option)
-                zutat = self.zutatenliste[o]
+                #o = int(option)
+                zutat = option
                 f.write(zutat.encode('cp1252'))
                 f.write("\n")
 

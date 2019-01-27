@@ -34,6 +34,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
 			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
 			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
+			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
+			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
+			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
+			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
+			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
+			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
+			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
+			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
+			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
+			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
+			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
+			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
 		</g2p>
 	</plugin>
 	<plugin type="dialogos.plugin.tts">
@@ -501,6 +513,19 @@ zutaten_voc = A</value>
 					<att name="width" type="integer" value="1636"/>
 					<att name="height" type="integer" value="841"/>
 					<groovyFunctions></groovyFunctions>
+					<node uid="2258e102-4f91-4493-8ab7-2ba2131aa91d" class="com.clt.diamant.graph.nodes.InputNode">
+						<graphics x="191" y="433" fill="#ff5a5a"/>
+						<att name="title" type="string" value="Eingabe"/>
+						<att name="output" type="list">
+							<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+								<att name="Text" type="string" value="[&quot;zutaten&quot;,&quot;all&quot;]"/>
+							</att>
+						</att>
+						<att name="reset" type="boolean" value="0"/>
+						<att name="wait" type="boolean" value="0"/>
+						<att name="discard" type="boolean" value="0"/>
+						<att name="ignoreInputHandlers" type="boolean" value="0"/>
+					</node>
 					<node uid="2d841cce-8071-4d96-8103-8769f7aa3b03" class="com.clt.diamant.graph.nodes.StartNode">
 						<graphics x="200" y="10" fill="#9999ff"/>
 						<att name="title" type="string" value="Start"/>
@@ -558,7 +583,7 @@ zutaten_voc = A</value>
 						<att name="ignoreInputHandlers" type="boolean" value="0"/>
 					</node>
 					<node uid="cca27864-097a-40cd-847e-be9311ddbd8c" class="com.clt.diamant.graph.nodes.ReturnNode">
-						<graphics x="180" y="468" fill="#9999ff"/>
+						<graphics x="189" y="498" fill="#9999ff"/>
 						<att name="title" type="string" value="Portionen"/>
 					</node>
 					<node uid="d8a41a27-5c26-41cc-919d-2720d9cc0920" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
@@ -583,11 +608,14 @@ zutaten_voc = A</value>
 						<att name="discard" type="boolean" value="0"/>
 						<att name="ignoreInputHandlers" type="boolean" value="0"/>
 					</node>
+					<edge src="2258e102-4f91-4493-8ab7-2ba2131aa91d" tgt="cca27864-097a-40cd-847e-be9311ddbd8c">
+						<att name="condition" type="string" value="result2"/>
+					</edge>
 					<edge src="2d841cce-8071-4d96-8103-8769f7aa3b03" tgt="d8a41a27-5c26-41cc-919d-2720d9cc0920">
 					</edge>
 					<edge src="52b8d9ec-3e1f-4e93-a5f2-b236edc42d70" tgt="45cece56-fb78-48c3-8b9a-485a6c02ff6b">
 					</edge>
-					<edge src="7e0348bd-eb6e-478f-8498-c635e5467f42" tgt="cca27864-097a-40cd-847e-be9311ddbd8c">
+					<edge src="7e0348bd-eb6e-478f-8498-c635e5467f42" tgt="2258e102-4f91-4493-8ab7-2ba2131aa91d">
 						<att name="condition" type="string" value="einheiten"/>
 					</edge>
 					<edge src="8631d0bd-fdde-449a-956e-ecd51504dd1f" tgt="7e0348bd-eb6e-478f-8498-c635e5467f42">
@@ -907,7 +935,7 @@ dyngram = dyngram + &quot;$input = (ende | fertig | abbrechen | Programm schlie�
 dyngram = dyngram + &quot;$ruhezeit = wie viel Ruhezeit (muss | kann | soll) ich rechnen | was ist die Ruhezeit | wie lange muss es ruhen | [die] Ruhezeit;&quot;;
 dyngram = dyngram + &quot;$arbeitszeit = wie viel Arbeitszeit (muss | kann | soll) ich rechnen | was ist die Arbeitszeit | [die] Arbeitszeit;&quot;;
 dyngram = dyngram + &quot;$kochzeit = wie viel (Kochzeit | Backzeit) (muss | kann | soll) ich rechnen | was ist die (Kochzeit | Backzeit) | wie lange (kocht | backt) es | wie lange muss es (kochen | backen) | [die] Kochzeit | [die] Backzeit;&quot;;
-dyngram = dyngram + &quot;$gesamtzeit = wie lange brauche ich | wie lange dauert das | wie ist die Gesamtzeit | wie viel Zeit muss ich (rechnen | einplanen)&quot;;
+dyngram = dyngram + &quot;$gesamtzeit = wie lange brauche ich | wie lange dauert das | wie ist die Gesamtzeit | wie viel Zeit muss ich (rechnen | einplanen) | [die] Gesamtzeit;&quot;;
 dyngram = dyngram + &quot;$schwierig = wie schwer ist (es | das Rezept) | welchen Schwierigkeitsgrad hat (es | das Rezept)| Schwierigkeitsgrad | (wie | was) ist der Schwierigkeitsgrad | Schwierigkeitsgrad | ist es schwierig ;&quot;;
 dyngram = dyngram + &quot;$kalorien = wie viele Kalorien hat das (Gericht | Essen);&quot;;
 
@@ -977,7 +1005,7 @@ dyngram = dyngram + &quot;$einkaufszettel = [schreib mir einen] Einkaufszettel |
 						<att name="title" type="string" value="Script"/>
 						<att name="script" type="text">
 							<value>gram = &quot;root $input; \n&quot;;
-gram = gram + &quot;$input = $personen {$=$personen} | $zutaten {$=$zutaten};&quot;;
+gram = gram + &quot;$input = $personen {$=$personen} | $zutaten {$=$zutaten} | (ende | abbrechen | gar nicht | nein | nicht umrechnen) {$=\&quot;Ende\&quot;};&quot;;
 gram = gram + &quot;$personen = [ich möchte] [für] 1 [Person | Portion] kochen {$=[\&quot;Personen\&quot;,\&quot;&quot;+1+&quot;\&quot;]} | [ich möchte] [für|mit] $anz [Personen| Portionen] [kochen] {$=[\&quot;Personen\&quot;, $anz]} | für $anz {$=[\&quot;Personen\&quot;, $anz]};&quot;;
 gram = gram + &quot;$anz = 2&quot;;
 for (int i = 3; i&lt;50 ; i++)
@@ -1153,6 +1181,9 @@ gram = gram + &quot;;&quot;;</value>
 					<edge src="c9c102e6-3305-4dd1-ac41-9f6ab9a26e33" tgt="77ef0e95-f417-4732-95ed-23b722ff81a5">
 						<att name="condition" type="string" value="[&quot;Zutaten&quot;, term1, term2]"/>
 					</edge>
+					<edge src="c9c102e6-3305-4dd1-ac41-9f6ab9a26e33" tgt="7e1d1938-28e0-42ec-bdb5-f06f983a857a">
+						<att name="condition" type="string" value="&quot;Ende&quot;"/>
+					</edge>
 					<edge src="d8be8c21-98b1-439e-8257-4b83c99c427b" tgt="92af95d0-f04f-45be-ae92-c82dff4716e7">
 					</edge>
 					<comment x="83" y="133" width="166" height="78" color="#ffff99">Fehler, falls Einheiten nicht zur Zutat passen
@@ -1231,7 +1262,7 @@ Grounding</comment>
 						<att name="title" type="string" value="Ausgabe"/>
 						<att name="output" type="list">
 							<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
-								<att name="Text" type="string" value="[&quot;Zettel&quot;, index]"/>
+								<att name="Text" type="string" value="[&quot;Zettel&quot;, zutat]"/>
 							</att>
 						</att>
 						<att name="reset" type="boolean" value="0"/>
@@ -1604,7 +1635,7 @@ aber wie kürzen?</comment>
 		<edge src="c1a42ce1-d3f3-45d6-8946-ee67cc5e1e3b" tgt="0f1647c3-aa36-4508-a245-efb4f2192b40">
 			<att name="condition" type="string" value="result"/>
 		</edge>
-		<edge src="cbdbbc96-088a-4de5-a69c-67f30cbd7234">
+		<edge src="cbdbbc96-088a-4de5-a69c-67f30cbd7234" tgt="382bb26e-097c-4f5d-b006-d266a1d84d7b">
 			<att name="condition" type="string" value="Return"/>
 		</edge>
 		<edge src="d004246c-c31e-42d6-99b8-da88dd0f0581" tgt="6b334da0-caf7-42e2-aef3-2c8549a0ab08">
@@ -1635,5 +1666,6 @@ aber wie kürzen?</comment>
 		</edge>
 		<comment x="468" y="99" width="208" height="99" color="#cc0000">Achtung: 
 Hier muss der richtige Pfad eingegeben werden!</comment>
+		<comment x="1226" y="55" width="132" height="87" color="#ffff99">index Variable noch benötigt?</comment>
 	</graph>
 </wizard>
