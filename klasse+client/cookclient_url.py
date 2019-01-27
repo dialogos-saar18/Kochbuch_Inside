@@ -97,7 +97,7 @@ class Main(Client):
             self.recipes[0].einkaufszettel(value[1].getString().strip('"'))
 
 
-        elif value[0]).getString().strip('"')=="exists_zutat":
+        elif value[0].getString().strip('"')=="exists_zutat":
             #if len(value)==1:
             
             self.send(self.recipes[0].contains(value[1].getString().strip('"')))
