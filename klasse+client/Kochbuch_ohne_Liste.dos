@@ -32,12 +32,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 		<g2p language="de_DE">
 			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
 			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
 		</g2p>
 	</plugin>
 	<plugin type="dialogos.plugin.tts">
@@ -312,6 +306,16 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="prompt_type" type="string" value="expression"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
+		<node uid="4693fa4e-646e-404a-93e1-9b83908cb7e8" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
+			<graphics x="1169" y="223" fill="#00b200"/>
+			<att name="title" type="string" value="Sprachsynthese"/>
+			<att name="prompt" type="text">
+				<value>Mit Ausnahme deines Einkaufszettels werden deine Daten nicht gespeichert.
+Möchtest du den Dialog wirklich abbrechen?</value>
+			</att>
+			<att name="prompt_type" type="string" value="text"/>
+			<att name="wait" type="boolean" value="1"/>
+		</node>
 		<node uid="48791351-f2f2-4aed-ad81-cec3b17ad87c" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
 			<graphics x="1219" y="805" fill="#00b200"/>
 			<att name="title" type="string" value="Sprachsynthese"/>
@@ -443,7 +447,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="title" type="string" value="Eigenschaft"/>
 		</node>
 		<node uid="5d3c33ec-9717-4a49-a853-e66d14a7c36b" class="com.clt.diamant.graph.nodes.EndNode">
-			<graphics x="1241" y="288" fill="#9999ff"/>
+			<graphics x="1356" y="288" fill="#9999ff"/>
 			<att name="title" type="string" value="Ende"/>
 		</node>
 		<node uid="617e7007-78ea-48e0-9df0-3f126dbd3ce6" class="com.clt.diamant.graph.nodes.SetVariableNode">
@@ -484,6 +488,12 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<att name="wait" type="boolean" value="0"/>
 			<att name="discard" type="boolean" value="0"/>
 			<att name="ignoreInputHandlers" type="boolean" value="0"/>
+		</node>
+		<node uid="6d36c812-3aaa-4725-9256-c0dc5058b400" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">
+			<graphics x="1170" y="295" fill="#b20000"/>
+			<att name="title" type="string" value="Spracherkenner"/>
+			<att name="language" type="string" value="Deutsch"/>
+			<att name="grammar" type="string" value="9a5dcd6a-8229-4015-b7ba-cd13e10b853f"/>
 		</node>
 		<node uid="707df6cf-7eb4-4dec-b198-c15392f35f9c" class="com.clt.diamant.graph.nodes.GraphNode">
 			<graphics x="391" y="377" fill="#ffc800"/>
@@ -911,7 +921,7 @@ dyngram = dyngram + &quot;$term_a = nächste {$=\&quot;anleitung\&quot;,\&quot;n
 			</att>
 			<att name="script" type="text">
 				<value>dyngram = &quot;root $input; \n&quot;;
-dyngram = dyngram + &quot;$input = (ende | fertig | abbrechen | Programm schließen) {$=\&quot;ende\&quot;} | (wiederholen | nochmal) {$=\&quot;wiederholen\&quot;} | $ruhezeit {$=[\&quot;eigenschaft\&quot;,\&quot;Ruhezeit\&quot;]} | $arbeitszeit {$=[\&quot;eigenschaft\&quot;,\&quot;Arbeitszeit\&quot;]} | $kochzeit {$=[\&quot;eigenschaft\&quot;,\&quot;Koch-/Backzeit\&quot;]} |$gesamtzeit {$=[\&quot;eigenschaft\&quot;, \&quot;Gesamtzeit\&quot;]} | $schwierig {$=[\&quot;eigenschaft\&quot;,\&quot;Schwierigkeitsgrad\&quot;]} | $kalorien {$=[\&quot;eigenschaft\&quot;,\&quot;Kalorien\&quot;]} | $anleitung {$=$anleitung} | $zutaten_menge {$=$zutaten_menge} | $zutaten_exist {$=$zutaten_exist} | $zutaten {$=\&quot;zutaten\&quot;} | $anleitung_ganz {$=\&quot;anleitung\&quot;} | $einkaufszettel {$=\&quot;einkaufszettel\&quot;};&quot;;
+dyngram = dyngram + &quot;$input = (ende | fertig | abbrechen | Programm schließen | schluss | beenden) {$=\&quot;ende\&quot;} | (wiederholen | nochmal | wiederhol das bitte) {$=\&quot;wiederholen\&quot;} | $ruhezeit {$=[\&quot;eigenschaft\&quot;,\&quot;Ruhezeit\&quot;]} | $arbeitszeit {$=[\&quot;eigenschaft\&quot;,\&quot;Arbeitszeit\&quot;]} | $kochzeit {$=[\&quot;eigenschaft\&quot;,\&quot;Koch-/Backzeit\&quot;]} |$gesamtzeit {$=[\&quot;eigenschaft\&quot;, \&quot;Gesamtzeit\&quot;]} | $schwierig {$=[\&quot;eigenschaft\&quot;,\&quot;Schwierigkeitsgrad\&quot;]} | $kalorien {$=[\&quot;eigenschaft\&quot;,\&quot;Kalorien\&quot;]} | $anleitung {$=$anleitung} | $zutaten_menge {$=$zutaten_menge} | $zutaten_exist {$=$zutaten_exist} | $zutaten {$=\&quot;zutaten\&quot;} | $anleitung_ganz {$=\&quot;anleitung\&quot;} | $einkaufszettel {$=\&quot;einkaufszettel\&quot;};&quot;;
 dyngram = dyngram + &quot;$ruhezeit = wie viel Ruhezeit (muss | kann | soll) ich rechnen | was ist die Ruhezeit | wie lange muss es ruhen | [die] Ruhezeit;&quot;;
 dyngram = dyngram + &quot;$arbeitszeit = wie viel Arbeitszeit (muss | kann | soll) ich rechnen | was ist die Arbeitszeit | [die] Arbeitszeit;&quot;;
 dyngram = dyngram + &quot;$kochzeit = wie viel (Kochzeit | Backzeit) (muss | kann | soll) ich rechnen | was ist die (Kochzeit | Backzeit) | wie lange (kocht | backt) es | wie lange muss es (kochen | backen) | [die] Kochzeit | [die] Backzeit;&quot;;
@@ -923,7 +933,7 @@ dyngram = dyngram + &quot;$anleitung = $next {$=[\&quot;anleitung\&quot;,\&quot;
 dyngram = dyngram + &quot;$next = was ist der nächste Schritt | nächster Schritt | weiter ;&quot;;
 dyngram = dyngram + &quot;$laststep = was ist der letzte Schritt | letzter Schritt | gehe ans Ende | was muss ich als letztes machen;&quot;;
 dyngram = dyngram + &quot;$prev = was war der (letzte | vorherige) Schritt;&quot;;
-dyngram = dyngram + &quot;$first = erster Schritt | von vorne | was ist der erste Schritt | wie geht es los;&quot;;
+dyngram = dyngram + &quot;$first = erster Schritt | von vorne | was ist der erste Schritt | wie geht es los | womit kann ich anfangen;&quot;;
 
 dyngram = dyngram + &quot;$rep = was ist der erste Schritt | [Wiederhole (den | diesen) Schritt] nochmal;&quot;;
 
@@ -935,9 +945,9 @@ dyngram = dyngram + &quot;$term_z = &quot; + get(ingredients,0);
 for (int i = 1; i&lt;length(ingredients); i++)
   dyngram = dyngram + &quot; | &quot; + get(ingredients,i);
 dyngram = dyngram + &quot;;&quot;;
-dyngram = dyngram + &quot;$zutaten = [sag mir | gib mir] (die Liste | alle Zutaten | die Zutatenliste) | [die] Zutaten | [die] Zutatenliste | was brauche ich | Zutaten vorlesen;&quot;;
+dyngram = dyngram + &quot;$zutaten = [sag mir | gib mir] (die Liste | alle Zutaten | die Zutatenliste) | [die] Zutaten | [die] Zutatenliste | was brauche ich | Zutaten vorlesen | welche Zutaten brauche ich;&quot;;
 dyngram = dyngram + &quot;$anleitung_ganz = [sag mir | gib mir] ([alle] Schritte | [die] (komplette | ganze) Anleitung) | was muss ich tun | Anleitung | wie geht das Rezept | wie sind die Schritte;&quot;;
-dyngram = dyngram + &quot;$einkaufszettel = [schreib mir einen] Einkaufszettel | [einen] Einkaufszettel schreiben | [eine] Einkaufsliste schreiben;&quot;;</value>
+dyngram = dyngram + &quot;$einkaufszettel = [schreib mir einen] Einkaufszettel | [einen] Einkaufszettel schreiben | [eine] Einkaufsliste schreiben | [schreib mir eine] Einkaufsliste ;&quot;;</value>
 			</att>
 		</node>
 		<node uid="d6a638f2-589a-464a-ab79-b03f7b2d749f" class="com.clt.diamant.graph.nodes.GotoNode">
@@ -1197,6 +1207,15 @@ Grounding</comment>
 					<att name="width" type="integer" value="1636"/>
 					<att name="height" type="integer" value="841"/>
 					<groovyFunctions></groovyFunctions>
+					<grammar id="0cca7ae3-6bec-4d80-920a-c0928863ba72">
+						<name>Einkaufszettel</name>
+						<value>root $input;
+ $input = $einkaufszettel {$=einkaufszettel} | $weiter {$=weiter} | $zurück {$=zurück} | $ende {$=ende};
+$einkaufszettel = [schreib die Zutat] auf den Einkaufszettel | Einkaufszettel | Einkaufsliste | [speichere das | setze das] auf (den Zettel | den Einkaufszettel | die Liste | die Einkaufsliste) | merk (es dir | dir das) | aufschreiben | schreib es auf;
+$weiter = weiter | nächste [Zutat] | fahre fort | nächstes | fortfahren;
+$zurück = nochmal [hören] | was | wie [viel] | wiederholen | zurück;
+$ende = [Zutatenliste] abbrechen | Ende;</value>
+					</grammar>
 					<node uid="01388d5a-fc36-4c8b-a402-b32f789df8b8" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
 						<graphics x="272" y="694" fill="#00b200"/>
 						<att name="title" type="string" value="Sprachsynthese"/>
@@ -1303,6 +1322,7 @@ Grounding</comment>
 						<graphics x="516" y="778" fill="#b20000"/>
 						<att name="title" type="string" value="Spracherkenner"/>
 						<att name="language" type="string" value="Deutsch"/>
+						<att name="grammar" type="string" value="0cca7ae3-6bec-4d80-920a-c0928863ba72"/>
 					</node>
 					<node uid="935432aa-1185-4e88-9ed8-0e34dde4e5e3" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
 						<graphics x="488" y="502" fill="#00b200"/>
@@ -1399,16 +1419,16 @@ Grounding</comment>
 					<edge src="5e4093a6-7731-421b-a3fa-95d0ef5cb058" tgt="f642fd85-fa61-4713-a0ca-c7dfc28700a6">
 					</edge>
 					<edge src="8692a7a3-69f2-4b2b-8951-941a253b7996" tgt="257b966f-2bfa-42e7-96b3-d85294374ea2">
-						<att name="condition" type="string" value="[schreib die Zutat] auf den Einkaufszettel | Einkaufszettel | Einkaufsliste | schreiben"/>
+						<att name="condition" type="string" value="&quot;einkaufszettel&quot;"/>
 					</edge>
 					<edge src="8692a7a3-69f2-4b2b-8951-941a253b7996" tgt="f642fd85-fa61-4713-a0ca-c7dfc28700a6">
-						<att name="condition" type="string" value="weiter | nächste [Zutat] | ok"/>
+						<att name="condition" type="string" value="&quot;weiter&quot;"/>
 					</edge>
 					<edge src="8692a7a3-69f2-4b2b-8951-941a253b7996" tgt="06660d55-7e92-4eac-8874-006c86052d3a">
-						<att name="condition" type="string" value="nochmal [hören] | was | wie [viel] | wiederholen"/>
+						<att name="condition" type="string" value="&quot;zurück&quot;"/>
 					</edge>
 					<edge src="8692a7a3-69f2-4b2b-8951-941a253b7996" tgt="999b841d-6d23-4a90-9606-b61b8a30cbf4">
-						<att name="condition" type="string" value="[Zutatenliste] abbrechen | Ende "/>
+						<att name="condition" type="string" value="&quot;ende&quot;"/>
 					</edge>
 					<edge src="935432aa-1185-4e88-9ed8-0e34dde4e5e3" tgt="2dba03b7-8863-4510-94d6-51faea35374b">
 					</edge>
@@ -1514,6 +1534,8 @@ aber wie kürzen?</comment>
 		</edge>
 		<edge src="37233152-ee46-4cd0-a4fa-22d283343513" tgt="a16ebd1d-5845-48b6-bd78-071999eb704c">
 		</edge>
+		<edge src="4693fa4e-646e-404a-93e1-9b83908cb7e8" tgt="6d36c812-3aaa-4725-9256-c0dc5058b400">
+		</edge>
 		<edge src="48791351-f2f2-4aed-ad81-cec3b17ad87c" tgt="308e062e-f331-400a-ba5d-bf38e5d16e0e">
 		</edge>
 		<edge src="4d021f03-04b9-471c-94b3-b4866f513544" tgt="37233152-ee46-4cd0-a4fa-22d283343513">
@@ -1552,11 +1574,17 @@ aber wie kürzen?</comment>
 		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="5297279c-2f32-4307-bcf5-debc04a15e56">
 			<att name="condition" type="string" value="&quot;wiederholen&quot;"/>
 		</edge>
-		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
+		<edge src="66370e54-87d3-472e-9710-3dcfaebe346b" tgt="4693fa4e-646e-404a-93e1-9b83908cb7e8">
 			<att name="condition" type="string" value="&quot;ende&quot; "/>
 		</edge>
 		<edge src="6b334da0-caf7-42e2-aef3-2c8549a0ab08" tgt="48791351-f2f2-4aed-ad81-cec3b17ad87c">
 			<att name="condition" type="string" value="result"/>
+		</edge>
+		<edge src="6d36c812-3aaa-4725-9256-c0dc5058b400" tgt="66370e54-87d3-472e-9710-3dcfaebe346b">
+			<att name="condition" type="string" value="&quot;nein&quot;"/>
+		</edge>
+		<edge src="6d36c812-3aaa-4725-9256-c0dc5058b400" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
+			<att name="condition" type="string" value="&quot;ja&quot;"/>
 		</edge>
 		<edge src="707df6cf-7eb4-4dec-b198-c15392f35f9c" tgt="d6849f9b-ad6c-47b8-9212-f6f0655d0379">
 			<att name="condition" type="string" value="Return"/>
