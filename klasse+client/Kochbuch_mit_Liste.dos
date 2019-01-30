@@ -32,23 +32,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 		<g2p language="de_DE">
 			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
 			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
 		</g2p>
 	</plugin>
 	<plugin type="dialogos.plugin.tts">
+	</plugin>
+	<plugin type="dialogos.plugin.lego">
 	</plugin>
 	<plugin type="dialogos.plugin.sqlite">
 		<att name="dbURL" type="string" value="jdbc:sqlite:C:\Users\TT\DialogOS\test.db"/>
@@ -324,7 +312,8 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<graphics x="562" y="228" fill="#99ffff"/>
 			<att name="title" type="string" value="Zutatenwörterbuch einlesen"/>
 			<att name="script" type="text">
-				<value>java.util.ArrayList fileContents = new File('C:/Users/Katharina/Documents/Studium/Dialogsysteme/Kochbuch/Kochbuch-master/klasse+client/Zutatenliste_unicode.txt').readLines('unicode')
+				<value>//java.util.ArrayList fileContents = new File('C:/Users/Katharina/Documents/Studium/Dialogsysteme/Kochbuch/Kochbuch-master/klasse+client/Zutatenliste_unicode.txt').readLines('unicode')
+java.util.ArrayList fileContents = new File('C:/Users/TT/Documents/GitHub/Kochbuch/klasse+client/Zutatenliste_unicode.txt').readLines('unicode')
 A=[]
 fileContents.each { String line -&gt;
   if (line != &quot;&quot;){A.add('&quot;' + line.trim() + '&quot;')} else {}
