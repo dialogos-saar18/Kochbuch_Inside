@@ -72,6 +72,13 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<value>root $input;
  $input = ;</value>
 		</grammar>
+		<grammar id="7ea97f36-2f41-4a2e-ba7f-4e363f44836e">
+			<name>ja/nein/umrechnen</name>
+			<value>root $input;
+$input = $ja {$ = &quot;ja&quot;}| $nein {$ = &quot;nein&quot;};
+$ja = ( ja | jawohl ) [ bitte | gerne | genau] | richtig | korrekt | ja ich möchte sie umrechnen | ändern | umrechnen;
+$nein = ( nein [danke] | ne | falsch ) | nein ich möchte [es | sie] nicht umrechnen;</value>
+		</grammar>
 		<variable uid="616a7294-ca38-4923-a7fc-b71a822d01de">
 			<name>result</name>
 			<type>string</type>
@@ -187,7 +194,7 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			<export/>
 		</variable>
 		<node uid="0324b06f-14e1-4af0-a1b7-949cfd3a5c4f" class="com.clt.diamant.graph.nodes.LabelNode">
-			<graphics x="1182" y="534" fill="#4c4c80"/>
+			<graphics x="1203" y="536" fill="#4c4c80"/>
 			<att name="title" type="string" value="Zutaten"/>
 		</node>
 		<node uid="06c8ca8e-867a-4507-9f60-85aaf09ab289" class="com.clt.diamant.graph.nodes.EndNode">
@@ -294,6 +301,17 @@ $nein = ( nein [danke] | ne | falsch );</value>
 			</att>
 			<att name="prompt_type" type="string" value="expression"/>
 			<att name="wait" type="boolean" value="1"/>
+		</node>
+		<node uid="453b685a-ed46-400e-9878-e63afe3a09dc" class="com.clt.diamant.graph.nodes.OutputNode">
+			<graphics x="1391" y="313" fill="#00cc99"/>
+			<att name="title" type="string" value="Ausgabe"/>
+			<att name="output" type="list">
+				<att name="16329b47-0236-44d6-8d0a-808a9d0da781" type="list">
+					<att name="Text" type="string" value="[&quot;ende&quot;]"/>
+				</att>
+			</att>
+			<att name="reset" type="boolean" value="0"/>
+			<att name="wait" type="boolean" value="0"/>
 		</node>
 		<node uid="4693fa4e-646e-404a-93e1-9b83908cb7e8" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
 			<graphics x="1214" y="196" fill="#00b200"/>
@@ -432,11 +450,11 @@ Möchtest du den Dialog wirklich abbrechen?</value>
 			<att name="label_uid" type="string" value="bb90d713-4708-440b-9277-505a4897b5d9"/>
 		</node>
 		<node uid="5cf72c09-a8ce-49b4-afc2-f84ced7592f2" class="com.clt.diamant.graph.nodes.LabelNode">
-			<graphics x="1349" y="533" fill="#4c4c80"/>
+			<graphics x="1347" y="533" fill="#4c4c80"/>
 			<att name="title" type="string" value="Eigenschaft"/>
 		</node>
 		<node uid="5d3c33ec-9717-4a49-a853-e66d14a7c36b" class="com.clt.diamant.graph.nodes.EndNode">
-			<graphics x="1401" y="261" fill="#9999ff"/>
+			<graphics x="1503" y="325" fill="#9999ff"/>
 			<att name="title" type="string" value="Ende"/>
 		</node>
 		<node uid="617e7007-78ea-48e0-9df0-3f126dbd3ce6" class="com.clt.diamant.graph.nodes.SetVariableNode">
@@ -665,7 +683,7 @@ Anleitung, Zutaten, Einkaufszettel oder weitere Informationen.</value>
 					<edge src="ac693a05-4248-4fc2-ab39-ae1e5d049151" tgt="a8cf6a07-b66d-4500-8dbf-542507c1e362">
 					</edge>
 					<edge src="acb39183-36af-41c8-b65d-0d209bfd4b5a" tgt="ac693a05-4248-4fc2-ab39-ae1e5d049151">
-						<att name="condition" type="string" value="[direkt] loslegen | anfangen | nein "/>
+						<att name="condition" type="string" value="[direkt] (loslegen |anfangen) | nein | ich möchte [direkt] (loslegen | anfangen) | [ich benötige] keine Hilfe"/>
 					</edge>
 					<edge src="acb39183-36af-41c8-b65d-0d209bfd4b5a" tgt="71550357-47e7-4df8-a96c-f37081948d07">
 						<att name="condition" type="string" value="Hilfe | wie kann ich (es | das Kochbuch) verwenden | ja"/>
@@ -850,7 +868,7 @@ Anleitung, Zutaten, Einkaufszettel oder weitere Informationen.</value>
 			<att name="label_uid" type="string" value="f68c2632-ac0e-4ebe-8564-e870523f337d"/>
 		</node>
 		<node uid="9296bee1-8a4d-43d8-91ec-46d9730d2f81" class="com.clt.diamant.graph.nodes.LabelNode">
-			<graphics x="1046" y="531" fill="#4c4c80"/>
+			<graphics x="1059" y="531" fill="#4c4c80"/>
 			<att name="title" type="string" value="Schritt"/>
 		</node>
 		<node uid="9b969592-57c0-4f52-b56c-cd0a48371689" class="com.clt.diamant.graph.nodes.LabelNode">
@@ -885,7 +903,7 @@ Anleitung, Zutaten, Einkaufszettel oder weitere Informationen.</value>
 			<graphics x="162" y="475" fill="#b20000"/>
 			<att name="title" type="string" value="Speech recognizer"/>
 			<att name="language" type="string" value="Deutsch"/>
-			<att name="grammar" type="string" value="9a5dcd6a-8229-4015-b7ba-cd13e10b853f"/>
+			<att name="grammar" type="string" value="7ea97f36-2f41-4a2e-ba7f-4e363f44836e"/>
 		</node>
 		<node uid="a7cd5c91-c640-4b1f-a00a-19b817eaad93" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
 			<graphics x="166" y="212" fill="#00b200"/>
@@ -1649,6 +1667,8 @@ aber wie kürzen?</comment>
 		</edge>
 		<edge src="37233152-ee46-4cd0-a4fa-22d283343513" tgt="a16ebd1d-5845-48b6-bd78-071999eb704c">
 		</edge>
+		<edge src="453b685a-ed46-400e-9878-e63afe3a09dc" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
+		</edge>
 		<edge src="4693fa4e-646e-404a-93e1-9b83908cb7e8" tgt="6d36c812-3aaa-4725-9256-c0dc5058b400">
 		</edge>
 		<edge src="48791351-f2f2-4aed-ad81-cec3b17ad87c" tgt="308e062e-f331-400a-ba5d-bf38e5d16e0e">
@@ -1703,7 +1723,7 @@ aber wie kürzen?</comment>
 		<edge src="6d36c812-3aaa-4725-9256-c0dc5058b400" tgt="66370e54-87d3-472e-9710-3dcfaebe346b">
 			<att name="condition" type="string" value="&quot;nein&quot;"/>
 		</edge>
-		<edge src="6d36c812-3aaa-4725-9256-c0dc5058b400" tgt="5d3c33ec-9717-4a49-a853-e66d14a7c36b">
+		<edge src="6d36c812-3aaa-4725-9256-c0dc5058b400" tgt="453b685a-ed46-400e-9878-e63afe3a09dc">
 			<att name="condition" type="string" value="&quot;ja&quot;"/>
 		</edge>
 		<edge src="707df6cf-7eb4-4dec-b198-c15392f35f9c" tgt="d6849f9b-ad6c-47b8-9212-f6f0655d0379">

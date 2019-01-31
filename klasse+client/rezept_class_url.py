@@ -216,6 +216,7 @@ class Recipe:
         for string in zubereitung.stripped_strings:
             string = str(i) + u'. ' + string
             schritte.append(string)
+            i = i+ 1
         return schritte
 
     # return dict: {u'Zwiebel(n)': {u'menge': 1, u'einheit': u'm.-gro\xdfe'}, u'Zucker':...}

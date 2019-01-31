@@ -128,6 +128,9 @@ class Main(Client):
             e = value[3].getString().strip('"')
             self.send(self.recipes[0].umrechnen([m,e],z))
 
+        elif value[0].getString().strip('"') == "ende":
+            self.recipes[0].schritt = 0
+
         elif len(value)==3:
             self.send(call(value[0].getString().strip('"'), value[1].getString().strip('"'), self.recipes[int(str(value[-1]))]))
         else:
