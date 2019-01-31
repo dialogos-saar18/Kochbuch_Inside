@@ -32,10 +32,7 @@ def call(category, term, recipe):
 
 class Main(Client):
     def __init__(self):
-        #pass
-        recipe = Recipe('https://www.chefkoch.de/rezepte/785281181805506/Spinat-Cannelloni-al-Forno.html')
-        self.recipes=[recipe]
-    
+        pass    
 
     def stateChanged(self, cs):
         print "new state: " + str(cs)
@@ -153,11 +150,10 @@ class Main(Client):
         frame.setLayout(None)
         
         def testact(event):
-            print("hi")
             frame.setVisible(False)
             url = field.getText()
-            #recipe = Recipe(url)
-            #self.recipes=[recipe]
+            recipe = Recipe(url)
+            self.recipes=[recipe]
             self.send("continue")
 
          

@@ -7,8 +7,30 @@ import re
 class Recipe:
     
     def __init__(self, url):
-        quellcode = urllib2.urlopen(url)
-        html = quellcode.read()
+        # Liest den kompletten Inhalt des gegebenen Readers
+        # und speichert ihn in einem String ab.
+        def read_all(reader):
+            arrsize = 8*1024
+            arr = zeros('c', arrsize)
+            buffer = StringBuilder()
+            numCharsRead = 0
+
+            while numCharsRead != -1:
+                numCharsRead = reader.read(arr, 0, arrsize)
+                if numCharsRead != -1:
+                    buffer.append(arr, 0, numCharsRead);
+
+            return buffer.toString()
+
+
+        url = URL(url)
+        urlCon = url.openConnection()
+        reader = InputStreamReader(urlCon.getInputStream())
+
+        html = read_all(reader)
+
+        reader.close()
+
         soup = bs(html,features="html.parser")
         
         self.title = self.init_titel(soup)
