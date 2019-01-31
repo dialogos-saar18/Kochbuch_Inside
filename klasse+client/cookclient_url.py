@@ -17,11 +17,11 @@ from java.lang import Class
 
 def call(category, term, recipe):
     #ruft die Methoden auf, die die Informationen auslesen
-    if category == "anleitung":#works but should be expanded
-        return(recipe.get_schritt(term)) # term one of {"first","next","repeat","all","previous", "last"}
-    elif category == "zutaten":#works
+    if category == "anleitung": # gibt die komplette Anleitung oder einen Schritt zurück
+        return(recipe.get_schritt(term)) # term Element von {"first","next","repeat","all","previous", "last"}
+    elif category == "zutaten": # gibt alle Zutaten oder einzelne Zutaten zurück
         return(recipe.get_zutat(term)) 
-    elif category == "eigenschaft":#works
+    elif category == "eigenschaft":# auslesen der Eigenschaften wie Arbeitszeit, Schwierigkeitsgrad etc.
         return(recipe.get_property(term))
     else:#works
         print("Fehler in call; Kategorie " + category + " ist ungültig")
@@ -68,17 +68,20 @@ class Main(Client):
             #recipe = Recipe('https://www.chefkoch.de/rezepte/785281181805506/Spinat-Cannelloni-al-Forno.html')
             #self.recipes=[recipe]
             print("created recipe")            
-                    
+
+        #erstellt Liste mit allen Zutaten 
         elif value[0].getString().strip('"')=="ingredients":
             if len(value)==1:
                 self.send(self.recipes[0].ingredients())
             else:
                 self.send(self.recipes[int(value[-1].getString())].ingredients())
+        #erstellt Liste mit allen Einheiten
         elif value[0].getString().strip('"')=="einheiten":
             if len(value)==1:
                 self.send(self.recipes[0].einheiten())
             else:
                 self.send(self.recipes[int(value[-1].getString())].einheiten())
+        #fragt den Titel des Rezepts ab
         elif value[0].getString().strip('"')=="titel":
             if len(value)==1:
                 self.send(self.recipes[0].get_title())
@@ -96,15 +99,18 @@ class Main(Client):
         elif value[0].getString().strip('"')=="Zettel":
             self.recipes[0].einkaufszettel(value[1].getString().strip('"'))
 
-
+        #gibt Antwort zurück, ob eine Zutat gebraucht wird
         elif value[0].getString().strip('"')=="exists_zutat":
             #if len(value)==1:
             
             self.send(self.recipes[0].contains(value[1].getString().strip('"')))
             #else:
              #   self.send(self.recipes[int(str(value[-1]))].einkaufszettel())
+
+        #
         elif value[0].getString().strip('"')=="zutaten":
             self.send(self.recipes[0].get_zutat(value[1].getString().strip('"')))
+        #gibt zurück, für wie viele Personen das Rezept gebraucht wird
         elif value[0].getString().strip('"')=="portionen":
             #if len(value)==1:
             if value[1].getString().strip('"')== "wert":

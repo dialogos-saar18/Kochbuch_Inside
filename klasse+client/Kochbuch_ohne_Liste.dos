@@ -30,12 +30,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 	<plugin type="dialogos.plugin.sphinx">
 		<att name="language" type="string" value="de_DE"/>
 		<g2p language="de_DE">
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
-			<entry g="Einkaufsliste" p="aI n k aU f s t s l I+ s t @"/>
-			<entry g="Einkaufszettel" p="aI n k aU f s t s t s E+ t @ l"/>
+			<entry g="drölf" p="d r 9 l f"/>
+			<entry g="Einkaufszettel" p="aI n k aU f s t s e: t @ l"/>
+			<entry g="Einkaufslite" p="aI n k aU f s l i: s t @"/>
 		</g2p>
 	</plugin>
 	<plugin type="dialogos.plugin.tts">
@@ -47,24 +44,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ic
 		<att name="width" type="integer" value="1691"/>
 		<att name="height" type="integer" value="1200"/>
 		<groovyFunctions></groovyFunctions>
-		<grammar id="0bc38a8e-cae8-4b4a-84fa-9be0bfafb1d1">
-			<name>zutatenschritte</name>
-			<value>root $input;
- $input = $zutaten {$=[&quot;zutaten&quot;, $term_z]}
-		| $eigenschaft 
-		| $anleitung;
-
-$zutaten = Wie viel $term_z brauche ich ;
-$term_z = milch | zucker;
-
-$eigenschaft = Wie lange (braucht | dauert) {$=[&quot;eigenschaft&quot;,&quot;zubereitungszeit&quot;]} 
-			| (Wie schwer ist | Welchen Schwierigkeitsgrad) {$=[&quot;eigenschaft&quot;,&quot;schwierigkeitsgrad&quot;]};
-
-$anleitung = Was ist der $term_a Schritt 
-			| $term_a Schritt
-			| (Wiederhole den Schritt | [diesen Schritt] nochmal {$=&quot;anleitung&quot;,&quot;repeat&quot;});
-$term_a = nächste {$=&quot;anleitung&quot;,&quot;next&quot;} | letzte {$=&quot;anleitung&quot;,&quot;previous&quot;};</value>
-		</grammar>
 		<grammar id="ef0d4498-5c51-46da-8237-16a99f071f91">
 			<name>mustertest</name>
 			<value>root $input;
@@ -528,7 +507,7 @@ Möchtest du den Dialog wirklich abbrechen?</value>
 						<graphics x="401" y="591" fill="#00b200"/>
 						<att name="title" type="string" value="anleitung"/>
 						<att name="prompt" type="text">
-							<value>Du kannst dir die komplette Anleitung in einem vorlesen lassen oder die einzelnen Absätze. Wenn dir die Absätze einzeln vorgelesen werden, kannst du nach jedem Schritt entscheiden, ob du den Schritt nocheinmal hören möchtest oder den nächsten Schritt vorgelesen bekommen willst. </value>
+							<value>Du kannst dir die komplette Anleitung in einem vorlesen lassen oder die einzelnen Absätze. Wenn dir die Absätze einzeln vorgelesen werden, kannst du nach jedem Schritt entscheiden, ob du den Schritt nocheinmal hören möchtest oder den nächsten Schritt vorgelesen bekommen willst oder gerne auf den vorherigen Schritt zurück gehen würdest. Außerdem hast du jederzeit die Möglichkeit auf den ersten oder den letzten Schritt zu springen. </value>
 						</att>
 						<att name="prompt_type" type="string" value="text"/>
 						<att name="wait" type="boolean" value="1"/>
@@ -547,10 +526,11 @@ Möchtest du den Dialog wirklich abbrechen?</value>
 						<att name="title" type="string" value="Start"/>
 					</node>
 					<node uid="6832dca4-7a24-44ee-aa2c-b43042c52350" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-						<graphics x="652" y="590" fill="#00b200"/>
+						<graphics x="654" y="587" fill="#00b200"/>
 						<att name="title" type="string" value="einkaufszettel"/>
 						<att name="prompt" type="text">
-							<value>Du kannst dir einen Einkaufszettel schreiben lassen, auf dem alle Zutaten mit den umgerechneten Mengenangaben aufgelistet werden.</value>
+							<value>Du kannst dir einen Einkaufszettel schreiben lassen, auf dem alle Zutaten mit den umgerechneten Mengenangaben aufgelistet werden.
+Außerdem kannst du, wenn du dir die Zutaten einzeln vorlesen lässt auch einzelne Zutaten auf deinen Einkaufszettel schreiben lassen.</value>
 						</att>
 						<att name="prompt_type" type="string" value="text"/>
 						<att name="wait" type="boolean" value="1"/>
@@ -558,6 +538,9 @@ Möchtest du den Dialog wirklich abbrechen?</value>
 					<node uid="6e61527c-b4bb-4d99-9ca9-3c67e09aa51b" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
 						<graphics x="531" y="592" fill="#00b200"/>
 						<att name="title" type="string" value="zutaten"/>
+						<att name="prompt" type="text">
+							<value>Du hast die Möglichkeit, dir die Zutaten vorlesen zu lassen. Wenn du dich für das Vorlesen der Zutaenliste entscheidest hast du danach die Möglichkeit, zu entscheiden, ob du sie einzeln oder auf einmal hören möchtest. </value>
+						</att>
 						<att name="prompt_type" type="string" value="text"/>
 						<att name="wait" type="boolean" value="1"/>
 					</node>
@@ -615,7 +598,7 @@ Möchtest du den Dialog wirklich abbrechen?</value>
 						<att name="language" type="string" value="Deutsch"/>
 					</node>
 					<node uid="b1da1224-c4ec-4241-8e45-7b52662f9e63" class="de.saar.coli.dialogos.marytts.plugin.TTSNode">
-						<graphics x="785" y="590" fill="#00b200"/>
+						<graphics x="787" y="587" fill="#00b200"/>
 						<att name="title" type="string" value="infos"/>
 						<att name="prompt" type="text">
 							<value>Du kannst, sofern im Rezept vorhanden, nach den Kalorien, dem Schwierigkeitsgrad, der Arbeitszeit, der Zubereitungszeit und der Koch beziehungsweise der Backzeit fragen.</value>
@@ -932,12 +915,9 @@ Anleitung, Zutaten, Einkaufszettel oder weitere Informationen.</value>
 			<graphics x="441" y="992" fill="#00b200"/>
 			<att name="title" type="string" value="Speech synthesis"/>
 			<att name="prompt" type="text">
-				<value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;maryxml xmlns=&quot;http://mary.dfki.de/2002/MaryXML&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; version=&quot;0.4&quot; xml:lang=&quot;de&quot;&gt;&lt;prosody pitch=&quot;+0%&quot; range=&quot;-10%&quot; rate=&quot;100%&quot; volume=&quot;loud&quot;&gt;Soll ich die Zutaten &lt;t ph=&quot;v i: d 6 h o: l  n &quot;&gt; wiederholen &lt;/t&gt;, oder dir die Anleitung 
-&lt;prosody contour=&quot;(100%,+20%) (50%,-20%)  (90%,+50%)&quot;&gt;
-vorlesen oder möchtest du nach weiteren Informationen fragen.
-&lt;/prosody&gt; ? &lt;/prosody&gt;&lt;/maryxml&gt;</value>
+				<value>Was kann ich weiter für dich tun?</value>
 			</att>
-			<att name="prompt_type" type="string" value="maryxml"/>
+			<att name="prompt_type" type="string" value="text"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="b492d654-936f-4c48-a4f2-13b5a7dfa44d" class="com.clt.diamant.graph.nodes.SetVariableNode">
@@ -956,13 +936,13 @@ vorlesen oder möchtest du nach weiteren Informationen fragen.
 			<att name="title" type="string" value="anleitung_zutaten"/>
 			<att name="prompt" type="text">
 				<value>result +
-&quot; Soll ich die Anleitung wiederholen, dir alle Zutaten vorlesen oder möchtest du nach weiteren Informationen fragen?&quot;</value>
+&quot;Was kann ich weiter für dich tun?&quot;</value>
 			</att>
 			<att name="prompt_type" type="string" value="expression"/>
 			<att name="wait" type="boolean" value="1"/>
 		</node>
 		<node uid="bb90d713-4708-440b-9277-505a4897b5d9" class="com.clt.diamant.graph.nodes.LabelNode">
-			<graphics x="754" y="143" fill="#4c4c80"/>
+			<graphics x="873" y="131" fill="#4c4c80"/>
 			<att name="title" type="string" value="1"/>
 		</node>
 		<node uid="be069a04-4c42-42db-a59f-0c4ed4610cef" class="edu.cmu.lti.dialogos.sphinx.plugin.SphinxNode">

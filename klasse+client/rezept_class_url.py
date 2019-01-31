@@ -42,7 +42,7 @@ class Recipe:
                 self.schritt = 0
                 return u'Dein erster Schritt lautet: ' + self.anleitung[0]
         elif argument == u'last':
-            self.schritt = len(self.anleitungen - 1)
+            self.schritt = len(self.anleitung - 1)
             return u'Der letzte Schritt lautet: ' + self.anleitung[self.schritt]
         elif argument == u'all':
             r = u''
@@ -137,7 +137,10 @@ class Recipe:
 
     def get_property(self,key): #returns string
         #key error / "all"=> gesamtzeit / übersicht über die einzelnen Zeiten
-        return self.eigenschaften[key]
+        try:        
+            return self.eigenschaften[key]
+        except:
+            return "Im Rezept gibt es keine Angaben zu " + key
 
     def get_title(self):
         return self.title
